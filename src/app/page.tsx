@@ -17,7 +17,7 @@ export default function Home() {
           <GameCard />
         </div>
       </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center text-sm text-zinc-950 dark:text-zinc-950 backdrop-blur-xs">
+      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center text-sm text-zinc-950 dark:text-zinc-950 dark:backdrop-blur-xs">
         <p>{"\u00A9"} {new Date().getFullYear()} - Game Journal Companion</p>
       </footer>
     </div>
