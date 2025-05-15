@@ -1,6 +1,7 @@
 {
     "conventionalCommits.scopes": [
         "project-structure",
-        "ui"
+        "ui",
+        "dark mode"
     ]
 }
