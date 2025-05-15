@@ -7,7 +7,7 @@ interface GameCardProps {
 const GameCard = ({ game }: GameCardProps) => {
 
     return (
-        <div className="p-4 border border-2 rounded-xl border-zinc-500 text-2xl text-zinc-950 shadow-md dark:shadow-zinc-950/70 dark:border-zinc-900 dark:text-zinc-950 dark:bg-white/20">
+        <div className="p-4 border border-2 rounded-xl border-zinc-500 bg-[url(/GameCardBackgroundCroppedNoBackground_v3.png)] bg-cover bg-no-repeat text-2xl text-zinc-950 shadow-md dark:shadow-zinc-950/70 dark:border-zinc-900 dark:text-zinc-950 dark:bg-gray-300/20">
             {game ? (
                 <h2>GameCard</h2>
             ) :
@@ -18,7 +18,6 @@ const GameCard = ({ game }: GameCardProps) => {
                     </svg>
                 </div>
             }
-
         </div>
     )
 }
