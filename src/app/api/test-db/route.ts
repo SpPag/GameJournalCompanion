@@ -8,11 +8,11 @@ export async function GET() {
 
   // 2. Try an operation: get user count (or empty array)
   const count = await User.countDocuments();
-  const sample = await User.find().limit(1);
+  const users = await User.find();
 
   return NextResponse.json({
     status:  "ok",
     userCount: count,
-    sampleUser: sample[0] || null,
+    users: users,
   });
 }
