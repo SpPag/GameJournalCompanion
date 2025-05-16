@@ -1,4 +1,4 @@
-import mongoose, { Schema, Document, model, models, } from "mongoose";
+import mongoose, { Schema, Document, model, models } from "mongoose";
 
 // useful to export the interface for strong typing function returns, consistent return types, TypeScript validations and checks and more
 interface IUser extends Document {
@@ -33,4 +33,7 @@ const UserSchema = new Schema<IUser>({
     }
 })
 
+const User = models.User || model<IUser>("User", UserSchema);
+
 export type { IUser }
+export { User, UserSchema }
