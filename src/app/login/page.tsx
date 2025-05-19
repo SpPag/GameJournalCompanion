@@ -52,4 +52,4 @@ const LoginPage = () => {
     );
 }
 
-export { LoginPage };
+export default LoginPage; // this needs to be default, because that's how Next.js knows to look for and import it
