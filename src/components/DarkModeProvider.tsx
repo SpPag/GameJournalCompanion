@@ -7,7 +7,7 @@ interface DarkModeProviderProps {
   children: ReactNode;
 }
 
-export default function DarkModeProvider({ children }: DarkModeProviderProps) {
+const DarkModeProvider = ({ children }: DarkModeProviderProps) => {
   useEffect(() => {
     // Function to check and apply theme
     // Check for saved preference or system preference
@@ -35,4 +35,6 @@ export default function DarkModeProvider({ children }: DarkModeProviderProps) {
   }, []);
 
   return <>{children}</>;
-}
+};
+
+export { DarkModeProvider };
