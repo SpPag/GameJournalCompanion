@@ -28,14 +28,14 @@ const LoginPage = () => {
     }
 
     return (
-        <form onSubmit={handleSubmit} className="flex flex-col gap-4 max-w-sm mx-auto mt-20">
+        <form onSubmit={handleSubmit} className="flex flex-col gap-4 max-w-sm mx-auto mt-20 center dark:text-zinc-300">
             <input
                 type="email"
                 placeholder="Email"
                 value={email}
                 required
                 onChange={(e) => setEmail(e.target.value)} // standard practice to update on every keystroke for validation (show error if the email isn't valid without having to submit the form. For example I may want to disable the submit button until the email is valid)
-                className="border p-2 rounded"
+                className="border p-2 rounded bg-[#f5f5f4] text-[#111827] border-stone-700 focus:outline-2 focus:outline-[#836e5e]/70 dark:text-[#d4d4d8] dark:border-zinc-500 dark:bg-[#312d29] dark:focus:outline-2 dark:focus:outline-zinc-400"
             />
             <input
                 type="password"
@@ -43,9 +43,9 @@ const LoginPage = () => {
                 value={password}
                 required
                 onChange={(e) => setPassword(e.target.value)}
-                className="border p-2 rounded"
+                className="border p-2 rounded bg-[#f5f5f4] text-[#111827] border-stone-700 focus:outline-2 focus:outline-[#836e5e]/70 dark:text-[#d4d4d8] dark:border-zinc-500 dark:bg-[#312d29] dark:focus:outline-2 dark:focus:outline-zinc-400"
             />
-            <button type="submit" className="bg-blue-500 text-white py-2 rounded">
+            <button type="submit" className="border py-2 rounded w-1/2 m-auto bg-[#c59854] text-[#111827] border-stone-700 focus:outline-2 focus:outline-[#867162] hover:bg-[#b68945] active:bg-[#ad803c] dark:bg-neutral-600 dark:hover:bg-[#4b4b4b] dark:focus:bg-[#4b4b4b] dark:active:bg-[#393939] dark:text-zinc-300 dark:focus:outline-2 dark:focus:outline-zinc-500">
                 Login
             </button>
         </form>

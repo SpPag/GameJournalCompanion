@@ -33,6 +33,34 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+/* Light-mode autofill */
+/* Targets any <input>, <textarea>, or <select> that the browser has auto-filled, via the WebKit pseudo-class */
+input:-webkit-autofill,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+  /* repaint background */
+  /* can’t reliably use background or background-color to override the autofill background because Chrome (and other WebKit browsers) apply their autofill styling with extremely high specificity, internally, and often with !important. So if I were to use background or background-color, it would be overriden by the browser's highly specific, !important, autofill styles. The key here is that browsers don't add a shadow of their own, so adding one myself results in no conflicts. The fourth parameter is the spread radius. Since the shadow is inset, it starts from the edge of the element (so practically the border) and spreads inward. In this case, it spreads inward for 1000px (actually covers the element's area from the edge to the middle and the rest of the 1000px is disregarded). Could use any other number, but 1000px is just so large that it will almost certainly cover the element's area */
+  box-shadow: inset 0 0 0px 1000px #f5f5f4;
+  /* force text color */
+  -webkit-text-fill-color: #111827;
+  /* disable Chrome’s fade-back animation */
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+/* Dark-mode autofill */
+@media (prefers-color-scheme: dark) {
+  input:-webkit-autofill,
+  textarea:-webkit-autofill,
+  select:-webkit-autofill {
+    /* repaint background */
+    box-shadow: inset 0 0 0px 1000px #312d29;
+    /* force text color */
+    -webkit-text-fill-color: #d4d4d8;
+    /* disable Chrome’s fade-back animation */
+    transition: background-color 5000s ease-in-out 0s;
+  }
+}
+
 /* Dark mode styles */
 .dark body {
   background-image: url("/ParchmentBackgroundDarkMode.png");
