@@ -6,13 +6,13 @@ Run locally with npm run dev and visit on the localhost address stated in the te
 <details>
   <summary><em>built using</em></summary>
   <ul>
-    <li>Next.js</li>
-    <li>JavaScript / TypeScript</li>
-    <li>React</li>
-    <li>Tailwind</li>
-    <li>ESLint</li>
-    <li>AppRouter</li>
-    <li>Turbopack</li>
-    <li>Mongoose</li>
+    <li>Next.js as the overarching React framework</li>
+    <li>JavaScript / TypeScript for the backend logic </li>
+    <li>React as the frontend framework</li>
+    <li>Tailwind for styling</li>
+    <li>ESLint to enforce certain approaches and styles both for performance and consistency, as well as help catch bugs early</li>
+    <li>AppRouter to handle routing and page navigation. It also makes it easier to mix server and client components</li>
+    <li>Turbopack as the bundler that is build by Vercel, the creators of NextJS to eventually replace the currently most widely used bundler, Webpack</li>
+    <li>Mongoose for handling the connection to MongoDB</li>
   </ul>
 </details>
