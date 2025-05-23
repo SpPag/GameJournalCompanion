@@ -1,5 +1,6 @@
 import { GameCard } from "@/components/GameCard";
 import { LogoutButton } from "@/components/LogoutButton";
+import React from 'react';
 
 export default function Home() {
   return (
