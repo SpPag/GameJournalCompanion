@@ -3,6 +3,7 @@
 import { signIn } from "next-auth/react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import React from "react";
 
 const LoginPage = () => {
     const [email, setEmail] = useState(""); // tracks the email input

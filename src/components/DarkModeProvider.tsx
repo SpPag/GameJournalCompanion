@@ -2,6 +2,7 @@
 'use client'; // Required if using Next.js 13+ App Router
 
 import { ReactNode, useEffect } from 'react';
+import React from 'react';
 
 interface DarkModeProviderProps {
   children: ReactNode;

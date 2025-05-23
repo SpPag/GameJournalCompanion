@@ -1,4 +1,5 @@
 import { Game } from "@/types/Game";
+import React from "react";
 
 interface GameCardProps {
     game?: Game;

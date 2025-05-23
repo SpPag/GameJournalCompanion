@@ -1,4 +1,4 @@
-import NextAuth from "next-auth"; //  This imports the types and modules from the next-auth package so that TypeScript knows how to extend (augment) them. I'm not importing NextAuth for use in the code. It just ensures the type definitions are loaded.
+import "next-auth"; //  This imports the types and modules from the next-auth package so that TypeScript knows how to extend (augment) them. I'm not importing NextAuth for use in the code. It just ensures the type definitions are loaded.
 
 declare module "next-auth" { //  This begins a TypeScript module augmentation block for next-auth. It allows us to extend the types of Session and User without modifying the original package
   interface Session { // By default, the Session object returned by useSession() or in server-side auth helpers only contains name, email and image. I'm extending it to include id and username

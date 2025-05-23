@@ -39,12 +39,19 @@ export async function POST(request: Request) {
         });
 
         // 7. Return success (omit password from response!)
+        // I'm including the following line that disables ESlint's no-unused-vars rule for this specific line. The relevant error stems from me grabbing the password and storing it in the _pw variable, which I don't want to be included anywhere. I would have to use it otherwise, which is the exact opposite of the point of the _pw throwaway variable
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const { password: _pw, ...userWithoutPassword } = newUser.toObject() as IUser;
         return NextResponse.json(
             { user: userWithoutPassword },
             { status: 201 }
         );
-    } catch (error: any) {
-        return NextResponse.json({ error: error.message }, { status: 400 });
+    } catch (error: unknown) {
+        if (error instanceof Error) {
+            return NextResponse.json({ error: error.message }, { status: 400 });
+        } else {
+            return NextResponse.json({ success: false, error: "An unknown error occurred" });
+        }
+
     }
 }
