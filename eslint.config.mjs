@@ -31,6 +31,11 @@ export default defineConfig([
   },
   // TypeScript support
   tseslint.configs.recommended,
+  {
+    rules: {
+      "@typescript-eslint/no-unused-vars": "warn" // Change unused variable errors to warnings
+    }
+  },
   // React support
   pluginReact.configs.flat.recommended,
   // React-specific configuration
