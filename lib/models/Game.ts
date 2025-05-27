@@ -12,27 +12,34 @@ interface IGame extends Document {
 const GameSchema = new Schema<IGame>({
     title: {
         type: String,
-        required: true
+        required: true,
+        unique: true,
+        trim: true
     },
     publisher: {
         type: String,
-        required: true
+        required: true,
+        trim: true
     },
     developer: {
         type: String,
-        required: true
+        required: true,
+        trim: true
     },
     westernReleaseYear: {
         type: String,
-        required: true
+        required: true,
+        trim: true
     },
     cover: {
         type: String,
-        required: false
+        required: false,
+        trim: true
     },
     genres: {
         type: String,
-        required: true
+        required: true,
+        trim: true
     }
 })
 
