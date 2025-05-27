@@ -1,6 +1,6 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { MongoDBAdapter } from "@auth/mongodb-adapter";
+import { MongoDBAdapter } from "@next-auth/mongodb-adapter";
 import { clientPromise } from "@/../lib/mongodb";
 import dbConnect from "@/../lib/mongoose";
 import { User } from "@/../lib/models/User";
@@ -34,6 +34,7 @@ const handler = NextAuth({
                     id: user._id.toString(),
                     email: user.email,
                     username: user.username,
+                    isAdmin: user.isAdmin
                 };
             }
         })
@@ -54,6 +55,7 @@ const handler = NextAuth({
                 token.id = user.id;
                 token.email = user.email;
                 token.username = user.username ?? ""; // since username is optional I'm setting a default value. Alternatively, I could only assign username if it exists, but then I'd have to go to the JWT interface in nextAuth.d.ts and set the username field as optional there as well
+                token.isAdmin = user.isAdmin ?? false;
             }
             return token;
         },
@@ -61,6 +63,7 @@ const handler = NextAuth({
             if (token && session.user) {
                 session.user.id = token.id;
                 session.user.username = token.username;
+                session.user.isAdmin = token.isAdmin;
             }
             return session;
         },
