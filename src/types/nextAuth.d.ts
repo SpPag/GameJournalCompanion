@@ -6,6 +6,7 @@ declare module "next-auth" { //  This begins a TypeScript module augmentation bl
       id: string;
       email: string;
       username: string;
+      isAdmin: boolean;
     };
   }
 
@@ -13,6 +14,7 @@ declare module "next-auth" { //  This begins a TypeScript module augmentation bl
     id: string;
     email: string;
     username?: string; // I need to make this optional to avoid a TypeScript error in route.ts. MongoDB-adapter doesn't have a username field, whereas nextAuth does. Note that OAuth providers such as Google don't have a username field, so if I were to allow login with providers other than the Credential Provider, there would simply not be a username field in the returned user object
+    isAdmin: boolean;
   }
 }
 
@@ -21,5 +23,6 @@ declare module "next-auth/jwt" { // This begins a TypeScript module augmentation
     id: string;
     email: string;
     username: string;
+    isAdmin: boolean;
   }
 }
