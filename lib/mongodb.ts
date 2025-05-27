@@ -12,6 +12,8 @@ if (!process.env.MONGODB_URI) {
 }
 
 declare global {
+    // I'm disabling the no-var rule for this line, because for global declarations, the var keyword is required. It's not the same as using var in the regular code. It just tells TypeScript that there's a global variable called _mongoClientPromise
+    // eslint-disable-next-line no-var
     var _mongoClientPromise: Promise<MongoClient> | undefined;
 }
 

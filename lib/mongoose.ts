@@ -8,7 +8,7 @@ if (!MONGODB_URI) {
 }
 
 // Global is used here to maintain a cached connection across hot reloads in development. This prevents connections from growing exponentially during API Route usage. However, using simply 'global' was causing a TS error, so I had to globalWithMongoose with the following logic and casting
-let globalWithMongoose = global as typeof globalThis & {
+const globalWithMongoose = global as typeof globalThis & {
     mongoose: {
         promise: Promise<typeof mongoose> | null;
         conn: typeof mongoose | null;

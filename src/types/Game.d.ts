@@ -1,8 +1,10 @@
 interface Game {
     title: string,
     publisher: string,
-    releaseDate: string,
-    cover: string
+    developer: string,
+    westernReleaseYear: string,
+    cover: string,
+    genre: string,
 }
 
 export { Game }

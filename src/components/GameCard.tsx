@@ -13,7 +13,7 @@ const GameCard = ({ game }: GameCardProps) => {
                 <h2>GameCard</h2>
             ) :
                 <div className="flex flex-col gap-4 items-center">
-                    <div>GameCard</div>
+                    <div className="block">Register a new game</div>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.2} stroke="currentColor" className="size-6">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                     </svg>

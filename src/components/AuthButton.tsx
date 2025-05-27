@@ -22,7 +22,7 @@ const AuthButton = () => {
             {session ?
                 (
                     <>
-                        Signed-in as {session.user.username}! <br/>Logout
+                        Logged in as {session.user.username}<br/>Logout
                     </>
                 ) :
                 "Login"
