@@ -14,7 +14,7 @@ const UserSchema = new Schema<IUser>({
         unique: true,
         required: true,
         lowercase: true,
-        match: /^[a-zA-Z0-9._\-+%]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$/ // regex note: the '-' character must be escaped, because otherwise it will be treated as an operator that sets a range. An alternative would be to have it at the end of the regex
+        match: /^[a-zA-Z0-9._\-+%]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/ // regex note: the '-' character must be escaped, because otherwise it will be treated as an operator that sets a range. An alternative would be to have it at the end of the regex
     },
     password: {
         type: String,
@@ -33,6 +33,7 @@ const UserSchema = new Schema<IUser>({
     }
 })
 
+// the following line checks if a model named 'User' has already been registered with Mongoose. If yes, it's saved to the User variable, otherwise, it creates a new model, registers it with Mongoose and saves it to the User variable
 const User = models.User || model<IUser>("User", UserSchema);
 
 export type { IUser }

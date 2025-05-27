@@ -43,15 +43,20 @@ export async function POST(request: Request) {
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const { password: _pw, ...userWithoutPassword } = newUser.toObject() as IUser;
         return NextResponse.json(
-            { user: userWithoutPassword },
+            { success: true, user: userWithoutPassword },
             { status: 201 }
         );
     } catch (error: unknown) {
         if (error instanceof Error) {
-            return NextResponse.json({ error: error.message }, { status: 400 });
+            return NextResponse.json(
+                { success: false, error: error.message },
+                { status: 500 }
+            );
         } else {
-            return NextResponse.json({ success: false, error: "An unknown error occurred" });
+            return NextResponse.json(
+                { success: false, error: "An unknown error occurred" },
+                { status: 500 }
+            );
         }
-
     }
 }

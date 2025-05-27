@@ -16,13 +16,21 @@ export async function GET() {
       password: 'securepassword123', // You’ll hash this later in real logic!
     });
 
-    return NextResponse.json({ success: true, user: newUser });
+    return NextResponse.json(
+      { success: true, user: newUser },
+      { status: 201 }
+    );
   } catch (error: unknown) { // originally error was of type any, but after installing ESlint and letting it use the recommended rules for TypeScript, it threw an error regarding that 'any'. So I changed it to unknown. The check below checks if the error is of type Error and if it is, it returns the error message. Otherwise, it returns a generic error message
     if (error instanceof Error) {
-      return NextResponse.json({ success: false, error: error.message });
-    }
-    else {
-      return NextResponse.json({ success: false, error: "An unknown error occurred" });
+      return NextResponse.json(
+        { success: false, error: error.message },
+        { status: 500 }
+      );
+    } else {
+      return NextResponse.json(
+        { success: false, error: "An unknown error occurred" },
+        { status: 500 }
+      );
     }
   }
 }
