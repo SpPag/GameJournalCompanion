@@ -40,7 +40,7 @@ export default function RootLayout({
                 <AdminPanel />
                 {children}
               </main>
-              <footer className="max-w-fit mx-auto mb-2 flex gap-[24px] flex-wrap items-center justify-center text-sm text-zinc-950 dark:text-zinc-950 dark:backdrop-blur-xs">
+              <footer className="max-w-fit mx-auto mb-2 flex flex-wrap items-center justify-center text-sm text-zinc-950 dark:text-zinc-950 dark:backdrop-blur-xs">
                 <p>{"\u00A9"} {new Date().getFullYear()} - Game Journal Companion</p>
               </footer>
             </PathAwareLayout>

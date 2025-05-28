@@ -65,3 +65,8 @@ select:-webkit-autofill {
 .dark body {
   background-image: url("/ParchmentBackgroundDarkMode.png");
 }
+
+/* Removes the spinners (up and down arrows for increasing and decreasing the number in the input) from marked number inputs (used in AddGameForm's westernReleaseYear field) */
+.no-spinner {
+  -moz-appearance: textfield;
+}
