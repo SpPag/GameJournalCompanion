@@ -8,15 +8,12 @@ interface GameCardProps {
 const GameCard = ({ game }: GameCardProps) => {
 
     return (
-        <div className="p-4 border border-2 rounded-xl border-zinc-500 bg-[url(/GameCardBackgroundCroppedNoBackground_v3.png)] bg-cover bg-no-repeat text-2xl text-zinc-950 shadow-md dark:shadow-zinc-950/70 dark:border-zinc-900 dark:text-zinc-950 dark:bg-gray-300/20">
+        <div className="text-center p-4 border border-2 rounded-xl text-xl w-24 h-38 sm:w-26 sm:h-41 md:w-28 md:h-44 lg:w-34 lg:h-52 border-zinc-500 bg-[url(/GameCardBackgroundCroppedNoBackground_v3.png)] bg-cover bg-no-repeat text-zinc-950 shadow-md dark:shadow-zinc-950/70 dark:border-zinc-900 dark:text-zinc-950 dark:bg-gray-300/20">
             {game ? (
                 <h2>GameCard</h2>
             ) :
                 <div className="flex flex-col gap-4 items-center">
                     <div className="block">Register a new game</div>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.2} stroke="currentColor" className="size-6">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                    </svg>
                 </div>
             }
         </div>
