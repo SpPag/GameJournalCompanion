@@ -60,7 +60,7 @@ export default function RegisterPage() {
 
       {error && <p className="text-red-500 text-sm">{error}</p>}
 
-      <button type="submit" className="bg-green-600 text-white py-2 rounded">
+      <button type="submit" className="border py-2 rounded w-1/2 m-auto bg-[#c59854] text-[#111827] border-stone-700 focus:outline-2 focus:outline-[#867162] hover:bg-[#b68945] active:bg-[#ad803c] dark:bg-neutral-600 dark:hover:bg-[#4b4b4b] dark:focus:bg-[#4b4b4b] dark:active:bg-[#393939] dark:text-zinc-300 dark:focus:outline-2 dark:focus:outline-zinc-500">
         Register
       </button>
     </form>
