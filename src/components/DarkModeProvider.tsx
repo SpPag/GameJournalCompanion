@@ -31,7 +31,6 @@ const DarkModeProvider = ({ children }: DarkModeProviderProps) => {
 
     return () => {
       mediaQuery.removeEventListener('change', applyTheme);
-      console.log('Cleanup: Removed theme listener'); // For debugging
     };
   }, []);
 
