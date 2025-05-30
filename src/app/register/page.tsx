@@ -30,8 +30,22 @@ export default function RegisterPage() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-4 max-w-sm mx-auto mt-20">
+    <form onSubmit={handleSubmit} className="flex flex-col gap-4 max-w-sm mx-auto mt-20" autoComplete="off">
       <h1 className="text-2xl font-bold">Register</h1>
+
+      {/* Hidden dummy input to mislead autocomplete */}
+      <input
+        type="text"
+        name="fakeusernameremembered"
+        autoComplete="off"
+        style={{ display: "none" }}
+      />
+      <input
+        type="password"
+        name="fakepasswordremembered"
+        autoComplete="off"
+        style={{ display: "none" }}
+      />
 
       <input
         type="email"
@@ -40,6 +54,7 @@ export default function RegisterPage() {
         required
         onChange={(e) => setEmail(e.target.value)}
         className="border p-2 rounded"
+        autoComplete="off"
       />
       <input
         type="text"
@@ -48,6 +63,7 @@ export default function RegisterPage() {
         required
         onChange={(e) => setUsername(e.target.value)}
         className="border p-2 rounded"
+        autoComplete="off"
       />
       <input
         type="password"
@@ -56,6 +72,7 @@ export default function RegisterPage() {
         required
         onChange={(e) => setPassword(e.target.value)}
         className="border p-2 rounded"
+        autoComplete="new-password"
       />
 
       {error && <p className="text-red-500 text-sm">{error}</p>}
