@@ -6,6 +6,7 @@ import React from "react";
 import { SessionWrapper } from "@/components/SessionWrapper";
 import PathAwareLayout from "@/components/PathAwareLayout";
 import { AdminPanel } from "@/components/AdminPanel";
+import { BookSvgClickable } from "@/components/BookSvgClickable";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -36,6 +37,7 @@ export default function RootLayout({
         <SessionWrapper>
           <DarkModeProvider>
             <PathAwareLayout>
+              <BookSvgClickable className="z-50 absolute top-2 left-5 mt-5 mr-5 w-8 h-8" />
               <main className="flex-1">
                 <AdminPanel />
                 {children}
