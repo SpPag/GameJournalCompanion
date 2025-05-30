@@ -11,17 +11,14 @@ export default function Home() {
 
   // Load the user's games when the component mounts
   useEffect(() => {
-    fetch("/api/users/games")
-      .then((response) => response.json())
-      .then((data) => setUserGames(data.registeredGames || [])) // Even if I know that every user on the database has at least an empty array as registeredGames' value, adding '|| []' guards against a server bug or network hiccup that would result in the response being someting like '{ "error": "Internal Server Error" }', which will set data.registeredGames to undefined, which would cause the app to crash since it would be unhandled. Same goes for if the app tries to access data.registeredGames before the fetch completes and populates it
-      .catch(console.error)
+    refreshGames();
   }, []);
 
   // Function that re-checks user's registered games after game registration modal closes to make sure the appropriate GameCard instances are rendered
   const refreshGames = () => {
     fetch("/api/users/games")
       .then((res) => res.json())
-      .then((data) => setUserGames(data.registeredGames || []))
+      .then((data) => setUserGames(data.registeredGames || []))// Even if I know that every user on the database has at least an empty array as registeredGames' value, adding '|| []' guards against a server bug or network hiccup that would result in the response being someting like '{ "error": "Internal Server Error" }', which will set data.registeredGames to undefined, which would cause the app to crash since it would be unhandled. Same goes for if the app tries to access data.registeredGames before the fetch completes and populates it
       .catch(console.error);
   };
 
