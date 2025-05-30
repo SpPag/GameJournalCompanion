@@ -44,22 +44,18 @@ const AvailableGamesModal = ({ onClose, onRegistered }: AvailableGamesModalProps
       onClick={onClose}
     >
       <div
-        className="bg-white dark:bg-zinc-900 rounded-lg p-6 w-full max-w-3xl mx-4 overflow-auto"
+        className="bg-white dark:bg-zinc-900 rounded-lg p-6 w-full max-w-[52rem] mx-4 overflow-auto"
         onClick={(e) => e.stopPropagation()}
       >
-        <h2 className="text-2xl mb-4">Pick a Game to Register</h2>
         {loading && <p>Loading…</p>}
-        <div className="grid grid-cols-3 gap-4">
+        <div className="flex flex-wrap gap-4 overflow-y-auto max-h-[80vh] min-w-[20rem] w-full p-4 items-center justify-start">
           {available.map((g) => (
             <div key={g._id} onClick={() => registerGame(g._id)}>
               <GameCard game={g} />
-              <button className="mt-2 w-full bg-blue-600 text-white py-1 rounded">
-                Register
-              </button>
             </div>
           ))}
           {available.length === 0 && !loading && (
-            <p>No more games to register!</p>
+            <p>No available games. Either I'm failing you or you're an absolute beast!</p>
           )}
         </div>
         <button
