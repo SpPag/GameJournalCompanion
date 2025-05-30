@@ -1,13 +1,14 @@
 import mongoose, { Schema, Document, model, models } from "mongoose";
 
 interface IGame extends Document {
-    _id: string; // MongoDB's auto-generated ObjectID
+    _id: mongoose.Types.ObjectId; // MongoDB's auto-generated ObjectID
     title: string;
     publisher: string;
     developer: string;
     westernReleaseYear: string;
     cover: string;
     genres: string;
+    
 }
 
 const GameSchema = new Schema<IGame>({
