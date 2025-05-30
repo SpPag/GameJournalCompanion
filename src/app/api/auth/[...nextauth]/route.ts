@@ -5,8 +5,10 @@ import { clientPromise } from "@/../lib/mongodb";
 import dbConnect from "@/../lib/mongoose";
 import { User } from "@/../lib/models/User";
 import bcrypt from "bcrypt";
+import type { NextAuthOptions } from "next-auth";
 
-const handler = NextAuth({
+
+const authOptions: NextAuthOptions = {
     // Adapter stores sessions/users in MongoDB
     adapter: MongoDBAdapter(clientPromise),
     // Enable credentials (email + password)
@@ -72,6 +74,8 @@ const handler = NextAuth({
     pages: {
         signIn: '/login', // use your custom login page
     },
-});
+};
 
-export { handler as GET, handler as POST };
+const handler = NextAuth(authOptions);
+
+export {authOptions, handler as GET, handler as POST };

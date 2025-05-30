@@ -7,6 +7,7 @@ interface IUser extends Document {
     username: string;
     createdAt: Date;
     isAdmin: boolean;
+    registeredGames: mongoose.Types.ObjectId[]
 }
 
 const UserSchema = new Schema<IUser>({
@@ -35,7 +36,14 @@ const UserSchema = new Schema<IUser>({
     isAdmin: {
         type: Boolean,
         default: false
-    }
+    },
+    registeredGames: [
+        {
+            type: Schema.Types.ObjectId, // This field stores an ObjectId (a MongoDB document reference)
+            ref: "Game", // That ObjectId points to a document in the "Game" collection. This is a reference to the Game model, based on which, mongoose names the collection 'games' (plural, lowercase)
+            default: [] // sets a new user's registeredGames array to an empty array
+        }
+    ]
 })
 
 // the following line checks if a model named 'User' has already been registered with Mongoose. If yes, it's saved to the User variable, otherwise, it creates a new model, registers it with Mongoose and saves it to the User variable

@@ -36,6 +36,7 @@ export async function POST(request: Request) {
             email,
             username,
             password: hashedPassword,
+            // games: [], // optional since schema already sets a default
         });
 
         // 7. Return success (omit password from response!)

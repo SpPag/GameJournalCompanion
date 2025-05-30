@@ -1,4 +1,5 @@
 interface Game {
+    _id: string,
     title: string,
     publisher: string,
     developer: string,
