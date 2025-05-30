@@ -3,9 +3,9 @@
 import { getServerSession } from "next-auth";
 import { authOptions } from "../../auth/[...nextauth]/route";
 import { User } from "@/../lib/models/User";
-import { Game } from '@/../lib/models/Game';
+import { Game } from "@/../lib/models/Game";
 import { NextResponse } from "next/server";
-import dbConnect from '@/../lib/mongoose';
+import dbConnect from "@/../lib/mongoose";
 
 export async function GET() {
     try {
