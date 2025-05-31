@@ -15,7 +15,7 @@ const GameCard = ({ game }: GameCardProps) => {
                     {/* Image container */}
                     <div className="w-full h-full">
                         <img
-                            src={game.cover || "/GameCardBackgroundCroppedNoBackground_v3.png"}
+                            src={game.cover || "/GameCardBackground_final_v4.png"}
                             alt={game.title}
                             className="w-full h-full object-cover"
                             loading="lazy"
@@ -28,7 +28,7 @@ const GameCard = ({ game }: GameCardProps) => {
                     </div>
                 </>
             ) :
-                <div className="flex flex-col items-center bg-[url('/GameCardBackgroundCroppedNoBackground_v3.png')] bg-cover bg-center bg-no-repeat w-full h-full">
+                <div className="flex flex-col items-center bg-[url('/GameCardBackground_final_v4.png')] bg-cover bg-center bg-no-repeat w-full h-full">
                     <div className="block">Register a new game</div>
                 </div>
             }
