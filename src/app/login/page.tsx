@@ -47,19 +47,18 @@ const LoginPage = () => {
                     onChange={(e) => setPassword(e.target.value)}
                     className="border p-2 rounded bg-[#f5f5f4] text-[#111827] border-stone-700 focus:outline-2 focus:outline-[#836e5e]/70 dark:text-[#d4d4d8] dark:border-zinc-500 dark:bg-[#312d29] dark:focus:outline-2 dark:focus:outline-zinc-400"
                 />
-                <button type="submit" className="border py-2 rounded w-1/2 m-auto bg-[#c59854] text-[#111827] border-stone-700 focus:outline-2 focus:outline-[#867162] hover:bg-[#b68945] active:bg-[#ad803c] dark:bg-neutral-600 dark:hover:bg-[#4b4b4b] dark:focus:bg-[#4b4b4b] dark:active:bg-[#393939] dark:text-zinc-300 dark:focus:outline-2 dark:focus:outline-zinc-500">
-                    Login
-                </button>
-            </form>
-
-            <div className="max-w-sm mx-auto mt-10 flex items-center gap-8">
-                <p className="text-center text-sm">
-                    Don’t have an account?{" "}
-                </p>
-                <button type="submit" onClick={() => router.push("/register")} className="border py-2 rounded w-1/2 m-auto bg-[#c59854] text-[#111827] border-stone-700 focus:outline-2 focus:outline-[#867162] hover:bg-[#b68945] active:bg-[#ad803c] dark:bg-neutral-600 dark:hover:bg-[#4b4b4b] dark:focus:bg-[#4b4b4b] dark:active:bg-[#393939] dark:text-zinc-300 dark:focus:outline-2 dark:focus:outline-zinc-500">
+                <div className="flex gap-4 h-[3.8rem]">
+                    <button type="submit" className="border py-2 rounded w-1/2 m-auto bg-[#c59854] text-[#111827] border-stone-700 focus:outline-2 focus:outline-[#867162] hover:bg-[#b68945] active:bg-[#ad803c] dark:border-zinc-500 dark:bg-neutral-600 dark:hover:bg-[#4b4b4b] dark:focus:bg-[#4b4b4b] dark:active:bg-[#393939] dark:text-zinc-300 dark:focus:outline-2 dark:focus:outline-zinc-500 text-2xl h-full">
+                        Login
+                    </button>
+                    <button type="button" onClick={() => router.push("/register")} className="border py-2 rounded w-1/2 m-auto bg-[#c59854] text-[#111827] border-stone-700 focus:outline-2 focus:outline-[#867162] hover:bg-[#b68945] active:bg-[#ad803c] dark:border-zinc-500 dark:bg-neutral-600 dark:hover:bg-[#4b4b4b] dark:focus:bg-[#4b4b4b] dark:active:bg-[#393939] dark:text-zinc-300 dark:focus:outline-2 dark:focus:outline-zinc-500">
+                    <p className="text-center text-sm">
+                        Don't have an account?
+                    </p>
                     Register
                 </button>
-            </div>
+                </div>
+            </form>
         </div>
     );
 }
