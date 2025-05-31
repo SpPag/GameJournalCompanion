@@ -19,4 +19,8 @@ Since I'm using MongoDB v6 with @next-auth/mongodb-adapter@1.1.3 (which only sup
   </ul>
 </details>
 
-All game cover images are copyright of their respective publishers and used here for non-commercial, educational/demo purposes only.
+
+
+
+
+<em>All game cover images are copyright of their respective publishers and used here for non-commercial, educational/demo purposes only.</em>
