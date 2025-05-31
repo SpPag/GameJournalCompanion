@@ -18,3 +18,5 @@ Since I'm using MongoDB v6 with @next-auth/mongodb-adapter@1.1.3 (which only sup
     <li>Mongoose for handling the connection to MongoDB</li>
   </ul>
 </details>
+
+All game cover images are copyright of their respective publishers and used here for non-commercial, educational/demo purposes only.
