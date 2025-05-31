@@ -3,6 +3,8 @@ Small ongoing project, meant to function as a digital journal for video game pla
 
 Run locally with npm run dev and visit on the localhost address stated in the terminal (http://localhost:3000 by default)
 
+Since I'm using MongoDB v6 with @next-auth/mongodb-adapter@1.1.3 (which only supports MongoDB Node.js driver versions 4.x or 5.x) there's a conflict. For now, I'm working around it by running npm install with a tag: "npm install --legacy-peer-deps"
+
 <details>
   <summary><em>built using</em></summary>
   <ul>
@@ -16,3 +18,9 @@ Run locally with npm run dev and visit on the localhost address stated in the te
     <li>Mongoose for handling the connection to MongoDB</li>
   </ul>
 </details>
+
+
+
+
+
+<em>All game cover images are copyright of their respective publishers and used here for non-commercial, educational/demo purposes only.</em>
