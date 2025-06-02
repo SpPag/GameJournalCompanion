@@ -30,7 +30,7 @@ export default function Home() {
         <h1 className="italic pr-1">Game Journal Companion</h1>
         <BookSvg className="h-8 w-8"/>
       </div>
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
+      <main className="flex flex-col row-start-2 items-center sm:items-start">
         <div className="flex gap-4 items-center flex-col sm:flex-row">
           {/* Render each registered game */}
           {userGames.map((game) => (

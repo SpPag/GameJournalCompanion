@@ -27,7 +27,7 @@ const AdminModal: React.FC<AdminModalProps> = ({ open, onClose, children }: Admi
             onClick={onClose}
         >
             <div
-                className="bg-white dark:bg-zinc-900 rounded-lg p-6 w-full max-w-lg relative"
+                className="bg-white dark:bg-stone-900 rounded-lg p-6 w-full max-w-lg relative"
                 onClick={e => e.stopPropagation()}
             >
                 <button

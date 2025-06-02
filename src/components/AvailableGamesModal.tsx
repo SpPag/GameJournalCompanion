@@ -56,7 +56,7 @@ const AvailableGamesModal = ({ onClose, onRegistered }: AvailableGamesModalProps
           onClick={onClose}
         >
           <div
-            className="bg-white dark:bg-zinc-900 rounded-lg p-6 w-full max-w-[52rem] mx-4 overflow-auto"
+            className="bg-stone-400/80 dark:bg-zinc-900 rounded-lg p-6 w-full max-w-[52rem] mx-4 overflow-auto border border-2 border-stone-600 dark:border-none"
             onClick={(e) => e.stopPropagation()}
           >
             {loading && <p>Loading…</p>}
@@ -67,7 +67,7 @@ const AvailableGamesModal = ({ onClose, onRegistered }: AvailableGamesModalProps
                 </div>
               ))}
               {available.length === 0 && !loading && (
-                <p>No available games. Either I'm failing you or you're an absolute beast!</p>
+                <p>No available games. Either I&apos;m failing you or you&apos;re an absolute beast!</p>
               )}
             </div>
             <button
