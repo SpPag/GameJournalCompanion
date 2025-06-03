@@ -56,7 +56,7 @@ const AvailableGamesModal = ({ onClose, onRegistered }: AvailableGamesModalProps
           onClick={onClose}
         >
           <div
-            className="bg-stone-400/80 dark:bg-zinc-900 rounded-lg p-6 w-full max-w-[52rem] mx-4 overflow-auto border border-2 border-stone-600 dark:border-none"
+            className="bg-stone-400 dark:bg-zinc-900 rounded-lg p-6 w-full max-w-[52rem] mx-4 overflow-auto border border-2 border-stone-600 dark:border-none"
             onClick={(e) => e.stopPropagation()}
           >
             {loading && <p>Loading…</p>}
@@ -72,7 +72,7 @@ const AvailableGamesModal = ({ onClose, onRegistered }: AvailableGamesModalProps
             </div>
             <button
               onClick={onClose}
-              className="mt-6 px-4 py-2 border rounded hover:bg-gray-100"
+              className="mt-6 px-4 py-2 border rounded bg-[#926d46] text-[#111827] border-stone-700 focus:outline-2 focus:outline-[#867162] hover:bg-[#9a754e] active:bg-[#a17749] dark:bg-zinc-900 dark:hover:bg-zinc-800 dark:focus:bg-zinc-950 dark:active:bg-zinc-950 dark:text-zinc-300 dark:focus:outline-1 dark:focus:outline-zinc-700"
             >
               Cancel
             </button>
