@@ -9,13 +9,13 @@ export async function GET() {
   const session = await getServerSession(authOptions);
 
   if (!session || !session.user?.email) {
-    return NextResponse.json({ status: "unauthorized" }, { status: 401 });
+    return NextResponse.json({ status: "Unauthenticated user" }, { status: 401 });
   }
 
   // 2. Connect
   await dbConnect();
 
-  // 3. Find user by email and return forbidden if not valid AND admin
+  // 3. Find user by email and return forbidden if user is not valid or not admin
   const dbUser = await User.findOne({ email: session.user.email });
 
   if (!dbUser || !dbUser.isAdmin) {
