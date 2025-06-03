@@ -8,7 +8,6 @@ interface IGame extends Document {
     westernReleaseYear: string;
     cover: string;
     genres: string;
-    
 }
 
 const GameSchema = new Schema<IGame>({
