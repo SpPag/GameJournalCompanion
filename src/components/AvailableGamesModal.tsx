@@ -61,9 +61,9 @@ const AvailableGamesModal = ({ onClose, onRegistered }: AvailableGamesModalProps
           >
             {loading && <p>Loading…</p>}
             <div className="flex flex-wrap gap-4 overflow-y-auto max-h-[80vh] min-w-[20rem] w-full p-4 items-center justify-start">
-              {available.map((g) => (
-                <div key={g._id} onClick={() => registerGame(g._id)}>
-                  <GameCard game={g} />
+              {available.map((game) => (
+                <div key={game._id} onClick={() => registerGame(game._id)}>
+                  <GameCard game={game} />
                 </div>
               ))}
               {available.length === 0 && !loading && (
