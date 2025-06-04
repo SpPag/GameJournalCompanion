@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import React from "react";
 
-export default function RegisterPage() {
+const RegisterPage= () => {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
@@ -91,3 +91,5 @@ export default function RegisterPage() {
     </div>
   );
 }
+
+export default RegisterPage; // this needs to be default, because that's how Next.js knows to look for and import it
