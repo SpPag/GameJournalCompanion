@@ -1,3 +1,5 @@
+import React from "react";
+
 interface BookSvgProps {
     className: string,
     onClick?: () => void
