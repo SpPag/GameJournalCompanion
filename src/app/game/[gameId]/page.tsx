@@ -4,30 +4,29 @@ import { NextResponse } from "next/server";
 import dbConnect from "@/../lib/mongoose";
 import React from "react";
 import mongoose from "mongoose";
+import { redirect } from "next/navigation";
 
-interface Props {
+interface GameDetailsPageProps {
     params: {
         gameId: string
     }
 }
 
-const GameDetailsPage = async ({ params }: Props) => {
+const GameDetailsPage = async ({ params }: GameDetailsPageProps) => {
 
     // 1. Get the currently logged-in user's session
     const session = await getServerSession(authOptions);
 
-    // ==================================================== !! TAKE A LOOK AT THIS, DO I REDIRECT INSTEAD? !! ===============================================
     // 2. Return 401 if there's no session or no logged-in user
     if (!session || !session.user) {
-    return <div className="text-red-500">You must be logged in to view this page.</div>;
-    // ==================================================== !! TAKE A LOOK AT THIS, DO I REDIRECT INSTEAD? !! ===============================================
-  }
+        redirect("/login"); // 'redirect()' is used for server-side navigation, while 'router.push()' is used for client-side navigation
+    }
 
     // 3. Connect to the database
     await dbConnect();
 
     // 4. Parse gameId from request
-    const { gameId } = params;
+    const { gameId } = await params;
 
     // 5. Return 400 if gameId is not provided
     if (!gameId) {
@@ -42,6 +41,7 @@ const GameDetailsPage = async ({ params }: Props) => {
     return (
         <div>
             <h1>Game Details Will Go Here</h1>
+            <p className="text-zinc-600">Game ID: {gameId}</p>
         </div>
     )
 };
