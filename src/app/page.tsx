@@ -7,6 +7,7 @@ import { WelcomeUser } from "@/components/WelcomeUser";
 import { Game } from "@/types/Game";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from 'react';
+import { useSearchParams } from 'next/navigation';
 
 export default function Home() {
   const [userGames, setUserGames] = useState<Game[]>([]);
@@ -25,6 +26,15 @@ export default function Home() {
       .then((data) => setUserGames(data.registeredGames || []))// Even if I know that every user on the database has at least an empty array as registeredGames' value, adding '|| []' guards against a server bug or network hiccup that would result in the response being someting like '{ "error": "Internal Server Error" }', which will set data.registeredGames to undefined, which would cause the app to crash since it would be unhandled. Same goes for if the app tries to access data.registeredGames before the fetch completes and populates it
       .catch(console.error);
   };
+
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    const error = searchParams.get('error');
+    if (error === 'not-registered') {
+      alert("You haven't registered this game to your account.");
+    }
+  }, [searchParams]);
 
   return (
     <div className="relative top-14 flex flex-col items-center justify-start flex-1 p-8 gap-16 font-[family-name:var(--font-geist-sans)]">
