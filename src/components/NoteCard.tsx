@@ -2,7 +2,7 @@ import { Note } from "@/types/Note";
 import React from "react";
 
 interface NoteCardProps {
-    note: Note;
+    note?: Note;
     onEdit: () => void;
     onDelete: () => void;
 }
@@ -70,9 +70,12 @@ const NoteCard = ({ note, onEdit, onDelete }: NoteCardProps) => {
                     <path d="M 480 851 L 479 852 L 455 852 L 454 853 L 440 853 L 439 854 L 430 854 L 429 855 L 421 855 L 420 856 L 414 856 L 413 857 L 408 857 L 407 858 L 403 858 L 402 859 L 398 859 L 397 860 L 395 860 L 394 861 L 391 861 L 390 862 L 389 862 L 388 863 L 386 863 L 385 864 L 384 864 L 383 865 L 382 865 L 381 866 L 380 866 L 379 867 L 378 867 L 376 869 L 375 869 L 369 875 L 369 876 L 367 878 L 367 880 ..." />
                 </svg> */}
             </button>
-            
+
             {/* Note content */}
-            <p className="whitespace-pre-wrap text-gray-800">{note.content}</p>
+            {note &&
+                <p className="whitespace-pre-wrap text-gray-800">{note.content}</p>
+            }
+
         </div>
     )
 };

@@ -69,9 +69,11 @@ const GameDetailsPage = async ({ params }: GameDetailsPageProps) => {
 
     return (
         <div>
-            {/* Pass the game to your component */}
-            <GameTitle game={game} />
-            {/* You can add more game details/components here */}
+            <div>
+                {/* Pass the game to your component */}
+                <GameTitle game={game} />
+                {/* You can add more game details/components here */}
+            </div>
         </div>
     );
 };

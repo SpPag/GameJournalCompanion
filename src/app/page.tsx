@@ -34,7 +34,7 @@ export default function Home() {
   useEffect(() => {
     const error = searchParams.get('error');
     if (error === 'game-not-registered') {
-      setShowAlert({ message: "Game not registered!", variant: "warning" });
+      setShowAlert({ message: "Game not registered!", variant: "error" });
     }
   }, [searchParams]);
 
