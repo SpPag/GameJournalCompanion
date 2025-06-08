@@ -5,7 +5,7 @@ import React from "react";
 
 interface ToastProps {
   message: string;
-  type?: "success" | "error";
+  type: "success" | "error";
   onDone: () => void;
   duration?: number; // milliseconds
 }
