@@ -10,8 +10,7 @@ interface DarkModeProviderProps {
 
 const DarkModeProvider = ({ children }: DarkModeProviderProps) => {
   useEffect(() => {
-    // Function to check and apply theme
-    // Check for saved preference or system preference
+    // Check for theme preference and track it. If the user changes theme, this will be called and add or remove the 'dark' class to or from the whole page, appropriately
     const applyTheme = () => {
       const isDark = localStorage.getItem('theme') === 'dark' ||
         (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches);

@@ -30,6 +30,25 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <script // starting script that immediately checks the user's selected theme and adds 'dark' to the page's className if it's dark
+          dangerouslySetInnerHTML={{
+            __html: `
+          (function () {
+            try {
+              const theme = localStorage.getItem('theme');
+              const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+              if (theme === 'dark' || (!theme && systemPrefersDark)) {
+                document.documentElement.classList.add('dark');
+              } else {
+                document.documentElement.classList.remove('dark');
+              }
+            } catch (_) {}
+          })();
+        `,
+          }}
+        />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col min-h-screen`}
       >
