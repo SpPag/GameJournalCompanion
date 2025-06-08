@@ -9,17 +9,23 @@ import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { AlertMessage } from "@/components/AlertMessage";
+import { useSession } from "next-auth/react";
 
 export default function Home() {
   const [userGames, setUserGames] = useState<Game[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [loading, setLoading] = useState(true);
   const router = useRouter();
+  const { data: session, status } = useSession();
 
   // Load the user's games when the component mounts
   useEffect(() => {
-    refreshGames();
-  }, []);
+    if (status === "authenticated") {
+      refreshGames();
+    } else if (status === "unauthenticated") {
+      setLoading(false); // Stop loading if the user isn't logged in
+    }
+  }, [status]);
 
   // Function that re-checks user's registered games after game registration modal closes to make sure the appropriate GameCard instances are rendered
   const refreshGames = () => {
