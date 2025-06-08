@@ -42,7 +42,7 @@ export default function Home() {
       const successMessages = {
         'registration-complete': 'Game registered successfully!',
       };
-      
+
     */
     const errorMessages: Record<string, string> = {
       'game-not-registered': 'Game not registered!',
@@ -51,8 +51,9 @@ export default function Home() {
       // 'unauthorized-access': 'You must be logged in to view that page.',
     };
 
-    if (error && errorMessages[error]) {
-      setShowAlert({ message: errorMessages[error], variant: "error" });
+    if (error) {
+      const message = errorMessages[error] ?? 'An unknown error occurred.';
+      setShowAlert({ message, variant: "error" });
     }
 
   }, [searchParams]);
