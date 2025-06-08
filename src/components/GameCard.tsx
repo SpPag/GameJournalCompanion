@@ -8,7 +8,7 @@ interface GameCardProps {
 const GameCard = ({ game }: GameCardProps) => {
 
     return (
-        <div className="relative text-center border border-2 rounded-lg text-xl w-24 h-38 sm:w-26 sm:h-41 md:w-28 md:h-44 lg:w-34 lg:h-52 border-zinc-500 bg-cover bg-center bg-no-repeat text-zinc-950 shadow-md dark:shadow-zinc-950/70 dark:border-zinc-900 dark:text-zinc-950 dark:bg-gray-300/20 cursor-pointer group overflow-hidden">
+        <div className="relative text-center border border-2 rounded-lg text-xl w-24 h-38 sm:w-26 sm:h-41 md:w-28 md:h-44 lg:w-34 lg:h-52 border-zinc-500 bg-cover bg-center bg-no-repeat text-zinc-950 shadow-md dark:shadow-zinc-950/70 dark:border-zinc-900 dark:text-zinc-950 dark:bg-[#c5c7cb]/20 cursor-pointer group overflow-hidden">
             {game ? (
                 <>
                     {/* Image container */}
