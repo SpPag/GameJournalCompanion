@@ -10,7 +10,7 @@ const GameCard = ({ game }: GameCardProps) => {
     const borderClasses = game ? "border-none" : "border border-2"
 
     return (
-        <div className={`relative text-center ${borderClasses} rounded-lg text-xl w-24 h-32 sm:w-28 sm:h-[9.33rem] md:w-32 md:h-[10.67rem] lg:w-36 lg:h-48
+        <div className={`relative text-center ${borderClasses} rounded-lg text-xl w-27 h-36 sm:w-30 sm:h-40 md:w-33 md:h-44 lg:w-36 lg:h-48
         border-zinc-500 bg-cover bg-center bg-no-repeat text-zinc-950 shadow-md dark:shadow-zinc-950/70 dark:border-zinc-900 dark:text-zinc-950 dark:bg-[#c5c7cb]/20 cursor-pointer group overflow-hidden`}>
             {game ? (
                 <>
