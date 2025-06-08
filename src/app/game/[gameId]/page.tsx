@@ -5,6 +5,9 @@ import dbConnect from "@/../lib/mongoose";
 import React from "react";
 import mongoose from "mongoose";
 import { redirect } from "next/navigation";
+import { Game } from "../../../../lib/models/Game";
+import { GameTitle } from "@/components/GameTitle";
+import { User } from "../../../../lib/models/User";
 
 interface GameDetailsPageProps {
     params: {
@@ -38,12 +41,39 @@ const GameDetailsPage = async ({ params }: GameDetailsPageProps) => {
         return NextResponse.json({ error: "Invalid game ID" }, { status: 400 });
     }
 
+    // 7. Fetch user data, including registeredGames
+    const user = await User.findOne({ email: session.user.email });
+
+    // 8. If there's no logged-in user or the session has expired, redirect to login
+    if (!user) {
+        redirect("/login");
+    }
+
+    // 9. Check if the gameId is in the user's registeredGames array. 'gameId' is a string, because it's coming from the URL
+    const gameIsRegistered = user.registeredGames.some(
+        (regGameId: mongoose.Types.ObjectId) => regGameId.toString() === gameId
+    );
+
+    // 10. If the game is not registered, redirect to the home page
+    if (!gameIsRegistered) {
+        redirect("/?error=game-not-registered");
+    }
+
+    // 11. Fetch the game document from DB
+    const game = await Game.findById(gameId);
+
+    // 12. 
+    if (!game) {
+        return <div className="text-red-500">Game not found.</div>;
+    }
+
     return (
         <div>
-            <h1>Game Details Will Go Here</h1>
-            <p className="text-zinc-600">Game ID: {gameId}</p>
+            {/* Pass the game to your component */}
+            <GameTitle game={game} />
+            {/* You can add more game details/components here */}
         </div>
-    )
+    );
 };
 
 export default GameDetailsPage; // this needs to be default, because that's how Next.js knows to look for and import it
