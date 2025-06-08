@@ -8,6 +8,7 @@ import { Game } from "@/types/Game";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
+import { AlertMessage } from "@/components/AlertMessage";
 
 export default function Home() {
   const [userGames, setUserGames] = useState<Game[]>([]);
@@ -28,49 +29,55 @@ export default function Home() {
   };
 
   const searchParams = useSearchParams();
+  const [showAlert, setShowAlert] = useState<null | { message: string; variant: "error" | "success" | "warning" | "info" }>(null);;
 
   useEffect(() => {
     const error = searchParams.get('error');
-    if (error === 'not-registered') {
-      alert("You haven't registered this game to your account.");
+    if (error === 'game-not-registered') {
+      setShowAlert({ message: "Game not registered!", variant: "warning" });
     }
   }, [searchParams]);
 
   return (
-    <div className="relative top-14 flex flex-col items-center justify-start flex-1 p-8 gap-16 font-[family-name:var(--font-geist-sans)]">
-      <div>
-        <div className="flex items-center justify-center gap-4 border border-2 rounded-xl w-106 h-16 sm:w-106 sm:h-16 md:w-123 md:h-17 lg:w-141 lg:h-19 text-2xl md:text-3xl lg:text-4xl border-zinc-500 shadow-xl p-4 text-zinc-950 dark:shadow-zinc-950/70 dark:border-zinc-900 dark:text-zinc-950 dark:bg-white/10">
-          <BookSvg className="h-8 w-8" />
-          <h1 className="italic pr-1">Game Journal Companion</h1>
-          <BookSvg className="h-8 w-8" />
-        </div>
-        <WelcomeUser />
-      </div>
-      <main className="flex flex-col row-start-2 items-center sm:items-start">
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          {/* Render each registered game */}
-          {userGames.map((game) => (
-            <div key={game._id} onClick={() => router.push(`/game/${game._id}`)}>
-              <GameCard key={game._id} game={game} />
-            </div>
-          ))}
-
-          {/* Always render one “Register a new game” card */}
-          <div onClick={() => setIsModalOpen(true)}>
-            <GameCard />
+    <>
+    {showAlert && (
+      <AlertMessage message={showAlert.message} variant={showAlert.variant} onDone={() => setShowAlert(null)}/>
+    )}
+      <div className="relative top-14 flex flex-col items-center justify-start flex-1 p-8 gap-16 font-[family-name:var(--font-geist-sans)]">
+        <div>
+          <div className="flex items-center justify-center gap-4 border border-2 rounded-xl w-106 h-16 sm:w-106 sm:h-16 md:w-123 md:h-17 lg:w-141 lg:h-19 text-2xl md:text-3xl lg:text-4xl border-zinc-500 shadow-xl p-4 text-zinc-950 dark:shadow-zinc-950/70 dark:border-zinc-900 dark:text-zinc-950 dark:bg-white/10">
+            <BookSvg className="h-8 w-8" />
+            <h1 className="italic pr-1">Game Journal Companion</h1>
+            <BookSvg className="h-8 w-8" />
           </div>
+          <WelcomeUser />
         </div>
-        {/* The modal to pick & register a new game */}
-        {isModalOpen && (
-          <AvailableGamesModal
-            onClose={() => setIsModalOpen(false)}
-            onRegistered={() => {
-              setIsModalOpen(false);
-              refreshGames();
-            }}
-          />
-        )}
-      </main>
-    </div>
+        <main className="flex flex-col row-start-2 items-center sm:items-start">
+          <div className="flex gap-4 items-center flex-col sm:flex-row">
+            {/* Render each registered game */}
+            {userGames.map((game) => (
+              <div key={game._id} onClick={() => router.push(`/game/${game._id}`)}>
+                <GameCard key={game._id} game={game} />
+              </div>
+            ))}
+
+            {/* Always render one “Register a new game” card */}
+            <div onClick={() => setIsModalOpen(true)}>
+              <GameCard />
+            </div>
+          </div>
+          {/* The modal to pick & register a new game */}
+          {isModalOpen && (
+            <AvailableGamesModal
+              onClose={() => setIsModalOpen(false)}
+              onRegistered={() => {
+                setIsModalOpen(false);
+                refreshGames();
+              }}
+            />
+          )}
+        </main>
+      </div>
+    </>
   );
 }
