@@ -13,6 +13,7 @@ import { AlertMessage } from "@/components/AlertMessage";
 export default function Home() {
   const [userGames, setUserGames] = useState<Game[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [loading, setLoading] = useState(true);
   const router = useRouter();
 
   // Load the user's games when the component mounts
@@ -22,10 +23,12 @@ export default function Home() {
 
   // Function that re-checks user's registered games after game registration modal closes to make sure the appropriate GameCard instances are rendered
   const refreshGames = () => {
+    setLoading(true); // Start loading
     fetch("/api/users/games")
       .then((res) => res.json())
       .then((data) => setUserGames(data.registeredGames || []))// Even if I know that every user on the database has at least an empty array as registeredGames' value, adding '|| []' guards against a server bug or network hiccup that would result in the response being someting like '{ "error": "Internal Server Error" }', which will set data.registeredGames to undefined, which would cause the app to crash since it would be unhandled. Same goes for if the app tries to access data.registeredGames before the fetch completes and populates it
-      .catch(console.error);
+      .catch(console.error)
+      .finally(() => setLoading(false)); // Done loading;
   };
 
   const searchParams = useSearchParams();
@@ -73,22 +76,27 @@ export default function Home() {
           <WelcomeUser />
         </div>
         <main className="flex flex-col row-start-2 items-center sm:items-start ">
-          <div className="flex flex-wrap gap-4 justify-center flex-row max-w-xl sm:max-w-2xl md:max-w-3xl lg:max-w-4xl max-h-[55vh] overflow-y-auto">
-            {/* Render each registered game */}
-            
-            {[...userGames] // spread registeredGames into a new array, to avoid mutating the original array that's tracked by React's state (might mess with it otherwise)
-            .sort((a, b) => a.title.toLocaleLowerCase().localeCompare(b.title)) // sort by name
-            .map((game) => (
-              <div key={game._id} onClick={() => router.push(`/game/${game._id}`)}>
-                <GameCard key={game._id} game={game} />
-              </div>
-            ))}
+          {loading ? (
+            <div className="text-center text-lg text-zinc-900">Loading...</div>
+          ) : (
+            <div className="flex flex-wrap gap-4 justify-center flex-row max-w-xl sm:max-w-2xl md:max-w-3xl lg:max-w-4xl max-h-[55vh] overflow-y-auto">
+              {/* Render each registered game */}
 
-            {/* Always render one “Register a new game” card */}
-            <div onClick={() => setIsModalOpen(true)}>
-              <GameCard />
+              {[...userGames] // spread registeredGames into a new array, to avoid mutating the original array that's tracked by React's state (might mess with it otherwise)
+                .sort((a, b) => a.title.toLocaleLowerCase().localeCompare(b.title)) // sort by name
+                .map((game) => (
+                  <div key={game._id} onClick={() => router.push(`/game/${game._id}`)}>
+                    <GameCard key={game._id} game={game} />
+                  </div>
+                ))}
+
+              {/* Always render one “Register a new game” card */}
+              <div onClick={() => setIsModalOpen(true)}>
+                <GameCard />
+              </div>
             </div>
-          </div>
+          )}
+
           {/* The modal to pick & register a new game */}
           {isModalOpen && (
             <AvailableGamesModal
