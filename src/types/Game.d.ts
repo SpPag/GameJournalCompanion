@@ -1,11 +1,11 @@
 interface Game {
-    _id: string,
+    _id: mongoose.Types.ObjectId; // MongoDB's auto-generated ObjectID
     title: string,
     publisher: string,
     developer: string,
     westernReleaseYear: string,
     cover: string,
-    genre: string,
+    genres: string,
 }
 
 export { Game }
