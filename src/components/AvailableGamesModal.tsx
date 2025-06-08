@@ -67,7 +67,7 @@ const AvailableGamesModal = ({ onClose, onRegistered }: AvailableGamesModalProps
                 </div>
               ))}
               {available.length === 0 && !loading && (
-                <p>No available games. Either I&apos;m failing you or you&apos;re an absolute beast!</p>
+                <p>No available games. Either I&apos;m failing you or you need to touch some grass, I-I-I mean, you&apos;re an absolute beast!</p>
               )}
             </div>
             <button
