@@ -1,14 +1,22 @@
 "use client";
 
 import { signIn } from "next-auth/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 import React from "react";
 
 const LoginPage = () => {
     const [email, setEmail] = useState(""); // tracks the email input
     const [password, setPassword] = useState(""); // tracks the password input
     const router = useRouter(); // used for navigating
+    const { data: session, status } = useSession(); // get session data to check if the user is already logged in
+
+    useEffect(() => {
+        if (status === "authenticated") {
+            router.replace("/"); // or dashboard page
+        }
+    }, [status, router]);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -26,6 +34,15 @@ const LoginPage = () => {
         } else {
             alert("Invalid login");
         }
+    }
+
+    // Show loading state until session status is determined
+    if (status !== "unauthenticated") {
+        return (
+            <div className="flex justify-center items-center text-zinc-950">
+                <div>Loading...</div>
+            </div>
+        );
     }
 
     return (
@@ -52,11 +69,11 @@ const LoginPage = () => {
                         Login
                     </button>
                     <button type="button" onClick={() => router.push("/register")} className="border py-2 rounded w-1/2 m-auto bg-[#c59854] text-[#111827] border-stone-700 focus:outline-2 focus:outline-[#867162] hover:bg-[#b68945] active:bg-[#ad803c] dark:border-zinc-500 dark:bg-neutral-600 dark:hover:bg-[#4b4b4b] dark:focus:bg-[#4b4b4b] dark:active:bg-[#393939] dark:text-zinc-300 dark:focus:outline-2 dark:focus:outline-zinc-500">
-                    <p className="text-center text-sm">
-                        Don&apos;t have an account?
-                    </p>
-                    Register
-                </button>
+                        <p className="text-center text-sm">
+                            Don&apos;t have an account?
+                        </p>
+                        Register
+                    </button>
                 </div>
             </form>
         </div>
