@@ -1,5 +1,6 @@
 import { Game } from "@/types/Game";
 import React from "react";
+import Image from "next/image";
 
 interface GameCardProps {
     game?: Game;
@@ -15,12 +16,13 @@ const GameCard = ({ game }: GameCardProps) => {
             {game ? (
                 <>
                     {/* Image container */}
-                    <div className="w-full h-full">
-                        <img
+                    <div className="w-full h-full relative">
+                        <Image
                             src={game.cover || "/GameCardBackground_final_v4.png"}
                             alt={game.title}
-                            className="w-full h-full object-cover"
-                            loading="lazy"
+                            fill
+                            className="object-cover"
+                            priority={false}
                         />
                     </div>
 
