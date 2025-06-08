@@ -29,20 +29,39 @@ export default function Home() {
   };
 
   const searchParams = useSearchParams();
-  const [showAlert, setShowAlert] = useState<null | { message: string; variant: "error" | "success" | "warning" | "info" }>(null);;
+  const [showAlert, setShowAlert] = useState<null | { message: string; variant: "error" | "success" | "warning" | "info" }>(null); // I currently only use 'error' but I'm adding these here in case they're useful in the future. Expand freely
 
   useEffect(() => {
+
     const error = searchParams.get('error');
-    if (error === 'game-not-registered') {
-      setShowAlert({ message: "Game not registered!", variant: "error" });
+    // I currently only use 'error' but I'm adding these here in case they're useful in the future. Expand freely by adding code like:
+    /*
+
+      const success = searchParams.get('success');
+      const warning = searchParams.get('warning');
+      const successMessages = {
+        'registration-complete': 'Game registered successfully!',
+      };
+      
+    */
+    const errorMessages: Record<string, string> = {
+      'game-not-registered': 'Game not registered!',
+      // Add more error codes and messages here. Examples:
+      // 'game-already-registered': 'Game already registered!',
+      // 'unauthorized-access': 'You must be logged in to view that page.',
+    };
+
+    if (error && errorMessages[error]) {
+      setShowAlert({ message: errorMessages[error], variant: "error" });
     }
+
   }, [searchParams]);
 
   return (
     <>
-    {showAlert && (
-      <AlertMessage message={showAlert.message} variant={showAlert.variant} onDone={() => setShowAlert(null)}/>
-    )}
+      {showAlert && (
+        <AlertMessage message={showAlert.message} variant={showAlert.variant} onDone={() => setShowAlert(null)} />
+      )}
       <div className="relative top-14 flex flex-col items-center justify-start flex-1 p-8 gap-16 font-[family-name:var(--font-geist-sans)]">
         <div>
           <div className="flex items-center justify-center gap-4 border border-2 rounded-xl w-106 h-16 sm:w-106 sm:h-16 md:w-123 md:h-17 lg:w-141 lg:h-19 text-2xl md:text-3xl lg:text-4xl border-zinc-500 shadow-xl p-4 text-zinc-950 dark:shadow-zinc-950/70 dark:border-zinc-900 dark:text-zinc-950 dark:bg-white/10">
