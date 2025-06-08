@@ -72,8 +72,8 @@ export default function Home() {
           </div>
           <WelcomeUser />
         </div>
-        <main className="flex flex-col row-start-2 items-center sm:items-start">
-          <div className="flex gap-4 items-center flex-col sm:flex-row">
+        <main className="flex flex-col row-start-2 items-center sm:items-start ">
+          <div className="flex flex-wrap gap-4 justify-center flex-row max-w-xl sm:max-w-2xl md:max-w-3xl lg:max-w-4xl max-h-[55vh] overflow-y-auto">
             {/* Render each registered game */}
             {userGames.map((game) => (
               <div key={game._id} onClick={() => router.push(`/game/${game._id}`)}>
