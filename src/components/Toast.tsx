@@ -10,7 +10,7 @@ interface ToastProps {
   duration?: number; // milliseconds
 }
 
-const Toast = ({ message, type = "success", onDone, duration = 4000 }: ToastProps) => {
+const Toast = ({ message, type, onDone, duration = 4000 }: ToastProps) => {
 
   const [visible, setVisible] = React.useState(false);
 
