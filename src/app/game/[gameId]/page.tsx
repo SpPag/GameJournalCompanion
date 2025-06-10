@@ -8,6 +8,7 @@ import { redirect } from "next/navigation";
 import { Game } from "../../../../lib/models/Game";
 import { GameTitle } from "@/components/GameTitle";
 import { User } from "../../../../lib/models/User";
+import { Note } from "../../../../lib/models/Note";
 
 interface GameDetailsPageProps {
     params: {
@@ -62,10 +63,13 @@ const GameDetailsPage = async ({ params }: GameDetailsPageProps) => {
     // 11. Fetch the game document from DB
     const game = await Game.findById(gameId);
 
-    // 12. 
+    // 12. Return 404 if game is not found
     if (!game) {
-        return <div className="text-red-500">Game not found.</div>;
+        return NextResponse.json({ error: "Game not found" }, { status: 404 });
     }
+
+    // 13. Fetch all notes for this user & game
+    const notes = (await Note.find({ userId: user.id, gameId: game.id })).sort((a, b) => a.lastEditedOn - b.lastEditedOn).reverse();
 
     return (
         <div>
@@ -74,6 +78,12 @@ const GameDetailsPage = async ({ params }: GameDetailsPageProps) => {
                 <GameTitle game={game} />
                 {/* You can add more game details/components here */}
             </div>
+            {[...notes].map((note) => (
+                <div key={note._id}>
+                    <p>{note.content}</p>
+                </div>
+            ))
+            }
         </div>
     );
 };
