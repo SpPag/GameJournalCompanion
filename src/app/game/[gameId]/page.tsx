@@ -68,9 +68,6 @@ const GameDetailsPage = async ({ params }: GameDetailsPageProps) => {
         return NextResponse.json({ error: "Game not found" }, { status: 404 });
     }
 
-    // 13. Fetch all notes for this user & game
-    const notes = (await Note.find({ userId: user.id, gameId: game.id })).sort((a, b) => a.lastEditedOn - b.lastEditedOn).reverse();
-
     return (
         <div>
             <div>
@@ -78,12 +75,6 @@ const GameDetailsPage = async ({ params }: GameDetailsPageProps) => {
                 <GameTitle game={game} />
                 {/* You can add more game details/components here */}
             </div>
-            {[...notes].map((note) => (
-                <div key={note._id}>
-                    <p>{note.content}</p>
-                </div>
-            ))
-            }
         </div>
     );
 };
