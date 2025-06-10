@@ -2,9 +2,15 @@
 
 import { getServerSession } from "next-auth";
 import { authOptions } from "../../auth/[...nextauth]/route";
+import { Game } from "@/../lib/models/Game";
 import { User } from "@/../lib/models/User";
-import { NextResponse } from "next/server";
 import dbConnect from "@/../lib/mongoose";
+import { NextResponse } from "next/server";
+
+// Force model registration
+// the following line disables the eslint warning regarding the declaration of an unused variable. I'm deliberately leaving the variable name empty to signify that it's meant to be unused. The only reason the line exists is to force the model to be registered before the route tries to get the user's games populated. This deals with the MissingSchema error when loading the home page, without having clicked on the 'Register a new game' GameCard instance (which would trigger the model registration)
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const _ = Game.modelName;
 
 export async function GET() {
     try {
