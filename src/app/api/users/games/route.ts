@@ -1,5 +1,3 @@
-// src/app/api/users/games/route.ts
-
 import { getServerSession } from "next-auth";
 import { authOptions } from "../../auth/[...nextauth]/route";
 import { Game } from "@/../lib/models/Game";
