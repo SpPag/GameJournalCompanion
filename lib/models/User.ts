@@ -2,6 +2,7 @@ import mongoose, { Schema, Document, model, models } from "mongoose";
 
 // useful to export the interface for strong typing function returns, consistent return types, TypeScript validations and checks and more
 interface IUser extends Document {
+    _id: mongoose.Types.ObjectId; // MongoDB's auto-generated ObjectID
     email: string;
     password: string;
     username: string;
