@@ -26,6 +26,39 @@ const GameDetailsPage = () => {
     const gameId = params.gameId as string;
 
     useEffect(() => {
+
+        const fetchGameData = async () => {
+            try {
+                setLoading(true);
+                //=====================DEBUG=====================
+                // console.log("Calling API with gameId:", gameId); // Check browser's Console
+                // const debugRes = await fetch(`/api/users/games/${gameId}`);
+                // console.log("Debug status:", debugRes.status);
+                //=====================DEBUG=====================
+
+                // Check if game is registered and get game details
+                const gameRes = await fetch(`/api/users/games/${gameId}`);
+                if (!gameRes.ok) {
+                    const errorData = await gameRes.json();
+                    throw new Error(errorData.error || "Game fetch failed");
+                }
+                const gameData = await gameRes.json();
+                setGame(gameData.game);
+
+                // Fetch notes for this game
+                const notesRes = await fetch(`/api/users/notes?gameId=${gameId}`);
+                if (notesRes.ok) {
+                    const notesData = await notesRes.json();
+                    setNotes(notesData.notes || []);
+                }
+
+            } catch (err) {
+                setError(err instanceof Error ? err.message : "An error occurred");
+                router.push("/?error=game-not-registered");
+            } finally {
+                setLoading(false);
+            }
+        };
         if (status === "unauthenticated") {
             router.push("/login");
             return;
@@ -34,41 +67,9 @@ const GameDetailsPage = () => {
         if (status === "authenticated" && gameId) {
             fetchGameData();
         }
-    }, [status, gameId]);
+    }, [status, gameId, router]);
 
-    const fetchGameData = async () => {
-        try {
-            setLoading(true);
-            //=====================DEBUG=====================
-            console.log("Calling API with gameId:", gameId); // Check browser's Console
-            fetch(`/api/users/games/${gameId}`)
-                .then(res => console.log("API response status:", res.status))
-                .catch(err => console.error("API call failed:", err));
-            //=====================DEBUG=====================
 
-            // Check if game is registered and get game details
-            const gameRes = await fetch(`/api/users/games/${gameId}`);
-            if (!gameRes.ok) {
-                const errorData = await gameRes.json();
-                throw new Error(errorData.error || "Game fetch failed");
-            }
-            const gameData = await gameRes.json();
-            setGame(gameData.game);
-
-            // Fetch notes for this game
-            const notesRes = await fetch(`/api/users/notes?gameId=${gameId}`);
-            if (notesRes.ok) {
-                const notesData = await notesRes.json();
-                setNotes(notesData.notes || []);
-            }
-
-        } catch (err) {
-            setError(err instanceof Error ? err.message : "An error occurred");
-            router.push("/?error=game-not-registered");
-        } finally {
-            setLoading(false);
-        }
-    };
 
     if (loading) {
         return <div>Loading...</div>;
