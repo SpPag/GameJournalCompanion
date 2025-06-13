@@ -92,7 +92,7 @@ export default function Home() {
                 .sort((a, b) => a.title.toLocaleLowerCase().localeCompare(b.title)) // sort by name
                 .map((game) => (
                   <div key={game._id} onClick={() => router.push(`/game/${game._id}`)}>
-                    <GameCard key={game._id} game={game} />
+                    <GameCard game={game} />
                   </div>
                 ))}
 
