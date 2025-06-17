@@ -8,9 +8,7 @@ import mongoose from "mongoose";
 
 export async function GET(request: Request, { params }: { params: { gameId: mongoose.Types.ObjectId } }) {
     
-    console.log("GET /api/users/games/:gameId route hit");
     try {
-        console.log("try block entered");
         // 1. Get the currently logged-in user's session
         const session = await getServerSession(authOptions);
 
@@ -65,6 +63,7 @@ export async function GET(request: Request, { params }: { params: { gameId: mong
         }
 
         return NextResponse.json({ game });
+        
     } catch (error) {
         console.error(error);
         return NextResponse.json(

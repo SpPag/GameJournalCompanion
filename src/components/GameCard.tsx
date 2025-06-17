@@ -37,7 +37,7 @@ const GameCard = ({ game }: GameCardProps) => {
                         <div className="block">Register a new game</div>
                     </div>
 
-                    {/* Hover overlay with title */}
+                    {/* Hover overlay with plus sign */}
                     <div className="absolute inset-0 bg-black/25 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                         <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g id="SVGRepo_bgCarrier" strokeWidth="0" />

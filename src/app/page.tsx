@@ -87,7 +87,6 @@ export default function Home() {
           ) : (
             <div className="flex flex-wrap gap-4 justify-center flex-row max-w-xl sm:max-w-2xl md:max-w-3xl lg:max-w-4xl max-h-[55vh] overflow-y-auto">
               {/* Render each registered game */}
-
               {[...userGames] // spread registeredGames into a new array, to avoid mutating the original array that's tracked by React's state (might mess with it otherwise)
                 .sort((a, b) => a.title.toLocaleLowerCase().localeCompare(b.title)) // sort by name
                 .map((game) => (
