@@ -28,6 +28,41 @@ const GameDetailsPage = () => {
     const gameId = params.gameId as string;
 
     useEffect(() => {
+
+        const fetchGameData = async () => {
+            try {
+                setLoading(true);
+                //=====================DEBUG=====================
+                // console.log("Calling API with gameId:", gameId); // Check browser's Console
+                // fetch(`/api/users/games/${gameId}`)
+                //     .then(res => console.log("API response status:", res.status))
+                //     .catch(err => console.error("API call failed:", err));
+                //=====================DEBUG=====================
+
+                // Check if game is registered and get game details
+                const gameRes = await fetch(`/api/users/games/${gameId}`);
+                if (!gameRes.ok) {
+                    const errorData = await gameRes.json();
+                    throw new Error(errorData.error || "Game fetch failed");
+                }
+                const gameData = await gameRes.json();
+                setGame(gameData.game);
+
+                // Fetch notes for this game
+                const notesRes = await fetch(`/api/users/notes?gameId=${gameId}`);
+                if (notesRes.ok) {
+                    const notesData = await notesRes.json();
+                    setUserGameNotes(notesData.notes || []);
+                }
+
+            } catch (err) {
+                setError(err instanceof Error ? err.message : "An error occurred");
+                router.push("/?error=game-not-registered");
+            } finally {
+                setLoading(false);
+            }
+        };
+
         if (status === "unauthenticated") {
             router.push("/login");
             return;
@@ -36,41 +71,7 @@ const GameDetailsPage = () => {
         if (status === "authenticated" && gameId) {
             fetchGameData();
         }
-    }, [status, gameId]);
-
-    const fetchGameData = async () => {
-        try {
-            setLoading(true);
-            //=====================DEBUG=====================
-            // console.log("Calling API with gameId:", gameId); // Check browser's Console
-            // fetch(`/api/users/games/${gameId}`)
-            //     .then(res => console.log("API response status:", res.status))
-            //     .catch(err => console.error("API call failed:", err));
-            //=====================DEBUG=====================
-
-            // Check if game is registered and get game details
-            const gameRes = await fetch(`/api/users/games/${gameId}`);
-            if (!gameRes.ok) {
-                const errorData = await gameRes.json();
-                throw new Error(errorData.error || "Game fetch failed");
-            }
-            const gameData = await gameRes.json();
-            setGame(gameData.game);
-
-            // Fetch notes for this game
-            const notesRes = await fetch(`/api/users/notes?gameId=${gameId}`);
-            if (notesRes.ok) {
-                const notesData = await notesRes.json();
-                setUserGameNotes(notesData.notes || []);
-            }
-
-        } catch (err) {
-            setError(err instanceof Error ? err.message : "An error occurred");
-            router.push("/?error=game-not-registered");
-        } finally {
-            setLoading(false);
-        }
-    };
+    }, [status, gameId, router]);
 
     const handleNoteCreate = () => {
 
@@ -94,10 +95,10 @@ const GameDetailsPage = () => {
                 <div className="text-center text-lg text-zinc-900">Game not found</div>
             ) : (
                 <div className="relative top-14 flex flex-col items-center justify-start flex-1 gap-16 font-[family-name:var(--font-geist-sans)]">
-                        <div className="relative flex flex-col items-center flex-1 gap-10">
-                            <GameTitle game={game || { title: "Loading..." }} />
-                            <WelcomeUser />
-                        </div>
+                    <div className="relative flex flex-col items-center flex-1 gap-10">
+                        <GameTitle game={game || { title: "Loading..." }} />
+                        <WelcomeUser />
+                    </div>
                     <main className="flex flex-wrap gap-4 justify-center flex-row max-w-xl sm:max-w-2xl md:max-w-3xl lg:max-w-4xl max-h-[55vh] overflow-y-auto">
                         {/* Notes section */}
 
