@@ -10,7 +10,7 @@ const LoginPage = () => {
     const [email, setEmail] = useState(""); // tracks the email input
     const [password, setPassword] = useState(""); // tracks the password input
     const router = useRouter(); // used for navigating
-    const { data: session, status } = useSession(); // get session data to check if the user is already logged in
+    const { status } = useSession(); // get session data to check if the user is already logged in
 
     useEffect(() => {
         if (status === "authenticated") {
