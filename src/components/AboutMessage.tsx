@@ -1,0 +1,43 @@
+import { useSession } from "next-auth/react";
+import React from "react";
+
+const AboutMessage = () => {
+
+    const { data: session, status } = useSession();
+
+    // checking for status == loading to avoid flickering the div before the session data is available
+    if (status === "loading") return null;
+
+    const messageTitle = "Welcome to the Game Journal Companion";
+
+    const messageOption1 = "Game Journal Companion is your digital notebook for gaming.\nTrack which games you're playing, and write down anything you want to remember — like shops with rare items, tough fights, or puzzles you'll come back to later.";
+
+    const messageOption2 = "Ever paused your game to jot something down — like a vendor with great gear, a chest you couldn't open yet, or a strategy for the Battle Tree in Pokemon?\n\nThis app is made for that.\n\nRegister the games you're playing and keep track of anything worth returning to.";
+
+    return (
+        <>
+            {!session && (
+                <div className="
+                    flex flex-col items-center justify-evenly z-50 p-6 top-120
+                    absolute
+                    w-180 h-90
+                    rounded-lg
+                    text-[#111827] dark:text-zinc-300
+                    bg-linear-to-tl from-[#494949]/65 to-neutral-800/65">
+                    <div className="
+                        p-2 mb-3
+                        text-[0.95rem]/[1.25rem] md:text-[0.97rem]/[1.3rem] lg:text-xl
+                        ">{messageTitle}</div>
+                    <div className="
+                        text-[0.95rem]/[1.25rem] md:text-[0.97rem]/[1.3rem] lg:text-[1.0625rem]/6
+                        tracking-wider leading-loose
+                        whitespace-pre-line
+                        text-center
+                        ">{messageOption2}</div>
+                </div>
+            )}
+        </>
+    );
+}
+
+export { AboutMessage }
