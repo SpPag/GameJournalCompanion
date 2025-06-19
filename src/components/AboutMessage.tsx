@@ -18,21 +18,23 @@ const AboutMessage = () => {
         <>
             {!session && (
                 <div className="
-                    flex flex-col items-center justify-evenly z-50 p-6 top-120
+                    flex flex-col items-center justify-evenly z-50 p-6 pt-2 top-110
                     absolute
-                    w-180 h-90
+                    lg:w-180 lg:h-90
                     rounded-lg
                     text-[#111827] dark:text-zinc-300
-                    bg-linear-to-tl from-[#494949]/65 to-neutral-800/65">
+                    bg-neutral-800/65">
                     <div className="
-                        p-2 mb-3
+                        mb-3
                         text-[0.95rem]/[1.25rem] md:text-[0.97rem]/[1.3rem] lg:text-xl
+                        font-merienda font-[800]
                         ">{messageTitle}</div>
                     <div className="
-                        text-[0.95rem]/[1.25rem] md:text-[0.97rem]/[1.3rem] lg:text-[1.0625rem]/6
+                        text-[0.95rem]/[1.25rem] md:text-[0.97rem]/[1.3rem] lg:text-[1.0625rem]/7
                         tracking-wider leading-loose
                         whitespace-pre-line
                         text-center
+                        font-merienda
                         ">{messageOption2}</div>
                 </div>
             )}
