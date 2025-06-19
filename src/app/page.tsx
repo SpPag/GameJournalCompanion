@@ -10,6 +10,7 @@ import React, { useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { AlertMessage } from "@/components/AlertMessage";
 import { useSession } from "next-auth/react";
+import { AboutMessage } from "@/components/AboutMessage";
 
 export default function Home() {
   const [userGames, setUserGames] = useState<Game[]>([]);
@@ -81,6 +82,7 @@ export default function Home() {
           </div>
           <WelcomeUser />
         </div>
+        <AboutMessage />
         <main className="flex flex-col row-start-2 items-center sm:items-start ">
           {loading ? (
             <div className="text-center text-lg text-zinc-900">Loading...</div>
