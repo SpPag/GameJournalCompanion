@@ -16,7 +16,7 @@ const AuthButton = () => {
     return (
         <button
             onClick={() => session ? signOut({ callbackUrl: "/" }) : router.push("/login")} // can add '{ callbackUrl: "/login" }' as the callback URL in signOut(), to redirect to the login page upon logout
-            className='
+            className="
             flex items-center z-50 px-4 py-2
             mt-5 mr-5
             absolute top-0 right-0
@@ -26,7 +26,7 @@ const AuthButton = () => {
             bg-[#c59854] dark:bg-neutral-600
             focus:bg-[#a37732] focus:outline-2 focus:outline-[#867162] dark:focus:bg-[#4b4b4b] dark:focus:outline-2 dark:focus:outline-zinc-500
             hover:bg-[#b68945] dark:hover:bg-[#4b4b4b]
-            active:bg-[#ad803c] dark:active:bg-[#393939]'
+            active:bg-[#ad803c] dark:active:bg-[#393939]"
         >
             {session ? "Logout" : "Login"}
         </button>
