@@ -73,9 +73,17 @@ export default function Home() {
       {showAlert && (
         <AlertMessage message={showAlert.message} variant={showAlert.variant} onDone={() => setShowAlert(null)} />
       )}
-      <div className="relative top-14 flex flex-col items-center justify-start flex-1 p-8 gap-16 font-[family-name:var(--font-geist-sans)]">
+      <div className="relative top-14 flex flex-col items-center justify-start flex-1 p-8 gap-10 font-[family-name:var(--font-geist-sans)]">
         <div>
-          <div className="flex items-center justify-center gap-4 border border-2 rounded-xl w-106 h-16 sm:w-106 sm:h-16 md:w-123 md:h-17 lg:w-141 lg:h-19 text-2xl md:text-3xl lg:text-4xl border-zinc-500 shadow-xl p-4 text-zinc-950 dark:shadow-zinc-950/70 dark:border-zinc-900 dark:text-zinc-950 dark:bg-white/10">
+          <div className="
+          flex items-center justify-center gap-4 p-4
+          w-106 h-16 sm:w-106 sm:h-16 md:w-123 md:h-17 lg:w-141 lg:h-19
+          border border-2 rounded-xl border-zinc-500 dark:border-zinc-900
+          text-2xl md:text-3xl lg:text-4xl
+          text-zinc-950 dark:text-zinc-950
+          shadow-xl dark:shadow-zinc-950/70
+          dark:bg-white/10
+          ">
             <BookSvg className="h-8 w-8" />
             <h1 className="italic pr-1">Game Journal Companion</h1>
             <BookSvg className="h-8 w-8" />
