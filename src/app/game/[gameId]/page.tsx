@@ -94,7 +94,7 @@ const GameDetailsPage = () => {
             ) : !game ? (
                 <div className="text-center text-lg text-zinc-900">Game not found</div>
             ) : (
-                <div className="relative top-14 flex flex-col items-center justify-start flex-1 gap-16 font-[family-name:var(--font-geist-sans)]">
+                <div className="relative top-14 flex flex-col items-center justify-start flex-1 gap-16 font-sans">
                     <div className="relative flex flex-col items-center flex-1 gap-10">
                         <GameTitle game={game || { title: "Loading..." }} />
                         <WelcomeUser />
