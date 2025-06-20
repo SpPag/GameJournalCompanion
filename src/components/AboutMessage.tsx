@@ -12,7 +12,7 @@ const AboutMessage = () => {
 
     const messageOption1 = "Game Journal Companion is your digital notebook for gaming.\nTrack which games you're playing, and write down anything you want to remember — like shops with rare items, tough fights, or puzzles you'll come back to later.";
 
-    const messageOption2 = "Ever paused your game to jot something down — like a vendor with great gear, a chest you couldn't open yet, or a strategy for the Battle Tree in Pokemon?\n\nThis app is made for that.\n\nRegister the games you're playing and keep track of anything worth returning to.";
+    const messageOption2 = "Ever paused your game to jot something down — like a vendor with a lucrative deal, a chest you couldn't open yet, or a strategy for the Battle Tree in Pokemon?\n\nThis app is made for that.\n\nRegister the games you're playing and keep track of anything worth returning to.";
 
     return (
         <>
