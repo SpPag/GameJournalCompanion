@@ -22,8 +22,10 @@ const AboutMessage = () => {
                     w-130 h-65 md:w-140 md:h-70 lg:w-180 lg:h-90
                     rounded-lg
                     font-merienda
+                    border border-stone-700 dark:border-none
+                    shadow-xl dark:shadow-none
                     text-[#111827] dark:text-zinc-300
-                    bg-neutral-800/65">
+                    bg-[#b68945]/75 dark:bg-neutral-800/65">
                     <div className="
                         mb-3
                         text-base md:text-base lg:text-xl
