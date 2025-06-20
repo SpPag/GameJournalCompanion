@@ -82,7 +82,6 @@ export default function Home() {
           </div>
           <WelcomeUser />
         </div>
-        <AboutMessage />
         <main className="flex flex-col row-start-2 items-center sm:items-start ">
           {loading ? (
             <div className="text-center text-lg text-zinc-900">Loading...</div>
@@ -115,6 +114,7 @@ export default function Home() {
             />
           )}
         </main>
+        <AboutMessage />
       </div>
     </>
   );
