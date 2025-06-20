@@ -18,11 +18,10 @@ const AboutMessage = () => {
         <>
             {!session && (
                 <div className="
-                    flex flex-col items-center justify-evenly z-50 p-6 pt-2 mt-5 sm:mb-20 md:mb-30 lg:mb-15
-                    w-130 h-65 md:w-140 md:h-70 lg:w-180 lg:h-90
-                    rounded-lg
+                    flex flex-col items-center justify-evenly z-50 px-4 pt-2 mt-10
+                    w-130 h-60 md:w-140 md:h-60 lg:w-160 lg:h-70
                     font-merienda
-                    border border-stone-700 dark:border-none
+                    border border-stone-700 dark:border-none rounded-lg
                     shadow-xl dark:shadow-none
                     text-[#111827] dark:text-zinc-300
                     bg-[#b68945]/75 dark:bg-neutral-800/65">
@@ -32,8 +31,8 @@ const AboutMessage = () => {
                         font-[800]
                         ">{messageTitle}</div>
                     <div className="
-                        text-[0.85rem]/[1.1rem] sm:text-[0.9rem]/[1.2rem] md:text-[0.97rem]/[1.3rem] lg:text-[1.0625rem]/7
-                        tracking-wider leading-loose
+                        text-[0.85rem]/[1.1rem] sm:text-[0.9rem]/[1.2rem] md:text-[0.97rem]/[1.3rem] lg:text-[1rem]/6
+                        tracking-wider
                         whitespace-pre-line
                         text-center
                         ">{messageOption2}</div>

@@ -73,10 +73,10 @@ export default function Home() {
       {showAlert && (
         <AlertMessage message={showAlert.message} variant={showAlert.variant} onDone={() => setShowAlert(null)} />
       )}
-      <div className="relative top-14 flex flex-col items-center justify-start flex-1 p-8 gap-10 font-[family-name:var(--font-geist-sans)]">
+      <div className="relative mt-14 flex flex-col items-center justify-start flex-1 pt-8 font-sans">
         <div>
           <div className="
-          flex items-center justify-center gap-4 p-4
+          flex items-center justify-center gap-4
           w-106 h-16 sm:w-106 sm:h-16 md:w-123 md:h-17 lg:w-141 lg:h-19
           border border-2 rounded-xl border-zinc-500 dark:border-zinc-900
           text-2xl md:text-3xl lg:text-4xl
@@ -90,7 +90,7 @@ export default function Home() {
           </div>
           <WelcomeUser />
         </div>
-        <main className="flex flex-col row-start-2 items-center sm:items-start ">
+        <main className="flex flex-col row-start-2 items-center sm:items-start mt-10">
           {loading ? (
             <div className="text-center text-lg text-zinc-900">Loading...</div>
           ) : (
