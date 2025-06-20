@@ -65,10 +65,24 @@ const LoginPage = () => {
                     className="border p-2 rounded bg-[#f5f5f4] text-[#111827] border-stone-700 focus:outline-2 focus:outline-[#836e5e]/70 dark:text-[#d4d4d8] dark:border-zinc-500 dark:bg-[#312d29] dark:focus:outline-2 dark:focus:outline-zinc-400"
                 />
                 <div className="flex gap-4 h-[3.8rem]">
-                    <button type="submit" className="border py-2 rounded w-1/2 m-auto bg-[#c59854] text-[#111827] border-stone-700 focus:outline-2 focus:outline-[#867162] hover:bg-[#b68945] active:bg-[#ad803c] dark:border-zinc-500 dark:bg-neutral-600 dark:hover:bg-[#4b4b4b] dark:focus:bg-[#4b4b4b] dark:active:bg-[#393939] dark:text-zinc-300 dark:focus:outline-2 dark:focus:outline-zinc-500 text-2xl h-full">
+                    <button type="submit" className="
+                    h-full w-1/2 m-auto
+                    border rounded-lg border-stone-700 dark:border-zinc-500
+                    bg-[#c59854] dark:bg-neutral-600
+                    text-2xl text-[#111827] dark:text-zinc-300
+                    focus:outline-2 focus:outline-[#867162] dark:focus:bg-[#4b4b4b] dark:focus:outline-2 dark:focus:outline-zinc-500
+                    hover:bg-[#b68945] dark:hover:bg-[#4b4b4b]
+                    active:bg-[#ad803c] dark:active:bg-[#393939]">
                         Login
                     </button>
-                    <button type="button" onClick={() => router.push("/register")} className="border py-2 rounded w-1/2 m-auto bg-[#c59854] text-[#111827] border-stone-700 focus:outline-2 focus:outline-[#867162] hover:bg-[#b68945] active:bg-[#ad803c] dark:border-zinc-500 dark:bg-neutral-600 dark:hover:bg-[#4b4b4b] dark:focus:bg-[#4b4b4b] dark:active:bg-[#393939] dark:text-zinc-300 dark:focus:outline-2 dark:focus:outline-zinc-500">
+                    <button type="button" onClick={() => router.push("/register")} className="
+                    w-1/2 py-2 m-auto
+                    border rounded-lg border-stone-700 dark:border-zinc-500
+                    bg-[#c59854] dark:bg-neutral-600
+                    text-[#111827] dark:text-zinc-300
+                    focus:outline-2 focus:outline-[#867162] dark:focus:bg-[#4b4b4b] dark:focus:outline-2 dark:focus:outline-zinc-500
+                    hover:bg-[#b68945] dark:hover:bg-[#4b4b4b]
+                    active:bg-[#ad803c] dark:active:bg-[#393939]">
                         <p className="text-center text-sm">
                             Don&apos;t have an account?
                         </p>

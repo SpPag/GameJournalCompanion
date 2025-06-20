@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import React from "react";
 
-const RegisterPage= () => {
+const RegisterPage = () => {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
@@ -77,15 +77,29 @@ const RegisterPage= () => {
         {error && <p className="text-red-500 text-sm">{error}</p>}
 
         <div className="flex gap-4 h-[3.8rem]">
-          <button type="submit" className="border py-2 rounded h-full w-1/2 m-auto bg-[#c59854] text-[#111827] border-stone-700 focus:outline-2 focus:outline-[#867162] hover:bg-[#b68945] active:bg-[#ad803c] dark:border-zinc-500 dark:bg-neutral-600 dark:hover:bg-[#4b4b4b] dark:focus:bg-[#4b4b4b] dark:active:bg-[#393939] dark:text-zinc-300 dark:focus:outline-2 dark:focus:outline-zinc-500 text-2xl">
+          <button type="submit" className="
+          h-full w-1/2 m-auto
+          border rounded-lg border-stone-700 dark:border-zinc-500
+          bg-[#c59854] dark:bg-neutral-600
+          text-2xl text-[#111827] dark:text-zinc-300
+          focus:outline-2 focus:outline-[#867162] dark:focus:bg-[#4b4b4b] dark:focus:outline-2 dark:focus:outline-zinc-500
+          hover:bg-[#b68945] dark:hover:bg-[#4b4b4b]
+          active:bg-[#ad803c] dark:active:bg-[#393939]">
             Register
           </button>
-          <button type="button" onClick={() => router.push("/login")} className="border py-2 rounded w-1/2 m-auto bg-[#c59854] text-[#111827] border-stone-700 focus:outline-2 focus:outline-[#867162] hover:bg-[#b68945] active:bg-[#ad803c] dark:border-zinc-500 dark:bg-neutral-600 dark:hover:bg-[#4b4b4b] dark:focus:bg-[#4b4b4b] dark:active:bg-[#393939] dark:text-zinc-300 dark:focus:outline-2 dark:focus:outline-zinc-500">
-          <p className="text-center text-sm">
-            Already have an account?
-          </p>
-          Login
-        </button>
+          <button type="button" onClick={() => router.push("/login")} className="
+          w-1/2 py-2 m-auto
+          border rounded-lg border-stone-700 dark:border-zinc-500
+          bg-[#c59854] dark:bg-neutral-600
+          text-[#111827] dark:text-zinc-300
+          focus:outline-2 focus:outline-[#867162] dark:focus:bg-[#4b4b4b] dark:focus:outline-2 dark:focus:outline-zinc-500
+          hover:bg-[#b68945] dark:hover:bg-[#4b4b4b]
+          active:bg-[#ad803c] dark:active:bg-[#393939]">
+            <p className="text-center text-sm">
+              Already have an account?
+            </p>
+            Login
+          </button>
         </div>
       </form>
     </div>
