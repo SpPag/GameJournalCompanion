@@ -17,8 +17,20 @@ Since I'm using MongoDB v6 with @next-auth/mongodb-adapter@1.1.3 (which only sup
   </ul>
 </details>
 
+Screenshots of the progress so far:
 
+[Starting page while the user isn't logged in](https://res.cloudinary.com/dztftxick/image/upload/v1752070293/GJC_Starting_Page_fbkpaj.png)
 
+[Login page](https://res.cloudinary.com/dztftxick/image/upload/v1752070166/GJC_Login_Page_ibmdtb.png)
 
+[Register page](https://res.cloudinary.com/dztftxick/image/upload/v1752070162/GJC_Register_Page_ipcypz.png)
+
+[Home page for admins - includes the 'Add Game To Database' button on the top left](https://res.cloudinary.com/dztftxick/image/upload/v1752070162/GJC_Admin_Home_Page_aomhhf.png)
+
+[Home page for non-admin users - no 'Add Game To Database' button](https://res.cloudinary.com/dztftxick/image/upload/v1752070167/GJC_Non-Admin_Home_Page_yo0zhz.png)
+
+[The modal that opens when a user clicks on the 'Register a new game' card in the home page](https://res.cloudinary.com/dztftxick/image/upload/v1752070156/GJC_Add_Game_Modal_mdptc9.png)
+
+[A game's specific page - a little barren for now, regarding both looks and functionality](https://res.cloudinary.com/dztftxick/image/upload/v1752070167/GJC_Game_Page_srda4e.png)
 
 <em>All game cover images are copyright of their respective publishers and used here for non-commercial, educational/demo purposes only.</em>
