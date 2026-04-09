@@ -14,7 +14,7 @@ import { AboutMessage } from "@/components/AboutMessage";
 
 export default function Home() {
   const [userGames, setUserGames] = useState<Game[]>([]);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isGamesModalOpen, setisGamesModalOpen] = useState(false);
   const [loading, setLoading] = useState(true);
   const router = useRouter();
   const { data: session, status } = useSession();
@@ -105,18 +105,18 @@ export default function Home() {
                 ))}
 
               {/* Always render one “Register a new game” card */}
-              <div onClick={() => setIsModalOpen(true)}>
+              <div onClick={() => setisGamesModalOpen(true)}>
                 <GameCard />
               </div>
             </div>
           )}
 
           {/* The modal to pick & register a new game */}
-          {isModalOpen && (
+          {isGamesModalOpen && (
             <AvailableGamesModal
-              onClose={() => setIsModalOpen(false)}
+              onClose={() => setisGamesModalOpen(false)}
               onRegistered={() => {
-                setIsModalOpen(false);
+                setisGamesModalOpen(false);
                 refreshGames();
               }}
             />

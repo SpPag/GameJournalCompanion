@@ -4,6 +4,7 @@ interface INote extends Document {
     _id: mongoose.Types.ObjectId; // MongoDB's auto-generated ObjectID;
     userId: mongoose.Types.ObjectId;
     gameId: mongoose.Types.ObjectId;
+    title: string;
     content: string;
     lastEditedOn: Date;
 }
@@ -18,6 +19,10 @@ const NoteSchema = new Schema<INote>({
         type: Schema.Types.ObjectId,
         required: true,
         ref: "Game"
+    },
+    title: {
+        type: String,
+        required: true
     },
     content: {
         type: String,
