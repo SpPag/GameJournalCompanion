@@ -54,12 +54,12 @@ const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
             <div className="rounded-lg p-20 w-full max-w-2xl aspect-[3/2] relative overflow-hidden flex items-center justify-center">
 
                 {/* ✅ Background image layer */}
-                <div className="absolute inset-0 bg-[url('/BurningNote.png')] bg-center bg-cover dark:brightness-60" />
-                <div className="rounded-lg p-6 w-full max-w-4/5 relative z-10">
-                    <h2 className="text-xl font-semibold mb-4 text-zinc-900 dark:text-zinc-900">
+                <div className="absolute inset-0 bg-[url('/BurningNote.png')] bg-center bg-cover dark:brightness-50" />
+                <div className="p-6 w-full max-w-4/5 relative z-10">
+                    <h2 className="text-xl font-semibold mb-4 text-zinc-900 dark:text-zinc-300">
                         {title}
                     </h2>
-                    <p className="text-xl text-zinc-700 dark:text-zinc-900 mb-6">
+                    <p className="text-xl text-zinc-700 dark:text-zinc-300 mb-6">
                         {message}
                     </p>
                     <div className="flex justify-end gap-3">

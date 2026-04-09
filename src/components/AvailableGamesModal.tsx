@@ -79,7 +79,7 @@ const AvailableGamesModal = ({ onClose, onRegistered }: AvailableGamesModalProps
             </div>
             <button
               onClick={onClose}
-              className="mt-6 px-4 py-2 border-2 rounded bg-[#d64d0c] text-[#111827] border-stone-700 focus:outline focus:outline-[#cc3600] hover:bg-orange-700 active:bg-[#cc470c] dark:bg-[#441901] dark:hover:bg-[#612905] dark:active:bg-[#542204] dark:text-zinc-300 dark:focus:outline-1 dark:focus:outline-zinc-700"
+              className="mt-6 px-4 py-2 border-2 rounded-md bg-[#d64d0c] text-[#111827] border-stone-700 focus:outline focus:outline-[#cc3600] hover:bg-orange-700 active:bg-[#cc470c] dark:bg-[#441901] dark:hover:bg-[#612905] dark:active:bg-[#542204] dark:text-zinc-300 dark:focus:outline-1 dark:focus:outline-zinc-700"
             >
               Cancel
             </button>

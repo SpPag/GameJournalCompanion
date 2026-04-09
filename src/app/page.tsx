@@ -136,7 +136,7 @@ export default function Home() {
           <div className="
           flex items-center justify-center gap-4
           w-106 h-16 sm:w-106 sm:h-16 md:w-123 md:h-17 lg:w-141 lg:h-19
-          border border-2 rounded-xl border-zinc-500 dark:border-zinc-900
+          border-2 rounded-xl border-zinc-500 dark:border-zinc-900
           text-2xl md:text-3xl lg:text-4xl
           text-zinc-950 dark:text-zinc-950
           shadow-xl dark:shadow-zinc-950/70
