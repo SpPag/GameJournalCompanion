@@ -18,7 +18,7 @@ const AboutMessage = () => {
         <>
             {!session && (
                 <div className="
-                    flex flex-col items-center justify-evenly z-50 px-4 pt-2 mt-10
+                    flex flex-col items-center justify-evenly px-4 pt-2 mt-10
                     w-130 h-60 md:w-140 md:h-60 lg:w-160 lg:h-70
                     font-merienda
                     border border-stone-700 dark:border-none rounded-lg

@@ -63,7 +63,7 @@ const AvailableGamesModal = ({ onClose, onRegistered }: AvailableGamesModalProps
           onClick={onClose}
         >
           <div
-            className="bg-stone-500 dark:bg-zinc-900 rounded-lg p-6 w-full max-w-[52rem] mx-4 overflow-auto border border-2 border-stone-600 dark:border-none"
+            className="bg-stone-500 dark:bg-zinc-900 rounded-lg p-6 w-full max-w-[52rem] mx-4 overflow-auto border-2 border-stone-600 dark:border-none"
             onClick={(e) => e.stopPropagation()}
           >
             {loading && <p>Loading…</p>}
