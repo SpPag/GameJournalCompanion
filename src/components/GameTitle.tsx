@@ -8,7 +8,7 @@ interface GameTitleProps {
 const GameTitle: React.FC<GameTitleProps> = ({ game }: GameTitleProps) => {
     return (
         <div className="flex items-center justify-center gap-4 p-4 mx-auto relative top-10
-        border border-2 rounded-xl border-zinc-500 dark:border-zinc-900
+        border-2 rounded-xl border-zinc-500 dark:border-zinc-900
         w-fit
         text-2xl sm:text-3xl md:text-3xl lg:text-4xl
         shadow-xl dark:shadow-zinc-950/70

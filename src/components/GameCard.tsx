@@ -10,7 +10,7 @@ interface GameCardProps {
 
 const GameCard = ({ game, onDelete, showDelete = true }: GameCardProps) => {
 
-    const borderClasses = game ? "border-none" : "border border-2";
+    const borderClasses = game ? "border-none" : "border-2";
 
     return (
         <div className={`relative text-center ${borderClasses} rounded-lg text-xl w-27 h-36 sm:w-30 sm:h-40 md:w-33 md:h-44 lg:w-36 lg:h-48
