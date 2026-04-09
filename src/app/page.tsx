@@ -11,11 +11,16 @@ import { useSearchParams } from 'next/navigation';
 import { AlertMessage } from "@/components/AlertMessage";
 import { useSession } from "next-auth/react";
 import { AboutMessage } from "@/components/AboutMessage";
+import ConfirmationModal from "@/components/ConfirmationModal";
+import { Toast } from "@/components/Toast";
 
 export default function Home() {
   const [userGames, setUserGames] = useState<Game[]>([]);
-  const [isGamesModalOpen, setisGamesModalOpen] = useState(false);
+  const [isGamesModalOpen, setIsGamesModalOpen] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [confirmingDeleteGame, setConfirmingDeleteGame] = useState<Game | null>(null);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [toast, setToast] = useState<{message: string, type: "success" | "error"} | null>(null);
   const router = useRouter();
   const { data: session, status } = useSession();
 
@@ -36,6 +41,59 @@ export default function Home() {
       .then((data) => setUserGames(data.registeredGames || []))// Even if I know that every user on the database has at least an empty array as registeredGames' value, adding '|| []' guards against a server bug or network hiccup that would result in the response being someting like '{ "error": "Internal Server Error" }', which will set data.registeredGames to undefined, which would cause the app to crash since it would be unhandled. Same goes for if the app tries to access data.registeredGames before the fetch completes and populates it
       .catch(console.error)
       .finally(() => setLoading(false)); // Done loading;
+  };
+
+  const handleGameDelete = (game: Game) => {
+    setConfirmingDeleteGame(game);
+  };
+
+  const handleConfirmDeleteGame = async () => {
+    if (!confirmingDeleteGame) return;
+
+    try {
+      setIsDeleting(true);
+      
+      // Delete all notes associated with this game
+      const notesRes = await fetch(`/api/users/notes?gameId=${confirmingDeleteGame._id}`);
+      if (notesRes.ok) {
+        const notesData = await notesRes.json();
+        const notes = notesData.notes || [];
+        
+        // Delete each note
+        for (const note of notes) {
+          await fetch(`/api/users/notes/${note._id.toString()}`, {
+            method: 'DELETE',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          });
+        }
+      }
+
+      // Delete the game itself
+      const res = await fetch(`/api/users/games/${confirmingDeleteGame._id}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (res.ok) {
+        setUserGames(prev =>
+          prev.filter(game => game._id !== confirmingDeleteGame._id)
+        );
+        setConfirmingDeleteGame(null);
+        setToast({message: 'Game de-registered successfully', type: 'success'});
+      } else {
+        console.error('Failed to delete game');
+        setToast({message: 'Failed to de-register game', type: 'error'});
+      }
+    } catch (error) {
+      console.error('Error deleting game:', error);
+      setToast({message: 'Error de-registering game', type: 'error'});
+    } finally {
+      setIsDeleting(false);
+    }
   };
 
   const searchParams = useSearchParams();
@@ -100,12 +158,12 @@ export default function Home() {
                 .sort((a, b) => a.title.toLocaleLowerCase().localeCompare(b.title)) // sort by name
                 .map((game) => (
                   <div key={game._id} onClick={() => router.push(`/game/${game._id}`)}>
-                    <GameCard game={game} />
+                    <GameCard game={game} onDelete={() => handleGameDelete(game)} />
                   </div>
                 ))}
 
               {/* Always render one “Register a new game” card */}
-              <div onClick={() => setisGamesModalOpen(true)}>
+              <div onClick={() => setIsGamesModalOpen(true)}>
                 <GameCard />
               </div>
             </div>
@@ -114,9 +172,9 @@ export default function Home() {
           {/* The modal to pick & register a new game */}
           {isGamesModalOpen && (
             <AvailableGamesModal
-              onClose={() => setisGamesModalOpen(false)}
+              onClose={() => setIsGamesModalOpen(false)}
               onRegistered={() => {
-                setisGamesModalOpen(false);
+                setIsGamesModalOpen(false);
                 refreshGames();
               }}
             />
@@ -124,6 +182,24 @@ export default function Home() {
         </main>
         <AboutMessage />
       </div>
+      <ConfirmationModal
+        isOpen={!!confirmingDeleteGame}
+        title="De-registering Game"
+        message="Are you sure you want to de-register this game? All associated notes will also be deleted. This action cannot be undone."
+        onConfirm={handleConfirmDeleteGame}
+        onClose={() => setConfirmingDeleteGame(null)}
+        confirmText="De-register"
+        cancelText="Cancel"
+        isDestructive={true}
+        isLoading={isDeleting}
+      />
+      {toast && (
+        <Toast
+          message={toast.message}
+          type={toast.type}
+          onDone={() => setToast(null)}
+        />
+      )}
     </>
   );
 }

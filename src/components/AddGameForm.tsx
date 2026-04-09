@@ -68,7 +68,7 @@ const AddGameForm = ({ onSuccess, onError }: AddGameFormProps) => {
           value={form[name]}
           onChange={handleChange}
           required
-          className="w-full border rounded px-3 py-2 bg-transparent no-spinner bg-[#f5f5f4] text-[#111827] border-stone-700 focus:outline-2 focus:outline-[#836e5e]/70 dark:text-[#d4d4d8] dark:border-zinc-500 dark:bg-[#312d29] dark:focus:outline-2 dark:focus:outline-zinc-400"
+          className="w-full border rounded px-3 py-2 no-spinner bg-[#f5f5f4] text-[#111827] border-stone-700 focus:outline-2 focus:outline-[#836e5e]/70 dark:text-[#d4d4d8] dark:border-zinc-500 dark:bg-[#312d29] dark:focus:outline-2 dark:focus:outline-zinc-400"
           {...(name === "westernReleaseYear" && {
             min: 1950,
             max: new Date().getFullYear(),
@@ -80,7 +80,7 @@ const AddGameForm = ({ onSuccess, onError }: AddGameFormProps) => {
       <button
         type="submit"
         disabled={status === "submitting"}
-        className="w-full px-4 py-2 rounded bg-[#c59854] text-[#111827] border border-stone-700 focus:outline-2 focus:outline-[#867162] hover:bg-[#b68945] active:bg-[#ad803c] dark:bg-neutral-600 dark:hover:bg-[#4b4b4b] dark:focus:bg-[#4b4b4b] dark:active:bg-[#393939] dark:text-zinc-300 dark:focus:outline-2 dark:focus:outline-zinc-500"
+        className="w-full px-4 py-2 rounded bg-[#c59854] text-[#111827] border border-stone-700 focus:outline-2 focus:outline-[#867162] hover:bg-[#ad803c] active:bg-[#b68945] dark:bg-neutral-600 dark:hover:bg-[#4b4b4b] dark:focus:bg-[#4b4b4b] dark:active:bg-[#393939] dark:text-zinc-300 dark:focus:outline-2 dark:focus:outline-zinc-500"
       >
         {status === "submitting" ? "Saving…" : "Save Game"}
       </button>

@@ -36,9 +36,20 @@ const NoteModal: React.FC<NoteModalProps> = ({
         }
     }, [isOpen, noteId, initialTitle, initialContent]);
 
+    // Close on Escape
+    useEffect(() => {
+        function handleKeyDown(e: KeyboardEvent) {
+            if (e.key === 'Escape') onClose();
+        }
+        if (isOpen) {
+            document.addEventListener('keydown', handleKeyDown);
+            return () => document.removeEventListener('keydown', handleKeyDown);
+        }
+    }, [isOpen, onClose]);
+
     const handleSave = () => {
         if (content.trim()) {
-            onSave(content, title.trim() || undefined, noteId);
+            onSave(content.trim(), title.trim() || undefined, noteId);
             onClose();
         }
     };
@@ -53,58 +64,54 @@ const NoteModal: React.FC<NoteModalProps> = ({
 
     const maxCharNum = 17;
 
-    return (
-        <div
-            className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
-            onClick={handleBackdropClick}
-        >
-            <div className="bg-white dark:bg-zinc-800 rounded-lg p-6 w-full max-w-md mx-4 relative">
-                <button
-                    onClick={onClose}
-                    className="absolute top-2 right-2 text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200"
-                >
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                    >
-                        <line x1="18" y1="6" x2="6" y2="18"></line>
-                        <line x1="6" y1="6" x2="18" y2="18"></line>
-                    </svg>
-                </button>
-                <h2 className="text-xl font-semibold mb-4 text-zinc-900 dark:text-zinc-100">
+return (
+    <div
+        className="fixed inset-0 bg-black/50 flex items-center justify-center z-50"
+        onClick={handleBackdropClick}
+    >
+        <div className="rounded-lg p-20 w-full max-w-2xl mx-4 relative overflow-hidden">
+            
+            {/* ✅ Background image layer */}
+            <div className="absolute inset-0 bg-[url('/NoteBackground_v2_NoBackground.png')] bg-center bg-cover dark:brightness-60" />
+
+            {/* ✅ Content (on top of image) */}
+            <div className="relative z-10">
+                <h2 className="text-xl font-semibold mb-4 text-zinc-900 dark:text-zinc-300">
                     {noteId ? 'Edit Note' : 'Add New Note'}
                 </h2>
+
                 <input
                     type="text"
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
+                    onKeyDown={(e) => {
+                        if (e.key === 'Enter') {
+                            handleSave();
+                        }
+                    }}
                     placeholder={`Note title (${maxCharNum} characters max)`}
                     maxLength={maxCharNum}
-                    className="w-full p-3 border border-zinc-300 dark:border-zinc-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-zinc-700 dark:text-zinc-100 mb-3"
+                    className="w-full p-3 border text-[#111827] border-zinc-300/50 focus:outline-2 focus:outline-[#836e5e]/70 dark:border-zinc-500 rounded-md bg-white/70 dark:bg-[#312d29]/80 dark:text-zinc-300 mb-3 dark:focus:outline-2 dark:focus:outline-zinc-400"
                 />
+
                 <textarea
                     value={content}
                     onChange={(e) => setContent(e.target.value)}
                     placeholder="Write your note here..."
-                    className="w-full h-32 p-3 border border-zinc-300 dark:border-zinc-600 rounded-md resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-zinc-700 dark:text-zinc-100"
+                    className="w-full h-32 p-3 border text-[#111827] border-zinc-300/50 focus:outline-2 focus:outline-[#836e5e]/70 dark:border-zinc-500 rounded-md bg-white/70 dark:bg-[#312d29]/80 dark:text-zinc-300 mb-3 dark:focus:outline-2 dark:focus:outline-zinc-400 resize-y"
                 />
+
                 <div className="flex justify-end gap-3 mt-4">
                     <button
                         onClick={onClose}
-                        className="px-4 py-2 text-zinc-600 dark:text-zinc-400 hover:text-zinc-800 dark:hover:text-zinc-200"
+                        className="px-4 py-2 border rounded-md text-[#111827] bg-[#d64d0c] border-stone-700 focus:outline-2 focus:outline-[#cc3600] hover:bg-orange-700 active:bg-[#cc470c] dark:text-zinc-300 dark:bg-[#441901] dark:hover:bg-[#612905] dark:active:bg-[#542204] dark:focus:outline-2 dark:focus:outline-zinc-700"
                     >
                         Cancel
                     </button>
+
                     <button
                         onClick={handleSave}
-                        className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="px-4 py-2 border rounded-md text-[#111827] bg-[#b68945] border-stone-700 focus:outline-2 focus:outline-[#867162] hover:bg-[#ad803c] active:bg-[#b28541] dark:text-zinc-300 dark:bg-[#3b403a] dark:hover:bg-[#4e544d] dark:active:bg-[#434942] dark:focus:outline-2 dark:focus:outline-zinc-700 disabled:opacity-50 disabled:cursor-not-allowed"
                         disabled={!content.trim()}
                     >
                         Save
@@ -112,7 +119,8 @@ const NoteModal: React.FC<NoteModalProps> = ({
                 </div>
             </div>
         </div>
-    );
+    </div>
+);
 };
 
 export default NoteModal;

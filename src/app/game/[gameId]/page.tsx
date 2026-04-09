@@ -227,10 +227,10 @@ const GameDetailsPage = () => {
             />
             <ConfirmationModal
                 isOpen={!!confirmingDeleteNote}
-                title="Delete Note"
+                title="Deleting Note"
                 message="Are you sure you want to delete this note? This action cannot be undone."
                 onConfirm={handleConfirmDelete}
-                onCancel={() => setConfirmingDeleteNote(null)}
+                onClose={() => setConfirmingDeleteNote(null)}
                 confirmText="Delete"
                 cancelText="Cancel"
                 isDestructive={true}

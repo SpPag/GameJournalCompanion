@@ -33,7 +33,14 @@ const AvailableGamesModal = ({ onClose, onRegistered }: AvailableGamesModalProps
       .catch(console.error)
       .finally(() => setLoading(false));
   }, [router]);
-
+  // Close on Escape
+  useEffect(() => {
+    function handleKeyDown(e: KeyboardEvent) {
+      if (e.key === 'Escape') onClose();
+    }
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [onClose]);
   // When a user clicks one to register
   const registerGame = async (gameId: string) => {
     const res = await fetch("/api/users/register-game", {
@@ -52,7 +59,7 @@ const AvailableGamesModal = ({ onClose, onRegistered }: AvailableGamesModalProps
     <>
       {authenticated && (
         <div
-          className="fixed inset-0 bg-black/50 flex items-center justify-center z-50"
+          className="fixed inset-0 bg-black/30 dark:bg-black/50 flex items-center justify-center z-50"
           onClick={onClose}
         >
           <div
@@ -63,16 +70,16 @@ const AvailableGamesModal = ({ onClose, onRegistered }: AvailableGamesModalProps
             <div className="flex flex-wrap gap-4 overflow-y-auto max-h-[80vh] min-w-[20rem] w-full p-4 items-center justify-start">
               {available.map((game) => (
                 <div key={game._id} onClick={() => registerGame(game._id)}>
-                  <GameCard game={game} />
+                  <GameCard game={game} showDelete={false} />
                 </div>
               ))}
               {available.length === 0 && !loading && (
-                <p>No available games. Either I&apos;m failing you or you need to touch some grass, I-I-I mean, you&apos;re an absolute beast!</p>
+                <p>No available games. Please feel free to contact me with games you&apos;d like to see included!</p>
               )}
             </div>
             <button
               onClick={onClose}
-              className="mt-6 px-4 py-2 border border-2 rounded bg-[#926d46] text-[#111827] border-stone-700 focus:outline-2 focus:outline-[#876c59] hover:bg-[#9a754e] active:bg-[#a17749] dark:bg-zinc-900 dark:hover:bg-zinc-800 dark:focus:bg-zinc-950 dark:active:bg-zinc-950 dark:text-zinc-300 dark:focus:outline-1 dark:focus:outline-zinc-700"
+              className="mt-6 px-4 py-2 border-2 rounded bg-[#d64d0c] text-[#111827] border-stone-700 focus:outline focus:outline-[#cc3600] hover:bg-orange-700 active:bg-[#cc470c] dark:bg-[#441901] dark:hover:bg-[#612905] dark:active:bg-[#542204] dark:text-zinc-300 dark:focus:outline-1 dark:focus:outline-zinc-700"
             >
               Cancel
             </button>
