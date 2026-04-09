@@ -25,7 +25,7 @@ const RegisterPage = () => {
     if (res.ok) {
       router.push("/login"); // Redirect to login after successful registration
     } else {
-      setError(data.message || "Registration failed");
+      setError(data.error || "Registration failed");
     }
   };
 
