@@ -69,10 +69,10 @@ return (
         className="fixed inset-0 bg-black/50 flex items-center justify-center z-50"
         onClick={handleBackdropClick}
     >
-        <div className="rounded-lg p-20 w-full max-w-2xl mx-4 relative overflow-hidden">
+        <div className="rounded-lg p-20 w-full max-w-2xl mx-4 relative overflow-hidden flex items-center justify-center">
             
             {/* ✅ Background image layer */}
-            <div className="absolute inset-0 bg-[url('/NoteBackground_v2_NoBackground.png')] bg-center bg-cover dark:brightness-60" />
+            <div className="absolute inset-0 bg-[url('/NoteBackground_v2_NoBackground.png')] bg-center bg-cover dark:brightness-50" />
 
             {/* ✅ Content (on top of image) */}
             <div className="relative z-10">
