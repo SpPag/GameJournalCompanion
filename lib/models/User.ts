@@ -23,6 +23,7 @@ const UserSchema = new Schema<IUser>({
         type: String,
         required: true,
         minlength: 8,
+        select:false
     },
     username: {
         type: String,

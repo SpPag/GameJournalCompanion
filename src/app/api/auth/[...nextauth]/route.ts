@@ -24,7 +24,7 @@ const authOptions: NextAuthOptions = {
                 await dbConnect();
 
                 // 2. Find user by email
-                const user = await User.findOne({ email: credentials?.email });
+                const user = await User.findOne({ email: credentials?.email }).select("+password");
                 if (!user) throw new Error("No user found with this email");
 
                 // 3. Check password
