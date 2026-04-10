@@ -35,10 +35,10 @@ const NoteCard = ({ note, onEdit, onDelete }: NoteCardProps) => {
                             e.stopPropagation();
                             onDelete?.();
                         }}
-                        className="absolute bottom-4 right-3 text-red-500 hover:text-red-700 cursor-pointer z-10"
+                        className="absolute bottom-4 right-3 text-red-800/80 hover:text-red-950 dark:text-red-900 dark:hover:text-red-800 cursor-pointer z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                     >
                         <svg
-                            className="h-7 w-7 text-zinc-600 hover:text-zinc-800" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round"
+                            className="h-7 w-7" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round"
                         >
                             <path stroke="none" d="M0 0h24v24H0z" />
                             <line x1="4" y1="7" x2="20" y2="7" />

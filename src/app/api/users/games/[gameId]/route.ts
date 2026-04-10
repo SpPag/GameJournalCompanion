@@ -6,7 +6,7 @@ import { Game } from "@/../lib/models/Game";
 import { User } from "@/../lib/models/User";
 import mongoose from "mongoose";
 
-export async function GET(request: Request, { params }: { params: { gameId: string} }) {
+export async function GET(request: Request, { params }: { params: Promise<{ gameId: string }> }) {
     
     // console.log("GET /api/users/games/:gameId route hit");
     try {
@@ -20,7 +20,7 @@ export async function GET(request: Request, { params }: { params: { gameId: stri
         }
 
         // 3. Get gameId from query parameters
-        const { gameId } = params;
+        const { gameId } = await params;
 
         // 4. Return 400 if gameId is not provided
         if (!gameId) {
@@ -75,7 +75,7 @@ export async function GET(request: Request, { params }: { params: { gameId: stri
     }
 }
 
-export async function DELETE(request: Request, { params }: { params: { gameId: string } }) {
+export async function DELETE(request: Request, { params }: { params: Promise<{ gameId: string }> }) {
     try {
         // 1. Get the currently logged-in user's session
         const session = await getServerSession(authOptions);
