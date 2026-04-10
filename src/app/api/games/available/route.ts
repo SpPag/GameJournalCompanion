@@ -1,5 +1,5 @@
 import { getServerSession } from "next-auth";
-import { authOptions } from "../../auth/[...nextauth]/route";
+import { authOptions } from "@/../lib/authOptions";
 import { Game } from "@/../lib/models/Game";
 import { User } from "@/../lib/models/User";
 import { Types } from "mongoose"; // if not already imported

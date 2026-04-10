@@ -227,7 +227,7 @@ const GameDetailsPage = () => {
             />
             <ConfirmationModal
                 isOpen={!!confirmingDeleteNote}
-                title="The quick brown fox "
+                title="Deleting Note"
                 message="Are you sure you want to delete this note? This action cannot be undone."
                 onConfirm={handleConfirmDelete}
                 onClose={() => setConfirmingDeleteNote(null)}
