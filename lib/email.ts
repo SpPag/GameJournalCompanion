@@ -14,7 +14,8 @@ export async function sendVerificationEmail(email: string, token: string) {
     console.log("RESEND API KEY EXISTS:", !!process.env.RESEND_API_KEY);
     console.log("RESEND KEY PREFIX:", process.env.RESEND_API_KEY?.slice(0, 4));
     console.log("NODE ENV:", process.env.NODE_ENV);
-
+    console.log("FULL RESEND KEY:", process.env.RESEND_API_KEY);
+    
     if (process.env.NODE_ENV === "development") {
         console.log("DEV MODE EMAIL:", url);
     }
