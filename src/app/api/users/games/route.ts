@@ -17,7 +17,10 @@ export async function GET() {
 
         // 2. Return 401 if there's no session or no logged-in user
         if (!session || !session.user) {
-            return NextResponse.json({ error: "Unauthenticated user" }, { status: 401 });
+            return NextResponse.json(
+                { error: "Unauthenticated user" },
+                { status: 401 }
+            );
         }
 
         // 3. Connect to the database
@@ -26,7 +29,10 @@ export async function GET() {
         // 4. Find the user and populate the games they have registered
         const user = await User.findById(session.user.id).populate("registeredGames"); // 'registeredGames' should be the name of the field in the User schema
         if (!user) {
-            return NextResponse.json({ error: "User not found" }, { status: 404 });
+            return NextResponse.json(
+                { error: "User not found" },
+                { status: 404 }
+            );
         }
 
         // 5. Return the user's registered games
