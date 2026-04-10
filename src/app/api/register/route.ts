@@ -47,7 +47,8 @@ export async function POST(request: Request) {
         );
     }
 
-    console.log("Mongo URI exists:", !!process.env.MONGODB_URI);
+    // debug log to verify that the MongoDB URI is being read correctly from environment variables
+    // console.log("Mongo URI exists:", !!process.env.MONGODB_URI);
 
     // 4. Parse the incoming JSON body
     const { email, username, password } = await request.json();
