@@ -7,7 +7,7 @@ import bcrypt from "bcrypt";
 import type { NextAuthOptions } from "next-auth";
 
 
-export  const authOptions: NextAuthOptions = {
+export const authOptions: NextAuthOptions = {
     // Adapter stores sessions/users in MongoDB
     adapter: MongoDBAdapter(clientPromise),
     // Enable credentials (email + password)
