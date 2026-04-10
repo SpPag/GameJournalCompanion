@@ -3,9 +3,9 @@ import { Resend } from "resend";
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 // debugging logs to verify that environment variables are being read correctly
-console.log("RESEND KEY:", process.env.RESEND_API_KEY?.slice(0, 5));
-console.log("FROM:", process.env.EMAIL_FROM);
-console.log("URL:", process.env.NEXTAUTH_URL);
+// console.log("RESEND KEY:", process.env.RESEND_API_KEY?.slice(0, 5));
+// console.log("FROM:", process.env.EMAIL_FROM);
+// console.log("URL:", process.env.NEXTAUTH_URL);
 
 export async function sendVerificationEmail(email: string, token: string) {
     const url = `${process.env.NEXTAUTH_URL}/api/auth/verify?token=${token}`;

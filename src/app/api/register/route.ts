@@ -6,6 +6,7 @@ import crypto from "crypto";
 import { sendVerificationEmail } from "@/../lib/email";
 
 export async function POST(request: Request) {
+    console.log("Mongo URI exists:", !!process.env.MONGODB_URI);
     // 1. Parse the incoming JSON body
     const { email, username, password } = await request.json();
 
@@ -50,9 +51,11 @@ export async function POST(request: Request) {
 
         // 8. Send verification email (using the raw token, since the user will be sending it back to us and we need to hash it and compare it to the hashed token in the database)
         try {
-            console.log("STEP 1: before email function");
+            // debug
+            // console.log("STEP 1: before email function");
             await sendVerificationEmail(email, rawToken);
-            console.log("STEP 2: after email function");
+            // debug
+            // console.log("STEP 2: after email function");
         } catch (error) {
             // rollback user creation if email fails
             await User.deleteOne({ email });
