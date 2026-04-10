@@ -5,6 +5,11 @@ import dbConnect from "@/../lib/mongoose";
 import { User } from "@/../lib/models/User";
 
 export async function GET() {
+
+  if (process.env.NODE_ENV !== "development") {
+    return Response.json({ error: "Disabled" }, { status: 403 });
+  }
+
   // 1. Get session
   const session = await getServerSession(authOptions);
 
