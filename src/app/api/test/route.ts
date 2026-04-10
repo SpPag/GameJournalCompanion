@@ -4,6 +4,9 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function GET() {
 
+  if (process.env.NODE_ENV !== "development") {
+    return Response.json({ error: "Disabled" }, { status: 403 });
+  }
   console.log("KEY EXISTS:", !!process.env.RESEND_API_KEY);
   console.log("FROM:", process.env.EMAIL_FROM);
   
