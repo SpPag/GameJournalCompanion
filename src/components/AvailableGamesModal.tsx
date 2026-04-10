@@ -63,7 +63,7 @@ const AvailableGamesModal = ({ onClose, onRegistered }: AvailableGamesModalProps
           onClick={onClose}
         >
           <div
-            className="bg-stone-500 dark:bg-zinc-900 rounded-lg p-6 w-full max-w-[52rem] mx-4 overflow-auto border-2 border-stone-600 dark:border-none"
+            className="bg-stone-400 dark:bg-zinc-900 rounded-lg p-6 w-full max-w-[52rem] mx-4 overflow-auto border border-stone-600 dark:border-none"
             onClick={(e) => e.stopPropagation()}
           >
             {loading && <p>Loading…</p>}
@@ -79,7 +79,7 @@ const AvailableGamesModal = ({ onClose, onRegistered }: AvailableGamesModalProps
             </div>
             <button
               onClick={onClose}
-              className="mt-6 px-4 py-2 border-2 rounded-md bg-[#d64d0c] text-[#111827] border-stone-700 focus:outline focus:outline-[#cc3600] hover:bg-orange-700 active:bg-[#cc470c] dark:bg-[#441901] dark:hover:bg-[#612905] dark:active:bg-[#542204] dark:text-zinc-300 dark:focus:outline-1 dark:focus:outline-zinc-700"
+              className="mt-6 px-4 py-2 border-2 rounded-md bg-[#d64d0c] text-[#111827] border-stone-700 focus:outline focus:outline-[#cc3600] hover:bg-orange-700 active:bg-[#cc470c] dark:bg-[#441901] dark:hover:bg-[#612905] dark:active:bg-[#542204] dark:text-zinc-300 dark:focus:outline-1 dark:focus:outline-zinc-700 hover:cursor-pointer"
             >
               Cancel
             </button>

@@ -27,7 +27,8 @@ const RegisterButton = () => {
                     bg-[#c59854] dark:bg-neutral-800
                     focus:outline-2 focus:outline-[#867162] dark:focus:outline-2 dark:focus:outline-zinc-500
                     hover:bg-[#b68945] dark:hover:bg-[#4b4b4b]
-                    active:bg-[#ad803c] dark:active:bg-[#393939]"
+                    active:bg-[#ad803c] dark:active:bg-[#393939]
+                    hover:cursor-pointer"
                 >
                     Register
                 </button>

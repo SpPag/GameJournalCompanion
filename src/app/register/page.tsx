@@ -84,7 +84,8 @@ const RegisterPage = () => {
           text-2xl text-[#111827] dark:text-zinc-300
           focus:outline-2 focus:outline-[#867162] dark:focus:outline-2 dark:focus:outline-[#494951]
           hover:bg-[#b68945] dark:hover:bg-[#4b4b4b]
-          active:bg-[#ad803c] dark:active:bg-[#393939]">
+          active:bg-[#ad803c] dark:active:bg-[#393939]
+          hover:cursor-pointer">
             Register
           </button>
           <button type="button" onClick={() => router.push("/login")} className="
@@ -94,7 +95,8 @@ const RegisterPage = () => {
           text-[#111827] dark:text-zinc-300
           focus:outline-2 focus:outline-[#867162] dark:focus:outline-2 dark:focus:outline-[#494951]
           hover:bg-[#b68945] dark:hover:bg-[#4b4b4b]
-          active:bg-[#ad803c] dark:active:bg-[#393939]">
+          active:bg-[#ad803c] dark:active:bg-[#393939]
+          hover:cursor-pointer">
             <p className="text-center text-sm">
               Already have an account?
             </p>
