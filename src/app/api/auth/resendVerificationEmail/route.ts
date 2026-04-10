@@ -3,8 +3,44 @@ import dbConnect from "@/../lib/mongoose";
 import { User } from "@/../lib/models/User";
 import crypto from "crypto";
 import { sendVerificationEmail } from "@/../lib/email";
+import { resendIpLimiter } from "@/../lib/rateLimit";
+
+function getClientIp(req: Request): string {
+    const xForwardedFor = req.headers.get("x-forwarded-for");
+    if (xForwardedFor) {
+        return xForwardedFor.split(",")[0].trim();
+    }
+
+    const realIp = req.headers.get("x-real-ip");
+
+    if (realIp) {
+        return realIp.trim();
+    }
+
+    return "unknown";
+}
 
 export async function POST(req: Request) {
+    const ip = getClientIp(req);
+
+    const { success, limit, remaining, reset } = await resendIpLimiter.limit(ip);
+
+    if (!success) {
+        return NextResponse.json(
+            {
+                error: "Too many requests from this network. Please try again later.",
+            },
+            {
+                status: 429,
+                headers: {
+                    "X-RateLimit-Limit": String(limit),
+                    "X-RateLimit-Remaining": String(remaining),
+                    "X-RateLimit-Reset": String(reset),
+                },
+            }
+        );
+    }
+
     const { email } = await req.json();
 
     if (!email) {
@@ -51,7 +87,6 @@ export async function POST(req: Request) {
 
     try {
         await sendVerificationEmail(email, rawToken);
-        return NextResponse.json({ success: true });
     } catch (error) {
         // Roll back only if the values still match this exact request
         await User.updateOne(
@@ -76,4 +111,5 @@ export async function POST(req: Request) {
             { status: 500 }
         );
     }
+    return NextResponse.json({ success: true });
 }

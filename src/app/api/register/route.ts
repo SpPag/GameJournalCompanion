@@ -1,12 +1,49 @@
 import { NextResponse } from 'next/server';
 import { hash } from 'bcrypt';
 import dbConnect from '@/../lib/mongoose';
-import { User, IUser } from '@/../lib/models/User';
+import { User } from '@/../lib/models/User';
 import crypto from "crypto";
 import { sendVerificationEmail } from "@/../lib/email";
+import { registerIpLimiter } from "@/../lib/rateLimit";
+
+function getClientIp(req: Request): string {
+    const xForwardedFor = req.headers.get("x-forwarded-for");
+    if (xForwardedFor) {
+        return xForwardedFor.split(",")[0].trim();
+    }
+
+    const realIp = req.headers.get("x-real-ip");
+
+    if (realIp) {
+        return realIp.trim();
+    }
+
+    return "unknown";
+}
 
 export async function POST(request: Request) {
+    const ip = getClientIp(request);
+
+    const { success, limit, remaining, reset } = await registerIpLimiter.limit(ip);
+
+    if (!success) {
+        return NextResponse.json(
+            {
+                error: "Too many registration attempts from this network. Please try again later.",
+            },
+            {
+                status: 429,
+                headers: {
+                    "X-RateLimit-Limit": String(limit),
+                    "X-RateLimit-Remaining": String(remaining),
+                    "X-RateLimit-Reset": String(reset),
+                },
+            }
+        );
+    }
+
     console.log("Mongo URI exists:", !!process.env.MONGODB_URI);
+
     // 1. Parse the incoming JSON body
     const { email, username, password } = await request.json();
 
@@ -22,10 +59,10 @@ export async function POST(request: Request) {
     await dbConnect();
 
     // 4. Check for existing user by email or username
-    const existingUser = await User.findOne({ $or: [{ email }, { username }] }); // https://www.mongodb.com/docs/manual/reference/operator/query/or/#op._S_or ({email} is equivalent to { email: email })
+    const existingUser = await User.findOne({ $or: [{ email }, { username }] });
     if (existingUser) {
         return NextResponse.json(
-            { error: "User already exists" },
+            { error: "Unable to create account with the provided details" },
             { status: 400 }
         );
     }
