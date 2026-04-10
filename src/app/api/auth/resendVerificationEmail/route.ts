@@ -13,39 +13,52 @@ export async function POST(req: Request) {
 
     await dbConnect();
 
-    const user = await User.findOne({ email });
+    const COOLDOWN = 120 * 1000;
+    const now = new Date();
 
-    if (!user) {
-        return NextResponse.json({ error: "User not found" }, { status: 404 });
-    }
-
-    if (user.emailVerified) {
-        return NextResponse.json({ error: "Email already verified" }, { status: 400 });
-    }
-
-    // generate new token
+    // 1. Generate token FIRST (needed for update)
     const rawToken = crypto.randomBytes(32).toString("hex");
     const hashedToken = crypto.createHash("sha256").update(rawToken).digest("hex");
 
-    user.verificationToken = hashedToken;
-    user.verificationTokenExpires = new Date(Date.now() + 1000 * 60 * 60);
+    // 2. Atomic update with cooldown check
+    const user = await User.findOneAndUpdate(
+        {
+            email,
+            emailVerified: false,
+            $or: [
+                { lastResendEmailSentAt: { $exists: false } },
+                { lastResendEmailSentAt: { $lte: new Date(Date.now() - COOLDOWN) } }
+            ]
+        },
+        {
+            $set: {
+                verificationToken: hashedToken,
+                verificationTokenExpires: new Date(Date.now() + 1000 * 60 * 60),
+                lastResendEmailSentAt: now
+            }
+        },
+        {
+            new: true // return updated doc
+        }
+    );
 
-    await user.save();
+    // 3. If no user matched → cooldown or invalid user
+    if (!user) {
+        return NextResponse.json(
+            { error: "Please wait before requesting another email." },
+            { status: 429 }
+        );
+    }
 
+    // 4. Send email AFTER successful update
     try {
-        // debug
-        // console.log("STEP 1: before email function in resend route");
         await sendVerificationEmail(email, rawToken);
-        // debug
-        // console.log("STEP 2: after email function in resend route");
     } catch (error) {
-        // rollback user creation if email fails
-        await User.deleteOne({ email });
-
         return NextResponse.json(
             { error: "Failed to send verification email. Please try again." },
             { status: 500 }
         );
     }
+
     return NextResponse.json({ success: true });
 }

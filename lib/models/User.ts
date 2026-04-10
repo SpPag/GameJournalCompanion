@@ -12,6 +12,7 @@ interface IUser extends Document {
     emailVerified: boolean;
     verificationToken?: string;
     verificationTokenExpires?: Date;
+    lastResendEmailSentAt: Date;
 }
 
 const UserSchema = new Schema<IUser>({
@@ -58,6 +59,10 @@ const UserSchema = new Schema<IUser>({
     },
     verificationTokenExpires: {
         type: Date
+    },
+    lastResendEmailSentAt: {
+        type: Date,
+        default: new Date()
     }
 })
 

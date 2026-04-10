@@ -93,10 +93,10 @@ const CheckEmailPage = () => {
                             message: "Verification email sent!",
                             variant: "success",
                         });
-                        const cooldownUntil = Date.now() + 60 * 1000;
+                        const cooldownUntil = Date.now() + 120 * 1000;
 
                         localStorage.setItem(COOLDOWN_KEY, cooldownUntil.toString());
-                        setCooldown(60);
+                        setCooldown(120);
                     } else {
                         setAlert({
                             message: "Failed to resend email",
