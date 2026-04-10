@@ -5,12 +5,29 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import React from "react";
+import { AlertMessage } from "@/components/AlertMessage";
+import { useSearchParams } from "next/navigation";
 
 const LoginPage = () => {
     const [email, setEmail] = useState(""); // tracks the email input
     const [password, setPassword] = useState(""); // tracks the password input
     const router = useRouter(); // used for navigating
     const { status } = useSession(); // get session data to check if the user is already logged in
+    const [alert, setAlert] = useState<null | {
+        message: string;
+        variant: "error" | "success" | "warning" | "info";
+    }>(null);
+    
+    const searchParams = useSearchParams();
+    
+    useEffect(() => {
+        if (searchParams.get("verified") === "true") {
+            setAlert({
+                message: "Your email has been verified. You can now log in.",
+                variant: "success"
+            });
+        }
+    }, [searchParams]);
 
     useEffect(() => {
         if (status === "authenticated") {
@@ -32,7 +49,10 @@ const LoginPage = () => {
         if (res?.ok) {
             router.push("/"); // redirect to home
         } else {
-            alert("Invalid login");
+            setAlert({
+                message: res?.error || "Login failed",
+                variant: "error"
+            });
         }
     }
 
@@ -90,6 +110,13 @@ const LoginPage = () => {
                     </button>
                 </div>
             </form>
+            {alert && (
+                <AlertMessage
+                    message={alert.message}
+                    variant={alert.variant}
+                    onDone={() => setAlert(null)}
+                />
+            )}
         </div>
     );
 }

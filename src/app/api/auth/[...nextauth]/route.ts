@@ -27,11 +27,16 @@ const authOptions: NextAuthOptions = {
                 const user = await User.findOne({ email: credentials?.email }).select("+password");
                 if (!user) throw new Error("No user found with this email");
 
-                // 3. Check password
+                // 3. Check if email is verified
+                if (!user.emailVerified) {
+                   throw new Error("Please verify your email before logging in");
+                }
+
+                // 4. Check password
                 const isValid = await bcrypt.compare(credentials!.password, user.password);
                 if (!isValid) throw new Error("Invalid password");
 
-                // 4. Return user object (required!)
+                // 5. Return user object (required!)
                 return {
                     id: user._id.toString(),
                     email: user.email,

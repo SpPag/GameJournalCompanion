@@ -23,7 +23,7 @@ const RegisterPage = () => {
     const data = await res.json();
 
     if (res.ok) {
-      router.push("/login"); // Redirect to login after successful registration
+      router.push("/auth/checkEmail"); // Redirect to check email page after registration
     } else {
       setError(data.error || "Registration failed");
     }
