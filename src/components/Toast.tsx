@@ -24,6 +24,7 @@ const Toast = ({ message, type, onDone, duration = 4000 }: ToastProps) => {
     const fadeOutTimer = setTimeout(() => setVisible(false), fadeOutTime);
     const removeTimer = setTimeout(onDone, duration);
     return () => {
+      clearTimeout(show);
       clearTimeout(fadeOutTimer);
       clearTimeout(removeTimer);
     };

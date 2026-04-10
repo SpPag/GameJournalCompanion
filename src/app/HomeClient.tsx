@@ -20,7 +20,7 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
   const [confirmingDeleteGame, setConfirmingDeleteGame] = useState<Game | null>(null);
   const [isDeleting, setIsDeleting] = useState(false);
-  const [toast, setToast] = useState<{message: string, type: "success" | "error"} | null>(null);
+  const [toast, setToast] = useState<{ message: string, type: "success" | "error" } | null>(null);
   const router = useRouter();
   const { data: session, status } = useSession();
 
@@ -52,13 +52,13 @@ export default function Home() {
 
     try {
       setIsDeleting(true);
-      
+
       // Delete all notes associated with this game
       const notesRes = await fetch(`/api/users/notes?gameId=${confirmingDeleteGame._id}`);
       if (notesRes.ok) {
         const notesData = await notesRes.json();
         const notes = notesData.notes || [];
-        
+
         // Delete each note
         for (const note of notes) {
           await fetch(`/api/users/notes/${note._id.toString()}`, {
@@ -83,14 +83,14 @@ export default function Home() {
           prev.filter(game => game._id !== confirmingDeleteGame._id)
         );
         setConfirmingDeleteGame(null);
-        setToast({message: 'Game de-registered successfully', type: 'success'});
+        setToast({ message: 'Game de-registered successfully', type: 'success' });
       } else {
         console.error('Failed to delete game');
-        setToast({message: 'Failed to de-register game', type: 'error'});
+        setToast({ message: 'Failed to de-register game', type: 'error' });
       }
     } catch (error) {
       console.error('Error deleting game:', error);
-      setToast({message: 'Error de-registering game', type: 'error'});
+      setToast({ message: 'Error de-registering game', type: 'error' });
     } finally {
       setIsDeleting(false);
     }
@@ -176,6 +176,9 @@ export default function Home() {
               onRegistered={() => {
                 setIsGamesModalOpen(false);
                 refreshGames();
+              }}
+              onRegisterSuccess={() => {
+                setToast({ message: 'Game registered successfully!', type: 'success' });
               }}
             />
           )}
