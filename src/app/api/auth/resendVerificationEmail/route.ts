@@ -16,11 +16,11 @@ export async function POST(req: Request) {
     const COOLDOWN = 120 * 1000;
     const now = new Date();
 
-    // 1. Generate token FIRST (needed for update)
     const rawToken = crypto.randomBytes(32).toString("hex");
     const hashedToken = crypto.createHash("sha256").update(rawToken).digest("hex");
+    const expiresAt = new Date(Date.now() + 1000 * 60 * 60);
 
-    // 2. Atomic update with cooldown check
+    // Reserve the resend slot atomically
     const user = await User.findOneAndUpdate(
         {
             email,
@@ -33,16 +33,15 @@ export async function POST(req: Request) {
         {
             $set: {
                 verificationToken: hashedToken,
-                verificationTokenExpires: new Date(Date.now() + 1000 * 60 * 60),
+                verificationTokenExpires: expiresAt,
                 lastResendEmailSentAt: now
             }
         },
         {
-            new: true // return updated doc
+            new: true
         }
     );
 
-    // 3. If no user matched → cooldown or invalid user
     if (!user) {
         return NextResponse.json(
             { error: "Please wait before requesting another email." },
@@ -50,15 +49,31 @@ export async function POST(req: Request) {
         );
     }
 
-    // 4. Send email AFTER successful update
     try {
         await sendVerificationEmail(email, rawToken);
+        return NextResponse.json({ success: true });
     } catch (error) {
+        // Roll back only if the values still match this exact request
+        await User.updateOne(
+            {
+                _id: user._id,
+                emailVerified: false,
+                verificationToken: hashedToken,
+                verificationTokenExpires: expiresAt,
+                lastResendEmailSentAt: now
+            },
+            {
+                $unset: {
+                    verificationToken: 1,
+                    verificationTokenExpires: 1,
+                    lastResendEmailSentAt: 1
+                }
+            }
+        );
+
         return NextResponse.json(
             { error: "Failed to send verification email. Please try again." },
             { status: 500 }
         );
     }
-
-    return NextResponse.json({ success: true });
 }

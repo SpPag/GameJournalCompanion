@@ -46,6 +46,7 @@ export async function POST(request: Request) {
             emailVerified: false,
             verificationToken: hashedToken,
             verificationTokenExpires: new Date(Date.now() + 1000 * 60 * 60), // 1 hour
+            lastResendEmailSentAt: new Date(),
             // games: [], // optional since schema already sets a default
         });
 
@@ -58,7 +59,7 @@ export async function POST(request: Request) {
             // console.log("STEP 2: after email function");
         } catch (error) {
             // rollback user creation if email fails
-            await User.deleteOne({ email });
+            await User.deleteOne({ _id: newUser._id });
 
             return NextResponse.json(
                 { error: "Failed to send verification email. Please try again." },
@@ -66,10 +67,7 @@ export async function POST(request: Request) {
             );
         }
 
-        // 9. Return success (omit password from response!)
-        // I'm including the following line that disables ESlint's no-unused-vars rule for this specific line. The relevant error stems from me grabbing the password and storing it in the _pw variable, which I don't want to be included anywhere. I would have to use it otherwise, which is the exact opposite of the point of the _pw throwaway variable
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        const { password: _pw, ...userWithoutPassword } = newUser.toObject() as IUser;
+        // 9. Return success response
         return NextResponse.json(
             {
                 success: true,
