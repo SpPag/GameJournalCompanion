@@ -3,13 +3,17 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import React from "react";
+import { AlertMessage } from "@/components/AlertMessage";
 
 const RegisterPage = () => {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const [alert, setAlert] = useState<null | {
+    message: string;
+    variant: "error" | "success" | "warning" | "info";
+  }>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -23,9 +27,18 @@ const RegisterPage = () => {
     const data = await res.json();
 
     if (res.ok) {
-      router.push("/auth/checkEmail"); // Redirect to check email page after registration
+      setAlert({
+        message: "Account created successfully!",
+        variant: "success",
+      });
+      setTimeout(() => {
+        router.push("/auth/checkEmail");
+      }, 1500);// Redirect to check email page after registration
     } else {
-      setError(data.error || "Registration failed");
+      setAlert({
+        message: data.error || "Registration failed",
+        variant: "error",
+      });
     }
   };
 
@@ -74,8 +87,6 @@ const RegisterPage = () => {
           autoComplete="new-password"
         />
 
-        {error && <p className="text-red-500 text-sm">{error}</p>}
-
         <div className="flex gap-4 h-[3.8rem]">
           <button type="submit" className="
           h-full w-1/2 m-auto
@@ -103,6 +114,13 @@ const RegisterPage = () => {
             Login
           </button>
         </div>
+        {alert && (
+          <AlertMessage
+            message={alert.message}
+            variant={alert.variant}
+            onDone={() => setAlert(null)}
+          />
+        )}
       </form>
     </div>
   );
