@@ -66,7 +66,7 @@ const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
                         <button
                             onClick={onClose}
                             disabled={isLoading}
-                            className="px-4 py-2 border rounded-md border-stone-700 text-[#111827] bg-[#c59854] focus:outline-2 focus:outline-[#867162] hover:bg-[#b68945] active:bg-[#ad803c] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:text-zinc-600 dark:border-zinc-500 dark:bg-[#5d4727] dark:text-zinc-300 dark:focus:outline-2 dark:focus:outline-zinc-700 dark:hover:bg-[#6c522e] dark:active:bg-[#654d2b] dark:disabled:hover:text-zinc-400 hover:cursor-pointer"
+                            className="px-4 py-2 border rounded-md border-stone-700 text-[#111827] bg-[#c59854] focus:outline-2 focus:outline-[#867162] hover:bg-[#b68945] active:bg-[#ad803c] disabled:hover:bg-[#c59854] disabled:opacity-50 disabled:cursor-not-allowed dark:border-zinc-500 dark:bg-[#5d4727] dark:text-zinc-300 dark:focus:outline-2 dark:focus:outline-zinc-700 dark:hover:bg-[#6c522e] dark:active:bg-[#654d2b] dark:disabled:hover:bg-[#5d4727] hover:cursor-pointer"
                         >
                             {cancelText}
                         </button>
