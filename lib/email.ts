@@ -10,6 +10,11 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 export async function sendVerificationEmail(email: string, token: string) {
     const url = `${process.env.NEXTAUTH_URL}/api/auth/verify?token=${token}`;
     
+    // debugging logs to verify that environment variables are being read correctly
+    console.log("RESEND API KEY EXISTS:", !!process.env.RESEND_API_KEY);
+    console.log("RESEND KEY PREFIX:", process.env.RESEND_API_KEY?.slice(0, 4));
+    console.log("NODE ENV:", process.env.NODE_ENV);
+
     if (process.env.NODE_ENV === "development") {
         console.log("DEV MODE EMAIL:", url);
     }
