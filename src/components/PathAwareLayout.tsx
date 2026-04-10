@@ -3,6 +3,7 @@
 import { usePathname } from 'next/navigation';
 import { AuthButton } from './AuthButton';
 import { RegisterButton } from './RegisterButton';
+import { DeleteAccountButton } from './DeleteAccountButton';
 import React from 'react';
 
 interface PathAwareLayoutProps {
@@ -12,7 +13,7 @@ interface PathAwareLayoutProps {
 export default function PathAwareLayout({ children }: PathAwareLayoutProps) {
     const pathname = usePathname();
 
-    // hide AuthButton on login and register pages
+    // hide auth-related buttons on login and register pages
     const showAuthButtons = pathname !== '/login' && pathname !== '/register';
 
     return (
@@ -21,6 +22,7 @@ export default function PathAwareLayout({ children }: PathAwareLayoutProps) {
                 <>
                     <AuthButton />
                     <RegisterButton />
+                    <DeleteAccountButton />
                 </>
             }
             {children}
