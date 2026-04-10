@@ -61,8 +61,7 @@ const UserSchema = new Schema<IUser>({
         type: Date
     },
     lastResendEmailSentAt: {
-        type: Date,
-        default: new Date()
+        type: Date
     }
 })
 
