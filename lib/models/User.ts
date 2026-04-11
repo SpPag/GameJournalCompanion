@@ -13,6 +13,8 @@ interface IUser extends Document {
     verificationToken?: string;
     verificationTokenExpires?: Date;
     lastResendEmailSentAt: Date;
+    passwordResetToken?: string;
+    passwordResetTokenExpires?: Date;
 }
 
 const UserSchema = new Schema<IUser>({
@@ -62,7 +64,14 @@ const UserSchema = new Schema<IUser>({
     },
     lastResendEmailSentAt: {
         type: Date
+    },
+    passwordResetToken: {
+        type: String
+    },
+    passwordResetTokenExpires: {
+        type: Date
     }
+
 })
 
 // the following line checks if a model named 'User' has already been registered with Mongoose. If yes, it's saved to the User variable, otherwise, it creates a new model, registers it with Mongoose and saves it to the User variable
