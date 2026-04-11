@@ -7,8 +7,8 @@ import { useSession } from "next-auth/react";
 
 const CheckEmailPage = () => {
     const router = useRouter();
-    
-     // Get the currently logged-in user's session
+
+    // Get the currently logged-in user's session
     const { status } = useSession();
 
     // State for user input, resend request loading state, session loading state, cooldown timer and alert messages
@@ -105,7 +105,7 @@ const CheckEmailPage = () => {
 
                 // Start cooldown (2 minutes)
                 const cooldownUntil = Date.now() + 120 * 1000;
-                
+
                 // Persist cooldown so it survives refresh
                 localStorage.setItem(COOLDOWN_KEY, cooldownUntil.toString());
                 setCooldown(120);
@@ -197,6 +197,7 @@ const CheckEmailPage = () => {
                         type="submit"
                         disabled={resendLoading || cooldown > 0}
                         className="
+                            relative overflow-hidden
                             w-full px-4 py-2 rounded-lg
                             border border-stone-700 dark:border-zinc-500
                             bg-[#c59854] dark:bg-neutral-600
@@ -209,11 +210,17 @@ const CheckEmailPage = () => {
                             disabled:opacity-50 disabled:cursor-not-allowed
                         "
                     >
-                        {cooldown > 0
-                            ? `Resend email (${cooldown}s)`
-                            : resendLoading
-                                ? "Sending..."
-                                : "Resend email"}
+                        {/* Colored (blue) overlay idea that I didn't really like in application */}
+                        {/* <span className="absolute inset-0 bg-[#243ec0]/15 pointer-events-none"></span> */}
+
+                        {/* Content */}
+                        <span className="relative z-10">
+                            {cooldown > 0
+                                ? `Resend email (${cooldown}s)`
+                                : resendLoading
+                                    ? "Sending..."
+                                    : "Resend email"}
+                        </span>
                     </button>
                 </form>
 
