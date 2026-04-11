@@ -1,14 +1,13 @@
 "use client";
 
 import { signIn } from "next-auth/react";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
-import React from "react";
 import { AlertMessage } from "@/components/AlertMessage";
 import { useSearchParams } from "next/navigation";
 
-const LoginPage = () => {
+const LoginClient = () => {
     const [email, setEmail] = useState(""); // tracks the email input
     const [password, setPassword] = useState(""); // tracks the password input
     const router = useRouter(); // used for navigating
@@ -17,13 +16,19 @@ const LoginPage = () => {
         message: string;
         variant: "error" | "success" | "warning" | "info";
     }>(null);
-    
+
     const searchParams = useSearchParams();
-    
+
     useEffect(() => {
         if (searchParams.get("verified") === "true") {
             setAlert({
                 message: "Your email has been verified. You can now log in.",
+                variant: "success"
+            });
+        }
+        if (searchParams.get("reset") === "true") {
+            setAlert({
+                message: "Your password has been reset. You can now log in.",
                 variant: "success"
             });
         }
@@ -84,6 +89,13 @@ const LoginPage = () => {
                     onChange={(e) => setPassword(e.target.value)}
                     className="border p-2 rounded bg-[#f5f5f4] text-[#111827] border-stone-700 focus:outline-2 focus:outline-[#836e5e]/70 dark:text-[#d4d4d8] dark:border-zinc-500 dark:bg-[#312d29] dark:focus:outline-2 dark:focus:outline-zinc-400"
                 />
+                <button
+                    type="button"
+                    onClick={() => router.push("/auth/forgotPassword")}
+                    className="w-fit text-sm ml-1 -my-2 underline text-zinc-700 dark:text-zinc-300 dark:bg-zinc-700/50 dark:rounded-lg dark:px-2 dark:py-0.5 hover:opacity-80 hover:cursor-pointer"
+                >
+                    Forgot password?
+                </button>
                 <div className="flex gap-4 h-[3.8rem]">
                     <button type="submit" className="
                     h-full w-1/2 m-auto
@@ -123,4 +135,4 @@ const LoginPage = () => {
     );
 }
 
-export default LoginPage; // this needs to be default, because that's how Next.js knows to look for and import it
+export default LoginClient; // this needs to be default, because that's how Next.js knows to look for and import it
