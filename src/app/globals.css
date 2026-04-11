@@ -1,4 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Calligraffitti&family=Coming+Soon&family=Merienda:wght@300..900&display=swap');
 @import "tailwindcss";
 
 :root {
@@ -11,10 +10,9 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-  --font-merienda: 'Merienda', cursive;
-  --font-coming-soon: 'Coming Soon', cursive;
-  --font-calligraffitti: 'Calligraffitti', cursive;
-}
+  --font-merienda: var(--font-merienda-google);
+  --font-coming-soon: var(--font-coming-soon-google);
+  --font-calligraffitti: var(--font-calligraffitti-google);}
 
 @media (prefers-color-scheme: dark) {
   :root {

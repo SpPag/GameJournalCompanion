@@ -1,5 +1,11 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import {
+  Geist,
+  Geist_Mono,
+  Merienda,
+  Coming_Soon,
+  Calligraffitti,
+} from "next/font/google";
 import "./globals.css";
 import { DarkModeProvider } from "@/components/DarkModeProvider";
 import React from "react";
@@ -16,6 +22,23 @@ const geistSans = Geist({
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+});
+
+const merienda = Merienda({
+  variable: "--font-merienda-google",
+  subsets: ["latin"],
+});
+
+const comingSoon = Coming_Soon({
+  variable: "--font-coming-soon-google",
+  subsets: ["latin"],
+  weight: "400",
+});
+
+const calligraffitti = Calligraffitti({
+  variable: "--font-calligraffitti-google",
+  subsets: ["latin"],
+  weight: "400",
 });
 
 export const metadata: Metadata = {
@@ -50,7 +73,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col min-h-screen`}
+        className={`${geistSans.variable} ${geistMono.variable} ${merienda.variable} ${comingSoon.variable} ${calligraffitti.variable} antialiased flex flex-col min-h-screen`}
       >
         {/* Wrapping everything in the a session provider to be able to track user authentication and session. The wrapping everything in the dark mode provider that handles changing background image based on light - dark mode */}
         <SessionWrapper>
