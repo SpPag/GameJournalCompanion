@@ -104,14 +104,14 @@ return (
                 <div className="flex justify-end gap-3 mt-4">
                     <button
                         onClick={onClose}
-                        className="px-4 py-2 border rounded-md text-[#111827] bg-[#d64d0c] border-stone-700 focus:outline-2 focus:outline-[#cc3600] hover:bg-orange-700 active:bg-[#cc470c] dark:text-zinc-300 dark:bg-[#441901] dark:hover:bg-[#612905] dark:active:bg-[#542204] dark:focus:outline-2 dark:focus:outline-zinc-700 hover:cursor-pointer"
+                        className="px-4 py-2 border rounded-md text-[#111827] bg-[#d64d0c] border-stone-700 focus:outline-2 focus:outline-[#cc3600] hover:bg-[#be3300] active:bg-[#cc470c] dark:text-zinc-300 dark:bg-[#441901] dark:hover:bg-[#612905] dark:active:bg-[#542204] dark:focus:outline-2 dark:focus:outline-zinc-700 hover:cursor-pointer"
                     >
                         Cancel
                     </button>
 
                     <button
                         onClick={handleSave}
-                        className="px-4 py-2 border rounded-md text-[#111827] bg-[#b68945] border-stone-700 focus:outline-2 focus:outline-[#867162] hover:bg-[#ad803c] active:bg-[#b28541] dark:text-zinc-300 dark:bg-[#3b403a] dark:hover:bg-[#4e544d] dark:active:bg-[#434942] dark:focus:outline-2 dark:focus:outline-zinc-700 disabled:opacity-50 disabled:cursor-not-allowed hover:cursor-pointer"
+                        className="px-4 py-2 border rounded-md text-[#111827] bg-[#b68945] border-stone-700 focus:outline-2 focus:outline-[#867162] hover:bg-[#ad803c] active:bg-[#b28541] disabled:hover:bg-[#b68945] dark:text-zinc-300 dark:bg-[#3b403a] dark:hover:bg-[#4e544d] dark:active:bg-[#434942] dark:disabled:hover:bg-[#3b403a] dark:focus:outline-2 dark:focus:outline-zinc-700 disabled:opacity-50 disabled:cursor-not-allowed hover:cursor-pointer"
                         disabled={!content.trim()}
                     >
                         Save

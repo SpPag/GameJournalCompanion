@@ -74,15 +74,17 @@ const DeleteAccountButton = () => {
             )}
             <button
                 type="button"
-                className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50
+                className="fixed bottom-6 right-6 z-50
                 px-4 py-2
                 border rounded-lg
-                border-stone-700 dark:border-neutral-600
+                border-stone-700
                 text-[0.95rem]/[1.25rem] md:text-[0.97rem]/[1.3rem] lg:text-base
                 text-[#111827] dark:text-zinc-300
-                bg-[#c59854] dark:bg-neutral-800
-                focus:outline-2 focus:outline-[#867162] dark:focus:outline-zinc-500
-                hover:cursor-pointer"
+                bg-[#d64d0c] dark:bg-[#441901]
+                focus:outline-2 focus:outline-[#cc3600] dark:focus:outline-2 dark:focus:outline-zinc-700
+                hover:bg-[#be3300] dark:hover:bg-[#612905] hover:cursor-pointer
+                active:bg-[#cc470c] dark:active:bg-[#542204]
+                disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-[#d64d0c] dark:disabled:hover:bg-[#441901]"
                 onClick={handleDeleteClick}
                 disabled={isDeleting}
             >
