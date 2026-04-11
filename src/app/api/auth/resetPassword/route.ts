@@ -4,6 +4,7 @@ import dbConnect from "@/../lib/mongoose";
 import { User } from "@/../lib/models/User";
 import crypto from "crypto";
 import { resetPasswordIpLimiter } from "@/../lib/rateLimit";
+import { sendPasswordChangedEmail } from "@/../lib/email";
 
 function getClientIp(req: Request): string {
     const xForwardedFor = req.headers.get("x-forwarded-for");
@@ -106,6 +107,12 @@ export async function POST(req: Request) {
             { error: "Invalid or expired reset token" },
             { status: 400 }
         );
+    }
+
+    try {
+        await sendPasswordChangedEmail(user.email);
+    } catch (error) {
+        console.error("Failed to send password changed email:", error);
     }
 
     // Return success response
