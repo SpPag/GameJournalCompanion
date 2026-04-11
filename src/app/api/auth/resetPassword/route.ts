@@ -3,8 +3,47 @@ import { hash } from "bcrypt";
 import dbConnect from "@/../lib/mongoose";
 import { User } from "@/../lib/models/User";
 import crypto from "crypto";
+import { resetPasswordIpLimiter } from "@/../lib/rateLimit";
+
+function getClientIp(req: Request): string {
+    const xForwardedFor = req.headers.get("x-forwarded-for");
+    if (xForwardedFor) {
+        return xForwardedFor.split(",")[0].trim();
+    }
+
+    const realIp = req.headers.get("x-real-ip");
+
+    if (realIp) {
+        return realIp.trim();
+    }
+
+    return "unknown";
+}
 
 export async function POST(req: Request) {
+
+    // Get client IP for rate limiting
+    const ip = getClientIp(req);
+
+    // Apply IP-based rate limiting
+    const { success, limit, remaining, reset } = await resetPasswordIpLimiter.limit(ip);
+
+    // If rate limit exceeded, return 429 with rate limit headers
+    if (!success) {
+        return NextResponse.json(
+            {
+                error: "Too many requests from this network. Please try again later.",
+            },
+            {
+                status: 429,
+                headers: {
+                    "X-RateLimit-Limit": String(limit),
+                    "X-RateLimit-Remaining": String(remaining),
+                    "X-RateLimit-Reset": String(reset),
+                },
+            }
+        );
+    }
 
     // Parse request body and extract token and new password
     const { token, password } = await req.json();
