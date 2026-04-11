@@ -9,7 +9,7 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function sendVerificationEmail(email: string, token: string) {
     const url = `${process.env.NEXTAUTH_URL}/api/auth/verify?token=${token}`;
-    
+
     // debugging logs to verify that environment variables are being read correctly
     // console.log("RESEND API KEY EXISTS:", !!process.env.RESEND_API_KEY);
     // console.log("RESEND KEY PREFIX:", process.env.RESEND_API_KEY?.slice(0, 4));
@@ -19,7 +19,7 @@ export async function sendVerificationEmail(email: string, token: string) {
     if (process.env.NODE_ENV === "development") {
         console.log("DEV MODE ACCOUNT VERIFICATION EMAIL:", url);
     }
-    
+
     const result = await resend.emails.send({
         from: process.env.EMAIL_FROM!,
         to: email,
@@ -57,6 +57,31 @@ export async function sendPasswordResetEmail(email: string, token: string) {
     });
 
     console.log("PASSWORD RESET EMAIL RESULT:", result);
+
+    return result;
+}
+
+export async function sendPasswordChangedEmail(email: string) {
+    const url = `${process.env.NEXTAUTH_URL}/login`;
+
+    if (process.env.NODE_ENV === "development") {
+        console.log("DEV MODE PASSWORD CHANGED EMAIL for:", email);
+        console.log("LOGIN URL:", url);
+    }
+
+    const result = await resend.emails.send({
+        from: process.env.EMAIL_FROM!,
+        to: email,
+        subject: "Your password has been changed",
+        html: `
+      <h1>Password changed</h1>
+      <p>Your password for Game Journal Companion has been changed successfully.</p>
+      <p>If you did not make this change, someone else may have access to your account or email address.</p>
+      <p>You can sign in here: <a href="${url}">${url}</a></p>
+    `,
+    });
+
+    console.log("PASSWORD CHANGED EMAIL RESULT:", result);
 
     return result;
 }
