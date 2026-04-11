@@ -30,6 +30,7 @@ const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
     useEffect(() => {
         function handleKeyDown(e: KeyboardEvent) {
             if (e.key === 'Escape') onClose();
+            if (e.key === 'Enter' && !isLoading) onConfirm();
         }
         if (isOpen) {
             document.addEventListener('keydown', handleKeyDown);
