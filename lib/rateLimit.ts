@@ -16,3 +16,10 @@ export const registerIpLimiter = new Ratelimit({
   analytics: true,
   prefix: "ratelimit:register-ip",
 });
+
+export const forgotPasswordIpLimiter = new Ratelimit({
+  redis,
+  limiter: Ratelimit.slidingWindow(3, "10 m"),
+  analytics: true,
+  prefix: "ratelimit:forgot-password-ip",
+});
