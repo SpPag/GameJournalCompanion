@@ -19,7 +19,14 @@ export const registerIpLimiter = new Ratelimit({
 
 export const forgotPasswordIpLimiter = new Ratelimit({
   redis,
-  limiter: Ratelimit.slidingWindow(3, "10 m"),
+  limiter: Ratelimit.slidingWindow(5, "10 m"),
   analytics: true,
   prefix: "ratelimit:forgot-password-ip",
+});
+
+export const resetPasswordIpLimiter = new Ratelimit({
+  redis,
+  limiter: Ratelimit.slidingWindow(5, "10 m"),
+  analytics: true,
+  prefix: "ratelimit:reset-password-ip",
 });
