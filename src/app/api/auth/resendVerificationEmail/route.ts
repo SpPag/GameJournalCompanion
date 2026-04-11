@@ -23,13 +23,13 @@ function getClientIp(req: Request): string {
 
 export async function POST(req: Request) {
 
-    // 1. Get client IP for rate limiting
+    // Get client IP for rate limiting
     const ip = getClientIp(req);
 
-    // 2. Apply IP-based rate limiting
+    // Apply IP-based rate limiting
     const { success, limit, remaining, reset } = await resendIpLimiter.limit(ip);
 
-    // 3. If rate limit exceeded, return 429 with rate limit headers
+    // If rate limit exceeded, return 429 with rate limit headers
     if (!success) {
         return NextResponse.json(
             {
@@ -46,33 +46,36 @@ export async function POST(req: Request) {
         );
     }
 
-    // 4. Parse request body and extract email
+    // Parse request body and extract email
     const { email } = await req.json();
 
-    // 5. Validate required field
+    // Validate required field
     if (!email) {
-        return NextResponse.json({ error: "Email required" }, { status: 400 });
+        return NextResponse.json(
+            { error: "Email required" },
+            { status: 400 }
+        );
     }
 
-    // 6. Connect to database
+    // Connect to database
     await dbConnect();
 
-    // 7. Define cooldown (time between resend requests)
+    // Define cooldown (time between resend requests)
     const COOLDOWN = 120 * 1000; // 2 minutes
     const now = new Date();
 
-    // 8. Generate verification token (raw + hashed version)
+    // Generate verification token (raw + hashed version)
     const rawToken = crypto.randomBytes(32).toString("hex");
     const hashedToken = crypto.createHash("sha256").update(rawToken).digest("hex");
 
-    // 9. Set token expiration (1 hour)
+    // Set token expiration (1 hour)
     const expiresAt = new Date(Date.now() + 1000 * 60 * 60);
 
-    // 10. Atomically:
-    //     - ensure user exists
-    //     - ensure email is NOT verified
-    //     - ensure cooldown has passed
-    //     - update token + cooldown timestamp
+    // Atomically:
+    //      - ensure user exists
+    //      - ensure email is NOT verified
+    //      - ensure cooldown has passed
+    //      - update token + cooldown timestamp
     const user = await User.findOneAndUpdate(
         {
             email,
@@ -97,10 +100,10 @@ export async function POST(req: Request) {
         }
     );
 
-    // 11. If no user was updated:
-    //     - either user doesn't exist
-    //     - OR email already verified
-    //     - OR cooldown not finished
+    // If no user was updated:
+    //      - either user doesn't exist
+    //      - OR email already verified
+    //      - OR cooldown not finished
     if (!user) {
         return NextResponse.json(
             { error: "Please wait before requesting another email." },
@@ -109,13 +112,13 @@ export async function POST(req: Request) {
     }
 
     try {
-        // 12. Send verification email using RAW token
-        //     (user will send it back → we hash it again and compare)
+        // Send verification email using RAW token
+        //      (user will send it back → we hash it again and compare)
         await sendVerificationEmail(email, rawToken);
     } catch (error) {
 
-        // 13. Rollback ONLY if this exact request is still the latest state
-        //     (prevents overwriting newer valid tokens)
+        // Rollback ONLY if this exact request is still the latest state
+        //      (prevents overwriting newer valid tokens)
         await User.updateOne(
             {
                 _id: user._id,
@@ -133,13 +136,13 @@ export async function POST(req: Request) {
             }
         );
 
-        // 14. Return error if email sending fails
+        // Return error if email sending fails
         return NextResponse.json(
             { error: "Failed to send verification email. Please try again." },
             { status: 500 }
         );
     }
 
-    // 15. Return success response
+    // Return success response
     return NextResponse.json({ success: true });
 }
