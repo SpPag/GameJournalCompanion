@@ -21,8 +21,10 @@ export default function Home() {
   const [confirmingDeleteGame, setConfirmingDeleteGame] = useState<Game | null>(null);
   const [isDeleting, setIsDeleting] = useState(false);
   const [toast, setToast] = useState<{ message: string, type: "success" | "error" } | null>(null);
+  const [showAlert, setShowAlert] = useState<null | { message: string; variant: "error" | "success" | "warning" | "info" }>(null); // I currently only use 'error' but I'm adding these here in case they're useful in the future. Expand freely
   const router = useRouter();
   const { data: session, status } = useSession();
+  const searchParams = useSearchParams();
 
   // Load the user's games when the component mounts
   useEffect(() => {
@@ -32,6 +34,41 @@ export default function Home() {
       setLoading(false); // Stop loading if the user isn't logged in
     }
   }, [status]);
+
+  useEffect(() => {
+    const error = searchParams.get('error');
+    // I currently only use 'error' but I'm adding these here in case they're useful in the future. Expand freely by adding code like:
+    /*
+
+      const success = searchParams.get('success');
+      const warning = searchParams.get('warning');
+      const successMessages = {
+        'registration-complete': 'Game registered successfully!',
+      };
+
+    */
+    const errorMessages: Record<string, string> = {
+      'game-not-registered': 'Game not registered!',
+      // Add more error codes and messages here. Examples:
+      // 'game-already-registered': 'Game already registered!',
+      // 'unauthorized-access': 'You must be logged in to view that page.',
+    };
+
+    if (error) {
+      const message = errorMessages[error] ?? 'An unknown error occurred.';
+      setShowAlert({
+        message,
+        variant: "error"
+      });
+    }
+
+    if (searchParams.get("accountDeleted") === "true") {
+      setShowAlert({
+        message: "Your account has been deleted successfully.",
+        variant: "success"
+      });
+    }
+  }, [searchParams]);
 
   // Function that re-checks user's registered games after game registration modal closes to make sure the appropriate GameCard instances are rendered
   const refreshGames = () => {
@@ -95,36 +132,6 @@ export default function Home() {
       setIsDeleting(false);
     }
   };
-
-  const searchParams = useSearchParams();
-  const [showAlert, setShowAlert] = useState<null | { message: string; variant: "error" | "success" | "warning" | "info" }>(null); // I currently only use 'error' but I'm adding these here in case they're useful in the future. Expand freely
-
-  useEffect(() => {
-
-    const error = searchParams.get('error');
-    // I currently only use 'error' but I'm adding these here in case they're useful in the future. Expand freely by adding code like:
-    /*
-
-      const success = searchParams.get('success');
-      const warning = searchParams.get('warning');
-      const successMessages = {
-        'registration-complete': 'Game registered successfully!',
-      };
-
-    */
-    const errorMessages: Record<string, string> = {
-      'game-not-registered': 'Game not registered!',
-      // Add more error codes and messages here. Examples:
-      // 'game-already-registered': 'Game already registered!',
-      // 'unauthorized-access': 'You must be logged in to view that page.',
-    };
-
-    if (error) {
-      const message = errorMessages[error] ?? 'An unknown error occurred.';
-      setShowAlert({ message, variant: "error" });
-    }
-
-  }, [searchParams]);
 
   return (
     <>

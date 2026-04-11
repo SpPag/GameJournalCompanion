@@ -36,14 +36,7 @@ const DeleteAccountButton = () => {
 
             if (response.ok) {
                 setIsConfirmModalOpen(false);
-                setShowAlert({
-                    message: "Your account has been deleted.",
-                    variant: "success",
-                });
-
-                setTimeout(async () => {
-                    await signOut({ callbackUrl: "/" });
-                }, 1200);
+                await signOut({ callbackUrl: "/?accountDeleted=true" });
             } else {
                 setIsConfirmModalOpen(false);
                 setShowAlert({
