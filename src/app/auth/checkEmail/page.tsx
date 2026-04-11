@@ -149,15 +149,17 @@ const CheckEmailPage = () => {
     return (
         <div className="dark:text-[#d4d4d8]">
             <div className="flex flex-col items-center justify-center mt-25 text-center gap-6 px-4">
-                <h1 className="text-2xl font-bold text-[#111827] dark:text-[#d4d4d8]">
-                    Check your email!
-                </h1>
+                <div className="flex flex-col px-4 py-2 gap-6 rounded-lg border border-stone-700 dark:border-none
+                    shadow-xl dark:shadow-none bg-[#b68945]/75 dark:bg-neutral-800/65">
+                    <h1 className="text-2xl font-semibold text-[#111827] dark:text-[#d4d4d8]">
+                        Check your email!
+                    </h1>
 
-                <p className="max-w-md text-stone-700 dark:text-zinc-300">
-                    We sent you a verification link. Click it to activate your account.
-                    If you don&apos;t see it, check spam or request a new one.
-                </p>
-
+                    <p className="max-w-md text-stone-700 dark:text-zinc-300">
+                        We sent you a verification link. Click it to activate your account.
+                        If you don&apos;t see it, check spam or request a new one.
+                    </p>
+                </div>
                 {/* 8. Navigate user to login page */}
                 <button
                     onClick={() => router.replace("/login")}
