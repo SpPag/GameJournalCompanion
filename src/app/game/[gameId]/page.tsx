@@ -24,10 +24,10 @@ const GameDetailsPage = () => {
     const [editingNote, setEditingNote] = useState<Note | null>(null);
     const [confirmingDeleteNote, setConfirmingDeleteNote] = useState<Note | null>(null);
     const [isDeleting, setIsDeleting] = useState(false);
-    const [toast, setToast] = useState<{message: string, type: "success" | "error"} | null>(null);
+    const [toast, setToast] = useState<{ message: string, type: "success" | "error" } | null>(null);
 
     // 1. Get the currently logged-in user's session
-    const { data: session, status } = useSession();
+    const { status } = useSession();
 
     //2 Get the params from the URL
     const params = useParams();
@@ -41,12 +41,6 @@ const GameDetailsPage = () => {
         const fetchGameData = async () => {
             try {
                 setLoading(true);
-                //=====================DEBUG=====================
-                // console.log("Calling API with gameId:", gameId); // Check browser's Console
-                // fetch(`/api/users/games/${gameId}`)
-                //     .then(res => console.log("API response status:", res.status))
-                //     .catch(err => console.error("API call failed:", err));
-                //=====================DEBUG=====================
 
                 // Check if game is registered and get game details
                 const gameRes = await fetch(`/api/users/games/${gameId}`);
@@ -164,14 +158,14 @@ const GameDetailsPage = () => {
                     prev.filter(note => note._id.toString() !== confirmingDeleteNote._id.toString())
                 );
                 setConfirmingDeleteNote(null);
-                setToast({message: 'Note deleted successfully', type: 'success'});
+                setToast({ message: 'Note deleted successfully', type: 'success' });
             } else {
                 console.error('Failed to delete note');
-                setToast({message: 'Failed to delete note', type: 'error'});
+                setToast({ message: 'Failed to delete note', type: 'error' });
             }
         } catch (error) {
             console.error('Error deleting note:', error);
-            setToast({message: 'Error deleting note', type: 'error'});
+            setToast({ message: 'Error deleting note', type: 'error' });
         } finally {
             setIsDeleting(false);
         }
@@ -194,22 +188,22 @@ const GameDetailsPage = () => {
                     <main className="flex flex-wrap gap-4 justify-center flex-row max-w-xl sm:max-w-2xl md:max-w-3xl lg:max-w-4xl max-h-[55vh] overflow-y-auto">
                         {/* Notes section */}
 
+                        {/* Always render one “Register a new game” card */}
+                        <div onClick={() => setModalOpen(true)}>
+                            <NoteCard />
+                        </div>
+
                         {/* Render each registered note */}
                         {[...userGameNotes] // spread registeredGames into a new array, to avoid mutating the original array that's tracked by React's state (might mess with it otherwise)
                             .sort((a, b) => new Date(b.lastEditedOn).getTime() - new Date(a.lastEditedOn).getTime())
                             .map((note) => (
-                                <NoteCard 
+                                <NoteCard
                                     key={note._id.toString()}
                                     note={note}
                                     onEdit={() => handleNoteEdit(note)}
                                     onDelete={() => handleNoteDelete(note)}
                                 />
                             ))}
-
-                        {/* Always render one “Register a new game” card */}
-                        <div onClick={() => setModalOpen(true)}>
-                            <NoteCard />
-                        </div>
                     </main>
                 </div>
             )}
