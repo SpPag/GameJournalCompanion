@@ -187,7 +187,6 @@ const GameDetailsPage = () => {
                     </div>
                     <main className="flex flex-wrap gap-4 justify-center flex-row max-w-xl sm:max-w-2xl md:max-w-3xl lg:max-w-4xl max-h-[55vh] overflow-y-auto">
                         {/* Notes section */}
-
                         {/* Always render one “Register a new game” card */}
                         <div onClick={() => setModalOpen(true)}>
                             <NoteCard />
