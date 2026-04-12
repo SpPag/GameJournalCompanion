@@ -42,6 +42,8 @@ const RegisterPage = () => {
     }
   };
 
+  const maxCharNum = 30; // Set a max character limit for the username input to prevent excessively long usernames that could cause issues in the UI or database. This is a common practice to ensure data integrity and a better user experience.
+  
   return (
     <div className="dark:text-[#d4d4d8]">
       <form onSubmit={handleSubmit} className="flex flex-col gap-4 max-w-sm mx-auto mt-20" autoComplete="off">
@@ -72,6 +74,7 @@ const RegisterPage = () => {
           type="text"
           placeholder="Username"
           value={username}
+          maxLength={maxCharNum}
           required
           onChange={(e) => setUsername(e.target.value)}
           className="border p-2 rounded bg-[#f5f5f4] text-[#111827] border-stone-700 focus:outline-2 focus:outline-[#836e5e]/70 dark:text-[#d4d4d8] dark:border-zinc-500 dark:bg-[#312d29] dark:focus:outline-2 dark:focus:outline-zinc-400"
