@@ -6,8 +6,8 @@ import { GameCard } from "@/components/GameCard";
 import { WelcomeUser } from "@/components/WelcomeUser";
 import { Game } from "@/types/Game";
 import { useRouter } from "next/navigation";
-import React, { useEffect, useState } from 'react';
-import { useSearchParams } from 'next/navigation';
+import React, { useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { AlertMessage } from "@/components/AlertMessage";
 import { useSession } from "next-auth/react";
 import { AboutMessage } from "@/components/AboutMessage";
@@ -21,9 +21,13 @@ export default function Home() {
   const [confirmingDeleteGame, setConfirmingDeleteGame] = useState<Game | null>(null);
   const [isDeleting, setIsDeleting] = useState(false);
   const [toast, setToast] = useState<{ message: string, type: "success" | "error" } | null>(null);
-  const [showAlert, setShowAlert] = useState<null | { message: string; variant: "error" | "success" | "warning" | "info" }>(null); // I currently only use 'error' but I'm adding these here in case they're useful in the future. Expand freely
+  const [alert, setAlert] = useState<null | {
+    id: number;
+    message: string;
+    variant: "error" | "success" | "warning" | "info";
+  }>(null);
   const router = useRouter();
-  const { data: session, status } = useSession();
+  const { status } = useSession();
   const searchParams = useSearchParams();
 
   // Load the user's games when the component mounts
@@ -56,14 +60,16 @@ export default function Home() {
 
     if (error) {
       const message = errorMessages[error] ?? 'An unknown error occurred.';
-      setShowAlert({
+      setAlert({
+        id: Date.now(),
         message,
         variant: "error"
       });
     }
 
     if (searchParams.get("accountDeleted") === "true") {
-      setShowAlert({
+      setAlert({
+        id: Date.now(),
         message: "Your account has been deleted successfully.",
         variant: "success"
       });
@@ -135,8 +141,13 @@ export default function Home() {
 
   return (
     <>
-      {showAlert && (
-        <AlertMessage message={showAlert.message} variant={showAlert.variant} onDone={() => setShowAlert(null)} />
+      {alert && (
+        <AlertMessage
+          key={alert.id}
+          message={alert.message}
+          variant={alert.variant}
+          onDone={() => setAlert(null)}
+        />
       )}
       <div className="relative mt-14 flex flex-col items-center justify-start flex-1 pt-8 font-sans">
         <div>

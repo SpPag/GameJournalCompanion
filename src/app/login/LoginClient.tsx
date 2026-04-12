@@ -1,9 +1,8 @@
 "use client";
 
-import { signIn } from "next-auth/react";
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { useSession } from "next-auth/react";
+import { useSession, signIn } from "next-auth/react";
 import { AlertMessage } from "@/components/AlertMessage";
 import { useSearchParams } from "next/navigation";
 
@@ -13,6 +12,7 @@ const LoginClient = () => {
     const router = useRouter(); // used for navigating
     const { status } = useSession(); // get session data to check if the user is already logged in
     const [alert, setAlert] = useState<null | {
+        id: number;
         message: string;
         variant: "error" | "success" | "warning" | "info";
     }>(null);
@@ -22,12 +22,14 @@ const LoginClient = () => {
     useEffect(() => {
         if (searchParams.get("verified") === "true") {
             setAlert({
+                id: Date.now(),
                 message: "Your email has been verified. You can now log in.",
                 variant: "success"
             });
         }
         if (searchParams.get("reset") === "true") {
             setAlert({
+                id: Date.now(),
                 message: "Your password has been reset. You can now log in.",
                 variant: "success"
             });
@@ -55,6 +57,7 @@ const LoginClient = () => {
             router.push("/"); // redirect to home
         } else {
             setAlert({
+                id: Date.now(),
                 message: res?.error || "Login failed",
                 variant: "error"
             });
@@ -126,6 +129,7 @@ const LoginClient = () => {
             </form>
             {alert && (
                 <AlertMessage
+                    key={alert.id}
                     message={alert.message}
                     variant={alert.variant}
                     onDone={() => setAlert(null)}

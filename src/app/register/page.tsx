@@ -1,8 +1,7 @@
 'use client';
 
-import { useState } from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-import React from "react";
 import { AlertMessage } from "@/components/AlertMessage";
 
 const RegisterPage = () => {
@@ -11,6 +10,7 @@ const RegisterPage = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [alert, setAlert] = useState<null | {
+    id: number;
     message: string;
     variant: "error" | "success" | "warning" | "info";
   }>(null);
@@ -24,10 +24,9 @@ const RegisterPage = () => {
       body: JSON.stringify({ email, username, password }),
     });
 
-    const data = await res.json();
-
     if (res.ok) {
       setAlert({
+        id: Date.now(),
         message: "Account created successfully!",
         variant: "success",
       });
@@ -43,6 +42,7 @@ const RegisterPage = () => {
         message = data?.error || "Registration failed (server).";
       }
       setAlert({
+        id: Date.now(),
         message,
         variant: "error",
       });
@@ -126,6 +126,7 @@ const RegisterPage = () => {
         </div>
         {alert && (
           <AlertMessage
+            key={alert.id}
             message={alert.message}
             variant={alert.variant}
             onDone={() => setAlert(null)}
