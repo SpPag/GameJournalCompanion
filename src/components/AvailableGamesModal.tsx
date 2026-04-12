@@ -122,7 +122,7 @@ const AvailableGamesModal = ({ onClose, onRegistered, onRegisterSuccess }: Avail
 
                   <button
                     type="button"
-                    onClick={() => router.push("/requestGame")}
+                    onClick={() => router.push("/contact/requestGame")}
                     className="
                       px-4 py-2 rounded-md
                       border border-stone-700 dark:border-neutral-600
