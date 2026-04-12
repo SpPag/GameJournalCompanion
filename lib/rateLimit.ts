@@ -30,3 +30,17 @@ export const resetPasswordIpLimiter = new Ratelimit({
   analytics: true,
   prefix: "ratelimit:reset-password-ip",
 });
+
+export const requestGameIpLimiter = new Ratelimit({
+  redis,
+  limiter: Ratelimit.slidingWindow(3, "10 m"),
+  analytics: true,
+  prefix: "ratelimit:request-game-ip",
+});
+
+export const requestGameUserLimiter = new Ratelimit({
+  redis,
+  limiter: Ratelimit.slidingWindow(3, "10 m"),
+  analytics: true,
+  prefix: "ratelimit:request-game-user",
+});
