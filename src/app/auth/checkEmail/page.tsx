@@ -149,7 +149,7 @@ const CheckEmailPage = () => {
     return (
         <div className="dark:text-[#d4d4d8]">
             <div className="flex flex-col items-center justify-center mt-25 text-center gap-6 px-4">
-                <div className="flex flex-col px-4 py-2 gap-6 rounded-lg border border-stone-700 dark:border-none
+                <div className="flex flex-col px-4 py-3 gap-4 rounded-lg border border-stone-700 dark:border-none
                     shadow-xl dark:shadow-none bg-[#b68945]/75 dark:bg-neutral-800/65">
                     <h1 className="text-2xl font-semibold text-[#111827] dark:text-[#d4d4d8]">
                         Check your email!

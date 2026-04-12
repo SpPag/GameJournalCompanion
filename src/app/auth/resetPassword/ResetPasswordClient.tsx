@@ -129,7 +129,7 @@ const ResetPasswordClient = () => {
     return (
         <div className="dark:text-[#d4d4d8]">
             <form onSubmit={handleSubmit} className="flex flex-col gap-4 max-w-sm mx-auto mt-20">
-                <div className="flex flex-col px-4 py-2 gap-6 rounded-lg border border-stone-700 dark:border-none
+                <div className="flex flex-col px-4 py-3 gap-4 rounded-lg border border-stone-700 dark:border-none
                     shadow-xl dark:shadow-none bg-[#b68945]/75 dark:bg-neutral-800/65">
                     <h1 className="text-2xl text-center font-semibold">
                         Reset your password
