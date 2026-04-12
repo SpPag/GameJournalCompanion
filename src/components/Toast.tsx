@@ -29,7 +29,7 @@ const Toast = ({ message, type, onDone, duration = 4000 }: ToastProps) => {
     };
   }, [onDone, duration]);
 
-  const bgColor = type === "success" ? "bg-[#5aa368] dark:bg-[#143e1e]/60" : "bg-[#882d23] dark:bg-[#741911]/60";
+  const bgColor = type === "success" ? "bg-[#5aa368] dark:bg-[#143e1e]/85" : "bg-[#882d23] dark:bg-[#741911]/60";
 
   return (
     <div
