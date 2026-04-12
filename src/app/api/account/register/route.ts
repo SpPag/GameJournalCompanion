@@ -5,6 +5,7 @@ import { User } from '@/../lib/models/User';
 import crypto from "crypto";
 import { sendVerificationEmail } from "@/../lib/email";
 import { registerIpLimiter } from "@/../lib/rateLimit";
+import { isReservedUsername, normalizeUsername } from "@/../lib/reservedUsernames";
 
 // Utility function to extract the client's IP address from request headers
 function getClientIp(req: Request): string {
@@ -51,19 +52,61 @@ export async function POST(request: Request) {
     // console.log("Mongo URI exists:", !!process.env.MONGODB_URI);
 
     // 4. Parse the incoming JSON body
-    const { email, username, password } = await request.json();
+    let body: { email?: unknown; username?: unknown; password?: unknown };
 
-    // 5. Validate presence of required fields
-    if (!email || !username || !password) {
+    try {
+        body = await request.json();
+    } catch {
         return NextResponse.json(
-            { error: "Missing email, username or password" },
+            { error: "Invalid request body" },
             { status: 400 }
         );
     }
 
-    const normalizedUsername = username.toLowerCase();
+    const { email, username, password } = body;
+
+    // 5. Validate presence and type of required fields
+    if (
+        typeof email !== "string" ||
+        typeof username !== "string" ||
+        typeof password !== "string"
+    ) {
+        return NextResponse.json(
+            { error: "Missing or invalid email, username or password" },
+            { status: 400 }
+        );
+    }
+
+    const normalizedUsername = normalizeUsername(username);
     const trimmedUsername = username.trim();
 
+    if (!/^[a-zA-Z0-9_]+$/.test(trimmedUsername)) {
+        return NextResponse.json(
+            { error: "Username may only contain letters, numbers, and underscores." },
+            { status: 400 }
+        );
+    }
+
+    if (trimmedUsername.length < 3 || trimmedUsername.length > 30) {
+        return NextResponse.json(
+            { error: "Username must be between 3 and 30 characters long." },
+            { status: 400 }
+        );
+    }
+
+    if (password.length < 8) {
+        return NextResponse.json(
+            { error: "Password must be at least 8 characters long" },
+            { status: 400 }
+        );
+    }
+
+    if (isReservedUsername(username)) {
+        return NextResponse.json(
+            { error: "This username is not available." },
+            { status: 400 }
+        );
+    }
     // 6. Connect to MongoDB
     await dbConnect();
 
