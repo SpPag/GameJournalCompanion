@@ -14,6 +14,6 @@ export function generateNoteTitle(content: string): string {
     if (lastChar === ' ' || /\s/.test(lastChar)) {
         return content.substring(0, 17);
     } else {
-        return content.substring(0, 14) + '...';
+        return `${content.substring(0, 14)}...`;
     }
 }
