@@ -110,7 +110,7 @@ const AvailableGamesModal = ({ onClose, onRegistered, onRegisterSuccess }: Avail
               <div className="shrink-0 flex items-center justify-between p-6 pt-4">
                 <button
                   onClick={onClose}
-                  className="px-4 py-2 border-2 rounded-md bg-[#d64d0c] text-[#111827] border-stone-700 focus:outline focus:outline-[#cc3600] hover:bg-orange-700 active:bg-[#cc470c] dark:bg-[#441901] dark:hover:bg-[#612905] dark:active:bg-[#542204] dark:text-zinc-300 dark:focus:outline-1 dark:focus:outline-zinc-700 hover:cursor-pointer"
+                  className="px-4 py-2 border-2 rounded-md bg-[#d64d0c] text-[#111827] border-stone-700 focus:outline-2 focus:outline-[#cc3600] hover:bg-orange-700 active:bg-[#cc470c] dark:bg-[#441901] dark:hover:bg-[#612905] dark:active:bg-[#542204] dark:text-zinc-300 dark:focus:outline-zinc-700 hover:cursor-pointer"
                 >
                   Cancel
                 </button>
@@ -130,7 +130,7 @@ const AvailableGamesModal = ({ onClose, onRegistered, onRegisterSuccess }: Avail
                       text-[#111827] dark:text-zinc-300
                       hover:bg-[#b68945] dark:hover:bg-[#4b4b4b]
                       active:bg-[#ad803c] dark:active:bg-[#393939]
-                      focus:outline-2 focus:outline-[#867162] dark:focus:outline-2 dark:focus:outline-zinc-500
+                      focus:outline-2 focus:outline-[#867162] dark:focus:outline-zinc-500
                       hover:cursor-pointer
                     "
                   >

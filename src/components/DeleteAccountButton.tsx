@@ -83,7 +83,7 @@ const DeleteAccountButton = () => {
                 text-[0.95rem]/[1.25rem] md:text-[0.97rem]/[1.3rem] lg:text-base
                 text-[#111827] dark:text-zinc-300
                 bg-[#d64d0c] dark:bg-[#441901]
-                focus:outline-2 focus:outline-[#cc3600] dark:focus:outline-2 dark:focus:outline-zinc-700
+                focus:outline-2 focus:outline-[#cc3600] dark:focus:outline-zinc-700
                 hover:bg-[#be3300] dark:hover:bg-[#612905] hover:cursor-pointer
                 active:bg-[#cc470c] dark:active:bg-[#542204]
                 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-[#d64d0c] dark:disabled:hover:bg-[#441901]"

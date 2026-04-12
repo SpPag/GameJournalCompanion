@@ -91,27 +91,27 @@ return (
                     }}
                     placeholder={`Note title (${maxCharNum} characters max)`}
                     maxLength={maxCharNum}
-                    className="w-full p-3 border text-[#111827] border-zinc-300/50 focus:outline-2 focus:outline-[#836e5e]/70 dark:border-zinc-500 rounded-md bg-white/70 dark:bg-[#312d29]/80 dark:text-zinc-300 mb-3 dark:focus:outline-2 dark:focus:outline-zinc-400"
+                    className="w-full p-3 border text-[#111827] border-zinc-300/50 focus:outline-2 focus:outline-[#836e5e]/70 dark:border-zinc-500 rounded-md bg-white/70 dark:bg-[#312d29]/80 dark:text-zinc-300 mb-3 dark:focus:outline-zinc-400"
                 />
 
                 <textarea
                     value={content}
                     onChange={(e) => setContent(e.target.value)}
                     placeholder="Write your note here..."
-                    className="w-full h-32 p-3 border text-[#111827] border-zinc-300/50 focus:outline-2 focus:outline-[#836e5e]/70 dark:border-zinc-500 rounded-md bg-white/70 dark:bg-[#312d29]/80 dark:text-zinc-300 mb-3 dark:focus:outline-2 dark:focus:outline-zinc-400 resize-y"
+                    className="w-full h-32 p-3 border text-[#111827] border-zinc-300/50 focus:outline-2 focus:outline-[#836e5e]/70 dark:border-zinc-500 rounded-md bg-white/70 dark:bg-[#312d29]/80 dark:text-zinc-300 mb-3 dark:focus:outline-zinc-400 resize-y"
                 />
 
                 <div className="flex justify-end gap-3 mt-4">
                     <button
                         onClick={onClose}
-                        className="px-4 py-2 border rounded-md text-[#111827] bg-[#d64d0c] border-stone-700 focus:outline-2 focus:outline-[#cc3600] hover:bg-[#be3300] active:bg-[#cc470c] dark:text-zinc-300 dark:bg-[#441901] dark:hover:bg-[#612905] dark:active:bg-[#542204] dark:focus:outline-2 dark:focus:outline-zinc-700 hover:cursor-pointer"
+                        className="px-4 py-2 border rounded-md text-[#111827] bg-[#d64d0c] border-stone-700 focus:outline-2 focus:outline-[#cc3600] hover:bg-[#be3300] active:bg-[#cc470c] dark:text-zinc-300 dark:bg-[#441901] dark:hover:bg-[#612905] dark:active:bg-[#542204] dark:focus:outline-zinc-700 hover:cursor-pointer"
                     >
                         Cancel
                     </button>
 
                     <button
                         onClick={handleSave}
-                        className="px-4 py-2 border rounded-md text-[#111827] bg-[#b68945] border-stone-700 focus:outline-2 focus:outline-[#867162] hover:bg-[#ad803c] active:bg-[#b28541] disabled:hover:bg-[#b68945] dark:text-zinc-300 dark:bg-[#3b403a] dark:hover:bg-[#4e544d] dark:active:bg-[#434942] dark:disabled:hover:bg-[#3b403a] dark:focus:outline-2 dark:focus:outline-zinc-700 disabled:opacity-50 disabled:cursor-not-allowed hover:cursor-pointer"
+                        className="px-4 py-2 border rounded-md text-[#111827] bg-[#b68945] border-stone-700 focus:outline-2 focus:outline-[#867162] hover:bg-[#ad803c] active:bg-[#b28541] disabled:hover:bg-[#b68945] dark:text-zinc-300 dark:bg-[#3b403a] dark:hover:bg-[#4e544d] dark:active:bg-[#434942] dark:disabled:hover:bg-[#3b403a] dark:focus:outline-zinc-700 disabled:opacity-50 disabled:cursor-not-allowed hover:cursor-pointer"
                         disabled={!content.trim()}
                     >
                         Save

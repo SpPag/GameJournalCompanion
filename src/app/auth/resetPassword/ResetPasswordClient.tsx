@@ -149,7 +149,7 @@ const ResetPasswordClient = () => {
                     value={password}
                     required
                     onChange={(e) => setPassword(e.target.value)}
-                    className="border p-2 rounded bg-[#f5f5f4] text-[#111827] border-stone-700 focus:outline-2 focus:outline-[#836e5e]/70 dark:text-[#d4d4d8] dark:border-zinc-500 dark:bg-[#312d29] dark:focus:outline-2 dark:focus:outline-zinc-400"
+                    className="border p-2 rounded bg-[#f5f5f4] text-[#111827] border-stone-700 focus:outline-2 focus:outline-[#836e5e]/70 dark:text-[#d4d4d8] dark:border-zinc-500 dark:bg-[#312d29] dark:focus:outline-zinc-400"
                     autoComplete="new-password"
                 />
 
@@ -159,7 +159,7 @@ const ResetPasswordClient = () => {
                     value={confirmPassword}
                     required
                     onChange={(e) => setConfirmPassword(e.target.value)}
-                    className="border p-2 rounded bg-[#f5f5f4] text-[#111827] border-stone-700 focus:outline-2 focus:outline-[#836e5e]/70 dark:text-[#d4d4d8] dark:border-zinc-500 dark:bg-[#312d29] dark:focus:outline-2 dark:focus:outline-zinc-400"
+                    className="border p-2 rounded bg-[#f5f5f4] text-[#111827] border-stone-700 focus:outline-2 focus:outline-[#836e5e]/70 dark:text-[#d4d4d8] dark:border-zinc-500 dark:bg-[#312d29] dark:focus:outline-zinc-400"
                     autoComplete="new-password"
                 />
 
@@ -172,7 +172,7 @@ const ResetPasswordClient = () => {
                         border rounded-lg border-stone-700 dark:border-zinc-500
                         bg-[#c59854] dark:bg-neutral-600
                         text-[#111827] dark:text-zinc-300
-                        focus:outline-2 focus:outline-[#867162] dark:focus:outline-2 dark:focus:outline-[#494951]
+                        focus:outline-2 focus:outline-[#867162] dark:focus:outline-[#494951]
                         hover:bg-[#b68945] dark:hover:bg-[#4b4b4b]
                         active:bg-[#ad803c] dark:active:bg-[#393939]
                         disabled:bg-[#c59854] disabled:dark:bg-neutral-600
@@ -190,7 +190,7 @@ const ResetPasswordClient = () => {
                         border rounded-lg border-stone-700 dark:border-zinc-500
                         bg-[#c59854] dark:bg-neutral-600
                         text-[#111827] dark:text-zinc-300
-                        focus:outline-2 focus:outline-[#867162] dark:focus:outline-2 dark:focus:outline-[#494951]
+                        focus:outline-2 focus:outline-[#867162] dark:focus:outline-[#494951]
                         hover:bg-[#b68945] dark:hover:bg-[#4b4b4b]
                         active:bg-[#ad803c] dark:active:bg-[#393939]
                         hover:cursor-pointer"

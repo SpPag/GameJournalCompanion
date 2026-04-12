@@ -82,7 +82,7 @@ const LoginClient = () => {
                     value={email}
                     required
                     onChange={(e) => setEmail(e.target.value)} // standard practice to update on every keystroke for validation (show error if the email isn't valid without having to submit the form. For example I may want to disable the submit button until the email is valid)
-                    className="border p-2 rounded bg-[#f5f5f4] text-[#111827] border-stone-700 focus:outline-2 focus:outline-[#836e5e]/70 dark:text-[#d4d4d8] dark:border-zinc-500 dark:bg-[#312d29] dark:focus:outline-2 dark:focus:outline-zinc-400"
+                    className="border p-2 rounded bg-[#f5f5f4] text-[#111827] border-stone-700 focus:outline-2 focus:outline-[#836e5e]/70 dark:text-[#d4d4d8] dark:border-zinc-500 dark:bg-[#312d29] dark:focus:outline-zinc-400"
                 />
                 <input
                     type="password"
@@ -90,7 +90,7 @@ const LoginClient = () => {
                     value={password}
                     required
                     onChange={(e) => setPassword(e.target.value)}
-                    className="border p-2 rounded bg-[#f5f5f4] text-[#111827] border-stone-700 focus:outline-2 focus:outline-[#836e5e]/70 dark:text-[#d4d4d8] dark:border-zinc-500 dark:bg-[#312d29] dark:focus:outline-2 dark:focus:outline-zinc-400"
+                    className="border p-2 rounded bg-[#f5f5f4] text-[#111827] border-stone-700 focus:outline-2 focus:outline-[#836e5e]/70 dark:text-[#d4d4d8] dark:border-zinc-500 dark:bg-[#312d29] dark:focus:outline-zinc-400"
                 />
                 <button
                     type="button"
@@ -105,7 +105,7 @@ const LoginClient = () => {
                     border rounded-lg border-stone-700 dark:border-zinc-500
                     bg-[#c59854] dark:bg-neutral-600
                     text-2xl text-[#111827] dark:text-zinc-300
-                    focus:outline-2 focus:outline-[#867162] dark:focus:outline-2 dark:focus:outline-[#494951]
+                    focus:outline-2 focus:outline-[#867162] dark:focus:outline-[#494951]
                     hover:bg-[#b68945] dark:hover:bg-[#4b4b4b]
                     active:bg-[#ad803c] dark:active:bg-[#393939]
                     hover:cursor-pointer">
@@ -116,7 +116,7 @@ const LoginClient = () => {
                     border rounded-lg border-stone-700 dark:border-zinc-500
                     bg-[#c59854] dark:bg-neutral-600
                     text-[#111827] dark:text-zinc-300
-                    focus:outline-2 focus:outline-[#867162] dark:focus:outline-2 dark:focus:outline-[#494951]
+                    focus:outline-2 focus:outline-[#867162] dark:focus:outline-[#494951]
                     hover:bg-[#b68945] dark:hover:bg-[#4b4b4b]
                     active:bg-[#ad803c] dark:active:bg-[#393939]
                     hover:cursor-pointer">

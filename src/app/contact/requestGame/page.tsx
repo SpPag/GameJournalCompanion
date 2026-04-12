@@ -132,7 +132,7 @@ const RequestGamePage = () => {
                                 bg-[#f5f5f4] text-[#111827] border-stone-700
                                 focus:outline-2 focus:outline-[#836e5e]/70
                                 dark:text-[#d4d4d8] dark:border-zinc-500 dark:bg-[#312d29]
-                                dark:focus:outline-2 dark:focus:outline-zinc-400
+                                dark:focus:outline-zinc-400
                             "
                             autoComplete="off"
                         />
@@ -160,7 +160,7 @@ const RequestGamePage = () => {
                                 bg-[#f5f5f4] text-[#111827] border-stone-700
                                 focus:outline-2 focus:outline-[#836e5e]/70
                                 dark:text-[#d4d4d8] dark:border-zinc-500 dark:bg-[#312d29]
-                                dark:focus:outline-2 dark:focus:outline-zinc-400
+                                dark:focus:outline-zinc-400
                             "
                         />
 
@@ -185,7 +185,7 @@ const RequestGamePage = () => {
                                 hover:bg-[#be3300] active:bg-[#cc470c]
                                 dark:text-zinc-300 dark:bg-[#441901]
                                 dark:hover:bg-[#612905] dark:active:bg-[#542204]
-                                dark:focus:outline-2 dark:focus:outline-zinc-700
+                                dark:focus:outline-zinc-700
                                 hover:cursor-pointer
                             "
                         >
@@ -200,7 +200,7 @@ const RequestGamePage = () => {
                                 border border-stone-700 dark:border-zinc-500
                                 bg-[#c59854] dark:bg-neutral-600
                                 text-[#111827] dark:text-zinc-300
-                                focus:outline-2 focus:outline-[#867162] dark:focus:outline-2 dark:focus:outline-[#494951]
+                                focus:outline-2 focus:outline-[#867162] dark:focus:outline-[#494951]
                                 hover:bg-[#b68945] dark:hover:bg-[#4b4b4b]
                                 active:bg-[#ad803c] dark:active:bg-[#393939]
                                 disabled:hover:bg-[#c59854] dark:disabled:hover:bg-neutral-600
