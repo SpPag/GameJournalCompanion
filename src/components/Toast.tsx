@@ -1,7 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 interface ToastProps {
   message: string;
@@ -12,12 +11,12 @@ interface ToastProps {
 
 const Toast = ({ message, type, onDone, duration = 4000 }: ToastProps) => {
 
-  const [visible, setVisible] = React.useState(false);
+  const [visible, setVisible] = useState(false);
 
   // Automatically dismiss after `duration`
   useEffect(() => {
     // Defer visibility toggle by one tick
-    const show = setTimeout(() => setVisible(true), 10);
+    const show = setTimeout(() => setVisible(true), 10);// delays visibility toggle to allow CSS transition to work on mount
 
     // Start fade-out shortly before the Toast is removed
     const fadeOutTime = duration - 1000; // match `duration-1000` transition
