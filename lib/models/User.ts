@@ -35,7 +35,10 @@ const UserSchema = new Schema<IUser>({
         type: String,
         required: true,
         trim: true,
-        unique: true
+        unique: true,
+        minlength: 3,
+        maxlength: 30,
+        match: /^[a-zA-Z0-9_]+$/
     },
     createdAt: {
         type: Date,

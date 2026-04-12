@@ -25,7 +25,7 @@ const AvailableGamesModal = ({ onClose, onRegistered, onRegisterSuccess }: Avail
     fetch("/api/games/available")
       .then(async (res) => {
         if (res.status === 401) {
-          router.push("/login");
+          router.replace("/login");
           return;
         }
         setAuthenticated(true);

@@ -74,7 +74,7 @@ const GameDetailsPage = () => {
         };
 
         if (status === "unauthenticated") {
-            router.push("/login");
+            router.replace("/login");
             return;
         }
 
