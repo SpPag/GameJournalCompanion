@@ -1,7 +1,6 @@
 'use client';
 
-import React from "react";
-import { useEffect, useState, ReactNode } from "react";
+import React, { useEffect, useState, ReactNode } from "react";
 
 type Variant = "error" | "success" | "warning" | "info"; // I currently only use 'error' but I'm adding these here in case they're useful in the future. Expand freely
 
@@ -14,12 +13,12 @@ interface AlertMessageProps {
 
 const AlertMessage = ({ message, variant, onDone, duration = 4000 }: AlertMessageProps) => {
 
-    const [visible, setVisible] = React.useState(true);
+    const [visible, setVisible] = useState(false);
 
     // Automatically dismiss after `duration`
     useEffect(() => {
         // Defer visibility toggle by one tick
-        const show = setTimeout(() => setVisible(true), 10);
+        const show = setTimeout(() => setVisible(true), 10); // delays visibility toggle to allow CSS transition to work on mount
 
         // Start fade-out shortly before the Toast is removed
         const fadeOutTime = duration - 1000; // match `duration-1000` transition
@@ -31,7 +30,7 @@ const AlertMessage = ({ message, variant, onDone, duration = 4000 }: AlertMessag
             clearTimeout(fadeOutTimer);
             clearTimeout(removeTimer);
         };
-    }, [duration, onDone]);
+    }, [message, variant, duration, onDone]);
 
     const bgColors: Record<string, string> = {  // I currently only use 'error' but I'm adding these here in case they're useful in the future. Expand freely
         error: "bg-[#a33226] dark:bg-[#741911]/60",
