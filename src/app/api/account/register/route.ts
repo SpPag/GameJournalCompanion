@@ -61,11 +61,20 @@ export async function POST(request: Request) {
         );
     }
 
+    const normalizedUsername = username.toLowerCase();
+    const trimmedUsername = username.trim();
+
     // 6. Connect to MongoDB
     await dbConnect();
 
     // 7. Check whether a user already exists with the same email or username
-    const existingUser = await User.findOne({ $or: [{ email }, { username }] });
+    const existingUser = await User.findOne({
+        $or: [
+            { email },
+            { usernameLower: normalizedUsername }
+        ]
+    });
+
     if (existingUser) {
         return NextResponse.json(
             { error: "Unable to create account with the provided details" },
@@ -86,7 +95,8 @@ export async function POST(request: Request) {
         // 10. Create the new user in an unverified state
         const newUser = await User.create({
             email,
-            username,
+            username: trimmedUsername,
+            usernameLower: normalizedUsername,
             password: hashedPassword,
             emailVerified: false,
             verificationToken: hashedToken,
@@ -119,8 +129,18 @@ export async function POST(request: Request) {
             { status: 201 }
         );
     } catch (error: unknown) {
-
         // 14. Return a meaningful server error response
+        if (
+            typeof error === "object" &&
+            error !== null &&
+            "code" in error &&
+            error.code === 11000
+        ) {
+            return NextResponse.json(
+                { success: false, error: "Unable to create account with the provided details" },
+                { status: 400 }
+            );
+        }
         if (error instanceof Error) {
             return NextResponse.json(
                 { success: false, error: error.message },

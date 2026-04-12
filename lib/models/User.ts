@@ -6,6 +6,7 @@ interface IUser extends Document {
     email: string;
     password: string;
     username: string;
+    usernameLower: string; // This field is used to store a lowercase version of the username for case-insensitive uniqueness checks. It is not meant to be exposed to the client or used for display purposes, but rather as an internal field to enforce the uniqueness constraint on usernames regardless of letter casing.
     createdAt: Date;
     isAdmin: boolean;
     registeredGames: mongoose.Types.ObjectId[];
@@ -35,10 +36,21 @@ const UserSchema = new Schema<IUser>({
         type: String,
         required: true,
         trim: true,
-        unique: true,
+        // unique: true, // commented out because we are using usernameLower for uniqueness instead, to allow case-insensitive uniqueness checks, and once that exists, this field will always be unique anyway
         minlength: 3,
         maxlength: 30,
         match: /^[a-zA-Z0-9_]+$/
+    },
+    usernameLower: {
+        type: String,
+        required: true,
+        trim: true,
+        unique: true,
+        lowercase: true,
+        minlength: 3,
+        maxlength: 30,
+        match: /^[a-z0-9_]+$/
+        
     },
     createdAt: {
         type: Date,
