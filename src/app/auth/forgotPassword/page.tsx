@@ -38,6 +38,7 @@ const ForgotPasswordPage = () => {
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
+
         try {
             setForgotResetRequestLoading(true);
 
@@ -50,17 +51,22 @@ const ForgotPasswordPage = () => {
                 body: JSON.stringify({ email }),
             });
 
-            const data = await res.json();
-
             // Show alert based on response
             if (res.ok) {
                 setAlert({
-                    message: data.message || "If an account with that email exists, a reset link has been sent.",
+                    message: "If an account with that email exists, a reset link has been sent.",
                     variant: "success",
                 });
             } else {
+                const isDev = process.env.NODE_ENV === "development";
+                let message = "Failed to send password reset email.";
+
+                if (isDev) {
+                    const data = await res.json().catch(() => null);
+                    message = data?.error || "Failed to send password reset email (server).";
+                }
                 setAlert({
-                    message: data.error || "Failed to send password reset email.",
+                    message,
                     variant: "error",
                 });
             }

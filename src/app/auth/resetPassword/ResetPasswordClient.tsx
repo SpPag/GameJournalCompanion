@@ -85,21 +85,18 @@ const ResetPasswordClient = () => {
                 }),
             });
 
-            const data = await res.json();
-
             if (res.ok) {
-                // setAlert({
-                //     message: data.message || "Password reset successfully.",
-                //     variant: "success",
-                // });
-
-                // setTimeout(() => {
-                //     router.push("/login?reset=true");
-                // }, 1500);
                 router.push("/login?reset=true");
             } else {
+                const isDev = process.env.NODE_ENV === "development";
+                let message = "Failed to reset password.";
+
+                if (isDev) {
+                    const data = await res.json().catch(() => null);
+                    message = data?.error || "Failed to reset password (server).";
+                }
                 setAlert({
-                    message: data.error || "Failed to reset password.",
+                    message,
                     variant: "error",
                 });
             }
@@ -139,7 +136,7 @@ const ResetPasswordClient = () => {
                         Enter your new password below.
                     </p>
                 </div>
-                
+
                 <input
                     type="password"
                     placeholder="New password"

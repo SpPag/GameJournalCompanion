@@ -63,8 +63,15 @@ const RequestGamePage = () => {
                 setGameTitle("");
                 setMessage("");
             } else {
+                const isDev = process.env.NODE_ENV === "development";
+                let message = "Failed to send new game request.";
+
+                if (isDev) {
+                    const data = await res.json().catch(() => null);
+                    message = data?.error || "Failed to send new game request (server).";
+                }
                 setAlert({
-                    message: data?.error || "Failed to send request.",
+                    message,
                     variant: "error",
                 });
             }
@@ -130,8 +137,8 @@ const RequestGamePage = () => {
 
                         <div
                             className={`text-right text-xs ${gameTitle.length > 90
-                                    ? "text-orange-600 dark:text-orange-400"
-                                    : "text-stone-600 dark:text-zinc-400"
+                                ? "text-orange-600 dark:text-orange-400"
+                                : "text-stone-600 dark:text-zinc-400"
                                 }`}
                         >
                             {gameTitle.length}/100
@@ -157,8 +164,8 @@ const RequestGamePage = () => {
 
                         <div
                             className={`text-right text-xs ${message.length > 185
-                                    ? "text-orange-600 dark:text-orange-400"
-                                    : "text-stone-600 dark:text-zinc-400"
+                                ? "text-orange-600 dark:text-orange-400"
+                                : "text-stone-600 dark:text-zinc-400"
                                 }`}
                         >
                             {message.length}/200

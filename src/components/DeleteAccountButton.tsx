@@ -25,22 +25,27 @@ const DeleteAccountButton = () => {
         try {
             setIsDeleting(true);
 
-            const response = await fetch("/api/account/delete", {
+            const res = await fetch("/api/account/delete", {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json",
                 },
             });
 
-            const data = await response.json();
-
-            if (response.ok) {
+            if (res.ok) {
                 setIsConfirmModalOpen(false);
                 await signOut({ callbackUrl: "/?accountDeleted=true" });
             } else {
+                const isDev = process.env.NODE_ENV === "development";
+                let message = "Failed to delete account.";
+
+                if (isDev) {
+                    const data = await res.json().catch(() => null);
+                    message = data?.error || "Failed to delete account (server).";
+                }
                 setIsConfirmModalOpen(false);
                 setShowAlert({
-                    message: data.error || "Failed to delete account.",
+                    message,
                     variant: "error",
                 });
             }

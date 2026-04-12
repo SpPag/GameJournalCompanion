@@ -35,15 +35,22 @@ const RegisterPage = () => {
         router.push("/auth/checkEmail");
       }, 1500);// Redirect to check email page after registration
     } else {
+      const isDev = process.env.NODE_ENV === "development";
+      let message = "Registration failed.";
+
+      if (isDev) {
+        const data = await res.json().catch(() => null);
+        message = data?.error || "Registration failed (server).";
+      }
       setAlert({
-        message: data.error || "Registration failed",
+        message,
         variant: "error",
       });
     }
   };
 
   const maxCharNum = 30; // Set a max character limit for the username input to prevent excessively long usernames that could cause issues in the UI or database. This is a common practice to ensure data integrity and a better user experience.
-  
+
   return (
     <div className="dark:text-[#d4d4d8]">
       <form onSubmit={handleSubmit} className="flex flex-col gap-4 max-w-sm mx-auto mt-20" autoComplete="off">
