@@ -52,7 +52,7 @@ const AvailableGamesModal = ({ onClose, onRegistered, onRegisterSuccess }: Avail
 
   // When a user clicks one to register
   const registerGame = async (gameId: string) => {
-    const res = await fetch("/api/users/register-game", {
+    const res = await fetch("/api/users/registerGame", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ gameId }),
