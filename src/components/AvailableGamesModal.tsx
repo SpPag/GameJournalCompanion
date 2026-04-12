@@ -75,7 +75,7 @@ const AvailableGamesModal = ({ onClose, onRegistered, onRegisterSuccess }: Avail
             onClick={onClose}
           >
             <div
-              className="bg-stone-400 dark:bg-zinc-900 rounded-lg w-full max-w-[52rem] max-h-[75vh] mx-4 border border-stone-600 dark:border-none flex flex-col"
+              className="bg-[#807152] dark:bg-zinc-900 rounded-lg w-full max-w-[52rem] max-h-[75vh] mx-4 border-2 shadow-lg dark:shadow-none border-stone-600 dark:border-none flex flex-col"
               onClick={(e) => e.stopPropagation()}
             >
               {/* Top content */}
