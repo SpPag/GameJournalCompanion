@@ -52,8 +52,6 @@ const RequestGamePage = () => {
                 }),
             });
 
-            const data = await res.json().catch(() => null);
-
             if (res.ok) {
                 setAlert({
                     message: "Your request has been sent successfully.",
