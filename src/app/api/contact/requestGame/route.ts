@@ -3,6 +3,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/../lib/authOptions";
 import { requestGameIpLimiter, requestGameUserLimiter } from "@/../lib/rateLimit";
 import { sendGameRequestEmail } from "@/../lib/email";
+import { updateUserLastActive } from "@/../lib/updateUserLastActive";
 
 function getClientIp(req: Request): string {
     const xForwardedFor = req.headers.get("x-forwarded-for");
@@ -146,6 +147,9 @@ export async function POST(req: Request) {
             gameTitle: trimmedGameTitle,
             message: trimmedMessage,
         });
+
+        // non-blocking already handled in helper
+        updateUserLastActive(session.user.id);
 
         return NextResponse.json(
             {

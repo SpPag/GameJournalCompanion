@@ -16,6 +16,15 @@ interface IUser extends Document {
     lastResendEmailSentAt: Date;
     passwordResetToken?: string;
     passwordResetTokenExpires?: Date;
+    lastActive: Date;
+}
+
+function getStartOfUtcDay(date = new Date()) {
+    return new Date(Date.UTC(
+        date.getUTCFullYear(),
+        date.getUTCMonth(),
+        date.getUTCDate()
+    ));
 }
 
 const UserSchema = new Schema<IUser>({
@@ -50,7 +59,7 @@ const UserSchema = new Schema<IUser>({
         minlength: 3,
         maxlength: 30,
         match: /^[a-z0-9_]+$/
-        
+
     },
     createdAt: {
         type: Date,
@@ -85,6 +94,10 @@ const UserSchema = new Schema<IUser>({
     },
     passwordResetTokenExpires: {
         type: Date
+    },
+    lastActive: {
+        type: Date,
+        default: () => getStartOfUtcDay()
     }
 
 })
