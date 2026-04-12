@@ -21,6 +21,7 @@ const ResetPasswordClient = () => {
     const [loading, setLoading] = useState(true);
     const [resetLoading, setResetLoading] = useState(false);
     const [alert, setAlert] = useState<null | {
+        id: number;
         message: string;
         variant: "error" | "success" | "warning" | "info";
     }>(null);
@@ -46,6 +47,7 @@ const ResetPasswordClient = () => {
         // Guard against missing token
         if (!token) {
             setAlert({
+                id: Date.now(),
                 message: "Invalid or missing reset token.",
                 variant: "error",
             });
@@ -55,6 +57,7 @@ const ResetPasswordClient = () => {
         // Validate password length
         if (password.length < 8) {
             setAlert({
+                id: Date.now(),
                 message: "Password must be at least 8 characters long.",
                 variant: "error",
             });
@@ -64,6 +67,7 @@ const ResetPasswordClient = () => {
         // Validate password confirmation
         if (password !== confirmPassword) {
             setAlert({
+                id: Date.now(),
                 message: "Passwords do not match.",
                 variant: "error",
             });
@@ -96,6 +100,7 @@ const ResetPasswordClient = () => {
                     message = data?.error || "Failed to reset password (server).";
                 }
                 setAlert({
+                    id: Date.now(),
                     message,
                     variant: "error",
                 });
@@ -103,6 +108,7 @@ const ResetPasswordClient = () => {
         } catch (error) {
             console.error("Reset password error:", error);
             setAlert({
+                id: Date.now(),
                 message: "Something went wrong. Please try again.",
                 variant: "error",
             });
@@ -196,6 +202,7 @@ const ResetPasswordClient = () => {
 
             {alert && (
                 <AlertMessage
+                    key={alert.id}
                     message={alert.message}
                     variant={alert.variant}
                     onDone={() => setAlert(null)}

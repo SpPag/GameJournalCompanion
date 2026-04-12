@@ -16,6 +16,7 @@ const RequestGamePage = () => {
     const [message, setMessage] = useState("");
 
     const [alert, setAlert] = useState<null | {
+        id: number;
         message: string;
         variant: "error" | "success" | "warning" | "info";
     }>(null);
@@ -54,6 +55,7 @@ const RequestGamePage = () => {
 
             if (res.ok) {
                 setAlert({
+                    id: Date.now(),
                     message: "Your request has been sent successfully.",
                     variant: "success",
                 });
@@ -69,6 +71,7 @@ const RequestGamePage = () => {
                     message = data?.error || "Failed to send new game request (server).";
                 }
                 setAlert({
+                    id: Date.now(),
                     message,
                     variant: "error",
                 });
@@ -77,6 +80,7 @@ const RequestGamePage = () => {
             console.error("Error sending game request:", error);
 
             setAlert({
+                id: Date.now(),
                 message: "Something went wrong. Please try again.",
                 variant: "error",
             });
@@ -211,6 +215,7 @@ const RequestGamePage = () => {
 
                 {alert && (
                     <AlertMessage
+                        key={alert.id}
                         message={alert.message}
                         variant={alert.variant}
                         onDone={handleAlertDone}

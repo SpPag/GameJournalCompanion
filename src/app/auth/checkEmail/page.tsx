@@ -17,6 +17,7 @@ const CheckEmailPage = () => {
     const [resendLoading, setResendLoading] = useState(false);
     const [cooldown, setCooldown] = useState(0);
     const [alert, setAlert] = useState<null | {
+        id: number;
         message: string;
         variant: "error" | "success" | "warning" | "info";
     }>(null);
@@ -99,6 +100,7 @@ const CheckEmailPage = () => {
 
             if (res.ok) {
                 setAlert({
+                    id: Date.now(),
                     message: "Verification email sent!",
                     variant: "success",
                 });
@@ -118,12 +120,14 @@ const CheckEmailPage = () => {
                 }
 
                 setAlert({
+                    id: Date.now(),
                     message,
                     variant: "error",
                 });
             }
         } catch (error) {
             setAlert({
+                id: Date.now(),
                 message: isDev
                     ? "Failed to resend email (network error)"
                     : "Something went wrong. Please try again.",
@@ -228,6 +232,7 @@ const CheckEmailPage = () => {
 
                 {alert && (
                     <AlertMessage
+                        key={alert.id}
                         message={alert.message}
                         variant={alert.variant}
                         onDone={handleAlertDone}

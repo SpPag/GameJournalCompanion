@@ -16,6 +16,7 @@ const ForgotPasswordPage = () => {
     const [loading, setLoading] = useState(true);
     const [forgotResetRequestLoading, setForgotResetRequestLoading] = useState(false);
     const [alert, setAlert] = useState<null | {
+        id: number;
         message: string;
         variant: "error" | "success" | "warning" | "info";
     }>(null);
@@ -54,6 +55,7 @@ const ForgotPasswordPage = () => {
             // Show alert based on response
             if (res.ok) {
                 setAlert({
+                    id: Date.now(),
                     message: "If an account with that email exists, a reset link has been sent.",
                     variant: "success",
                 });
@@ -66,6 +68,7 @@ const ForgotPasswordPage = () => {
                     message = data?.error || "Failed to send password reset email (server).";
                 }
                 setAlert({
+                    id: Date.now(),
                     message,
                     variant: "error",
                 });
@@ -73,6 +76,7 @@ const ForgotPasswordPage = () => {
         } catch (error) {
             console.error("Forgot password error:", error);
             setAlert({
+                id: Date.now(),
                 message: "Something went wrong. Please try again.",
                 variant: "error",
             });
@@ -168,6 +172,7 @@ const ForgotPasswordPage = () => {
 
                     {alert && (
                         <AlertMessage
+                            key={alert.id}
                             message={alert.message}
                             variant={alert.variant}
                             onDone={() => setAlert(null)}

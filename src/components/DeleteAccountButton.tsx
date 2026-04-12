@@ -9,7 +9,8 @@ const DeleteAccountButton = () => {
     const { data: session, status } = useSession();
     const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
     const [isDeleting, setIsDeleting] = useState(false);
-    const [showAlert, setShowAlert] = useState<null | {
+    const [alert, setAlert] = useState<null | {
+        id: number;
         message: string;
         variant: "error" | "success" | "warning" | "info";
     }>(null);
@@ -44,7 +45,8 @@ const DeleteAccountButton = () => {
                     message = data?.error || "Failed to delete account (server).";
                 }
                 setIsConfirmModalOpen(false);
-                setShowAlert({
+                setAlert({
+                    id: Date.now(),
                     message,
                     variant: "error",
                 });
@@ -52,7 +54,8 @@ const DeleteAccountButton = () => {
         } catch (error) {
             console.error("Error deleting account:", error);
             setIsConfirmModalOpen(false);
-            setShowAlert({
+            setAlert({
+                id: Date.now(),
                 message: "Something went wrong while deleting your account.",
                 variant: "error",
             });
@@ -63,11 +66,12 @@ const DeleteAccountButton = () => {
 
     return (
         <>
-            {showAlert && (
+            {alert && (
                 <AlertMessage
-                    message={showAlert.message}
-                    variant={showAlert.variant}
-                    onDone={() => setShowAlert(null)}
+                    key={alert.id}
+                    message={alert.message}
+                    variant={alert.variant}
+                    onDone={() => setAlert(null)}
                 />
             )}
             <button
