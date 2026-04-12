@@ -2,7 +2,7 @@
 
 import { AlertMessage } from "@/components/AlertMessage";
 import { useRouter } from "next/navigation";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 
 const ForgotPasswordPage = () => {

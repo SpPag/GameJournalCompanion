@@ -2,7 +2,7 @@
 
 import { AlertMessage } from "@/components/AlertMessage";
 import { useRouter } from "next/navigation";
-import { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { useSession } from "next-auth/react";
 
 const CheckEmailPage = () => {
