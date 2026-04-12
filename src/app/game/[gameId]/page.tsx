@@ -3,7 +3,7 @@
 import { useSession } from "next-auth/react";
 import React, { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
-import { Game, IGame } from "../../../../lib/models/Game";
+import { IGame } from "../../../../lib/models/Game";
 import { GameTitle } from "@/components/GameTitle";
 import { Note } from "@/types/Note";
 import { NoteCard } from "@/components/NoteCard";
