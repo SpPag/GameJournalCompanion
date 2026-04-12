@@ -120,7 +120,7 @@ const ResetPasswordClient = () => {
     if (loading) {
         return (
             <div className="dark:text-[#d4d4d8]">
-                <div className="flex flex-col items-center justify-center mt-20 text-center gap-4">
+                <div className="flex flex-col items-center justify-center gap-4 mt-20 text-center">
                     <div className="text-xl text-[#111827] dark:text-[#d4d4d8]">
                         Loading...
                     </div>
@@ -132,13 +132,21 @@ const ResetPasswordClient = () => {
     return (
         <div className="dark:text-[#d4d4d8]">
             <form onSubmit={handleSubmit} className="flex flex-col gap-4 max-w-sm mx-auto mt-20">
-                <div className="flex flex-col px-4 py-3 gap-4 rounded-lg border border-stone-700 dark:border-none
-                    shadow-xl dark:shadow-none bg-[#b68945]/75 dark:bg-neutral-800/65">
+                <div
+                    className="
+                        flex flex-col gap-4
+                        px-4 py-3
+                        border rounded-lg border-stone-700
+                        bg-[#b68945]/75 shadow-xl
+                        dark:border-none
+                        dark:bg-neutral-800/65
+                        dark:shadow-none
+                    ">
                     <h1 className="text-2xl text-center font-semibold">
                         Reset your password
                     </h1>
 
-                    <p className="text-center text-sm text-zinc-700 dark:text-zinc-300">
+                    <p className="text-sm text-center text-zinc-700 dark:text-zinc-300">
                         Enter your new password below.
                     </p>
                 </div>
@@ -149,7 +157,17 @@ const ResetPasswordClient = () => {
                     value={password}
                     required
                     onChange={(e) => setPassword(e.target.value)}
-                    className="border p-2 rounded bg-[#f5f5f4] text-[#111827] border-stone-700 focus:outline-2 focus:outline-[#836e5e]/70 dark:text-[#d4d4d8] dark:border-zinc-500 dark:bg-[#312d29] dark:focus:outline-zinc-400"
+                    className="
+                        p-2
+                        text-[#111827]
+                        border rounded border-stone-700
+                        bg-[#f5f5f4]
+                        focus:outline-2 focus:outline-[#836e5e]/70
+                        dark:text-[#d4d4d8]
+                        dark:border-zinc-500
+                        dark:bg-[#312d29]
+                        dark:focus:outline-zinc-400
+                    "
                     autoComplete="new-password"
                 />
 
@@ -159,7 +177,17 @@ const ResetPasswordClient = () => {
                     value={confirmPassword}
                     required
                     onChange={(e) => setConfirmPassword(e.target.value)}
-                    className="border p-2 rounded bg-[#f5f5f4] text-[#111827] border-stone-700 focus:outline-2 focus:outline-[#836e5e]/70 dark:text-[#d4d4d8] dark:border-zinc-500 dark:bg-[#312d29] dark:focus:outline-zinc-400"
+                    className="
+                        p-2
+                        text-[#111827]
+                        border rounded border-stone-700
+                        bg-[#f5f5f4]
+                        focus:outline-2 focus:outline-[#836e5e]/70
+                        dark:text-[#d4d4d8]
+                        dark:border-zinc-500
+                        dark:bg-[#312d29]
+                        dark:focus:outline-zinc-400
+                    "
                     autoComplete="new-password"
                 />
 
@@ -168,16 +196,22 @@ const ResetPasswordClient = () => {
                         type="submit"
                         disabled={resetLoading}
                         className="
-                        h-full w-1/2 m-auto
-                        border rounded-lg border-stone-700 dark:border-zinc-500
-                        bg-[#c59854] dark:bg-neutral-600
-                        text-[#111827] dark:text-zinc-300
-                        focus:outline-2 focus:outline-[#867162] dark:focus:outline-[#494951]
-                        hover:bg-[#b68945] dark:hover:bg-[#4b4b4b]
-                        active:bg-[#ad803c] dark:active:bg-[#393939]
-                        disabled:bg-[#c59854] disabled:dark:bg-neutral-600
-                        disabled:opacity-50 disabled:cursor-not-allowed
-                        hover:cursor-pointer"
+                            w-1/2 h-full m-auto
+                            border rounded-lg border-stone-700
+                            text-[#111827]
+                            bg-[#c59854]
+                            hover:bg-[#b68945] hover:cursor-pointer
+                            active:bg-[#ad803c]
+                            focus:outline-2 focus:outline-[#867162]
+                            disabled:bg-[#c59854] disabled:opacity-50 disabled:cursor-not-allowed
+                            dark:border-zinc-500
+                            dark:text-zinc-300
+                            dark:bg-neutral-600
+                            dark:hover:bg-[#4b4b4b]
+                            dark:active:bg-[#393939]
+                            dark:focus:outline-[#494951]
+                            disabled:dark:bg-neutral-600
+                        "
                     >
                         {resetLoading ? "Resetting..." : "Reset password"}
                     </button>
@@ -186,14 +220,20 @@ const ResetPasswordClient = () => {
                         type="button"
                         onClick={() => router.push("/login")}
                         className="
-                        w-1/2 py-2 m-auto
-                        border rounded-lg border-stone-700 dark:border-zinc-500
-                        bg-[#c59854] dark:bg-neutral-600
-                        text-[#111827] dark:text-zinc-300
-                        focus:outline-2 focus:outline-[#867162] dark:focus:outline-[#494951]
-                        hover:bg-[#b68945] dark:hover:bg-[#4b4b4b]
-                        active:bg-[#ad803c] dark:active:bg-[#393939]
-                        hover:cursor-pointer"
+                            w-1/2 py-2 m-auto
+                            border rounded-lg border-stone-700
+                            text-[#111827]
+                            bg-[#c59854]
+                            hover:bg-[#b68945] hover:cursor-pointer
+                            active:bg-[#ad803c]
+                            focus:outline-2 focus:outline-[#867162]
+                            dark:border-zinc-500
+                            dark:text-zinc-300
+                            dark:bg-neutral-600
+                            dark:hover:bg-[#4b4b4b]
+                            dark:active:bg-[#393939]
+                            dark:focus:outline-[#494951]
+                        "
                     >
                         Back to login
                     </button>

@@ -91,8 +91,9 @@ const RequestGamePage = () => {
 
     if (loading) {
         return (
-            <div className="dark:text-[#d4d4d8]">
-                <div className="flex flex-col items-center justify-center mt-20 text-center gap-4">
+            <div
+                className="dark:text-[#d4d4d8]">
+                <div className="flex flex-col items-center justify-center gap-4 mt-20 text-center ">
                     <div className="text-xl text-[#111827] dark:text-[#d4d4d8]">
                         Loading...
                     </div>
@@ -103,12 +104,16 @@ const RequestGamePage = () => {
 
     return (
         <div className="dark:text-[#d4d4d8]">
-            <div className="flex flex-col items-center justify-center mt-25 text-center gap-6 px-4">
+            <div className="flex flex-col items-center justify-center gap-6 px-4 mt-25 text-center">
                 <div
-                    className="flex flex-col px-4 py-3 gap-4 rounded-lg border border-stone-700 dark:border-none
-                    shadow-xl dark:shadow-none bg-[#b68945]/75 dark:bg-neutral-800/65"
+                    className="
+                        flex flex-col gap-4 px-4 py-3
+                        border border-stone-700 rounded-lg
+                        bg-[#b68945]/75 shadow-xl
+                        dark:border-none dark:bg-neutral-800/65 dark:shadow-none
+                    "
                 >
-                    <h1 className="text-2xl font-semibold text-[#111827] dark:text-[#d4d4d8]">
+                    <h1 className="text-2xl text-[#111827] font-semibold dark:text-[#d4d4d8]">
                         Request a game
                     </h1>
 
@@ -118,7 +123,7 @@ const RequestGamePage = () => {
                 </div>
 
                 <form onSubmit={handleSubmit} className="flex flex-col items-center gap-4 w-full max-w-md">
-                    <div className="w-full flex flex-col gap-1">
+                    <div className="flex flex-col gap-1 w-full">
                         <input
                             type="text"
                             name="gameTitle"
@@ -128,17 +133,21 @@ const RequestGamePage = () => {
                             required
                             maxLength={100}
                             className="
-                                w-full border p-2 rounded
-                                bg-[#f5f5f4] text-[#111827] border-stone-700
+                                w-full p-2
+                                text-[#111827]
+                                border rounded border-stone-700
+                                bg-[#f5f5f4]  
                                 focus:outline-2 focus:outline-[#836e5e]/70
-                                dark:text-[#d4d4d8] dark:border-zinc-500 dark:bg-[#312d29]
+                                dark:text-[#d4d4d8]
+                                dark:border-zinc-500
+                                dark:bg-[#312d29]
                                 dark:focus:outline-zinc-400
                             "
                             autoComplete="off"
                         />
 
                         <div
-                            className={`text-right text-xs ${gameTitle.length > 90
+                            className={`text-xs text-right ${gameTitle.length > 90
                                 ? "text-orange-600 dark:text-orange-400"
                                 : "text-stone-600 dark:text-zinc-400"
                                 }`}
@@ -147,7 +156,7 @@ const RequestGamePage = () => {
                         </div>
                     </div>
 
-                    <div className="w-full flex flex-col gap-1">
+                    <div className="flex flex-col gap-1 w-full">
                         <textarea
                             name="message"
                             placeholder="Optional details, alternative titles, release year, etc."
@@ -156,10 +165,15 @@ const RequestGamePage = () => {
                             rows={6}
                             maxLength={200}
                             className="
-                                w-full border p-2 rounded resize-none
-                                bg-[#f5f5f4] text-[#111827] border-stone-700
+                                w-full p-2
+                                text-[#111827] 
+                                border rounded border-stone-700
+                                bg-[#f5f5f4] 
                                 focus:outline-2 focus:outline-[#836e5e]/70
-                                dark:text-[#d4d4d8] dark:border-zinc-500 dark:bg-[#312d29]
+                                resize-none
+                                dark:text-[#d4d4d8]
+                                dark:border-zinc-500
+                                dark:bg-[#312d29]
                                 dark:focus:outline-zinc-400
                             "
                         />
@@ -179,14 +193,18 @@ const RequestGamePage = () => {
                             type="button"
                             onClick={() => router.push("/")}
                             className="
-                                w-full px-4 py-2 border rounded-md
-                                text-[#111827] bg-[#d64d0c] border-stone-700
+                                w-full px-4 py-2
+                                text-[#111827]
+                                border rounded-md border-stone-700
+                                bg-[#d64d0c]
+                                hover:bg-[#be3300] hover:cursor-pointer
+                                active:bg-[#cc470c]
                                 focus:outline-2 focus:outline-[#cc3600]
-                                hover:bg-[#be3300] active:bg-[#cc470c]
-                                dark:text-zinc-300 dark:bg-[#441901]
-                                dark:hover:bg-[#612905] dark:active:bg-[#542204]
+                                dark:text-zinc-300
+                                dark:bg-[#441901]
+                                dark:hover:bg-[#612905]
+                                dark:active:bg-[#542204]
                                 dark:focus:outline-zinc-700
-                                hover:cursor-pointer
                             "
                         >
                             Back
@@ -196,16 +214,21 @@ const RequestGamePage = () => {
                             type="submit"
                             disabled={submitting || !gameTitle.trim()}
                             className="
-                                w-full px-4 py-2 rounded-md
-                                border border-stone-700 dark:border-zinc-500
-                                bg-[#c59854] dark:bg-neutral-600
-                                text-[#111827] dark:text-zinc-300
-                                focus:outline-2 focus:outline-[#867162] dark:focus:outline-[#494951]
-                                hover:bg-[#b68945] dark:hover:bg-[#4b4b4b]
-                                active:bg-[#ad803c] dark:active:bg-[#393939]
-                                disabled:hover:bg-[#c59854] dark:disabled:hover:bg-neutral-600
-                                hover:cursor-pointer
-                                disabled:opacity-50 disabled:cursor-not-allowed
+                                w-full px-4 py-2
+                                text-[#111827]
+                                border rounded-md border-stone-700
+                                bg-[#c59854]
+                                hover:bg-[#b68945] hover:cursor-pointer
+                                active:bg-[#ad803c]
+                                focus:outline-2 focus:outline-[#867162]
+                                disabled:hover:bg-[#c59854] disabled:opacity-50 disabled:cursor-not-allowed
+                                dark:text-zinc-300
+                                dark:border-zinc-500
+                                dark:bg-neutral-600
+                                dark:hover:bg-[#4b4b4b]
+                                dark:active:bg-[#393939]
+                                dark:focus:outline-[#494951]
+                                dark:disabled:hover:bg-neutral-600
                             "
                         >
                             {submitting ? "Sending..." : "Send request"}

@@ -141,7 +141,7 @@ const CheckEmailPage = () => {
     if (loading) {
         return (
             <div className="dark:text-[#d4d4d8]">
-                <div className="flex flex-col items-center justify-center mt-20 text-center gap-4">
+                <div className="flex flex-col items-center justify-center gap-4 mt-20 text-center ">
                     <div className="text-xl text-[#111827] dark:text-[#d4d4d8]">
                         Loading...
                     </div>
@@ -152,10 +152,17 @@ const CheckEmailPage = () => {
 
     return (
         <div className="dark:text-[#d4d4d8]">
-            <div className="flex flex-col items-center justify-center mt-25 text-center gap-6 px-4">
-                <div className="flex flex-col px-4 py-3 gap-4 rounded-lg border border-stone-700 dark:border-none
-                    shadow-xl dark:shadow-none bg-[#b68945]/75 dark:bg-neutral-800/65">
-                    <h1 className="text-2xl font-semibold text-[#111827] dark:text-[#d4d4d8]">
+            <div className="flex flex-col gap-6 items-center justify-center px-4 mt-25 text-center">
+                <div
+                    className="
+                        flex flex-col gap-4
+                        px-4 py-3
+                        border rounded-lg border-stone-700
+                        bg-[#b68945]/75 shadow-xl
+                        dark:border-none
+                        dark:bg-neutral-800/65 dark:shadow-none
+                    ">
+                    <h1 className="text-2xl text-[#111827] font-semibold dark:text-[#d4d4d8]">
                         Check your email!
                     </h1>
 
@@ -168,14 +175,19 @@ const CheckEmailPage = () => {
                 <button
                     onClick={() => router.replace("/login")}
                     className="
-                        px-4 py-2 rounded-lg
-                        border border-stone-700 dark:border-zinc-500
-                        bg-[#c59854] dark:bg-neutral-600
-                        text-[#111827] dark:text-zinc-300
-                        focus:outline-2 focus:outline-[#867162] dark:focus:outline-[#494951]
-                        hover:bg-[#b68945] dark:hover:bg-[#4b4b4b]
-                        active:bg-[#ad803c] dark:active:bg-[#393939]
-                        hover:cursor-pointer
+                        px-4 py-2
+                        text-[#111827]
+                        border rounded-lg border-stone-700
+                        bg-[#c59854]
+                        hover:bg-[#b68945] hover:cursor-pointer
+                        active:bg-[#ad803c]
+                        focus:outline-2 focus:outline-[#867162]
+                        dark:text-zinc-300
+                        dark:border-zinc-500
+                        dark:bg-neutral-600
+                        dark:hover:bg-[#4b4b4b]
+                        dark:active:bg-[#393939]
+                        dark:focus:outline-[#494951]
                     "
                 >
                     Go to login
@@ -190,10 +202,14 @@ const CheckEmailPage = () => {
                         onChange={(e) => setEmail(e.target.value)}
                         required
                         className="
-                            w-full border p-2 rounded
-                            bg-[#f5f5f4] text-[#111827] border-stone-700
+                            w-full p-2
+                            text-[#111827]
+                            border rounded border-stone-700
+                            bg-[#f5f5f4]
                             focus:outline-2 focus:outline-[#836e5e]/70
-                            dark:text-[#d4d4d8] dark:border-zinc-500 dark:bg-[#312d29]
+                            dark:text-[#d4d4d8]
+                            dark:border-zinc-500
+                            dark:bg-[#312d29]
                             dark:focus:outline-zinc-400
                         "
                         autoComplete="off"
@@ -203,17 +219,23 @@ const CheckEmailPage = () => {
                         type="submit"
                         disabled={resendLoading || cooldown > 0}
                         className="
-                            relative overflow-hidden
-                            w-full px-4 py-2 rounded-lg
-                            border border-stone-700 dark:border-zinc-500
-                            bg-[#c59854] dark:bg-neutral-600
-                            text-[#111827] dark:text-zinc-300
-                            focus:outline-2 focus:outline-[#867162] dark:focus:outline-[#494951]
-                            hover:bg-[#b68945] dark:hover:bg-[#4b4b4b]
-                            active:bg-[#ad803c] dark:active:bg-[#393939]
-                            disabled:hover:bg-[#c59854] dark:disabled:hover:bg-neutral-600
-                            hover:cursor-pointer
-                            disabled:opacity-50 disabled:cursor-not-allowed
+                            overflow-hidden
+                            relative
+                            w-full px-4 py-2
+                            text-[#111827]
+                            border rounded-lg border-stone-700
+                            bg-[#c59854]
+                            hover:bg-[#b68945] hover:cursor-pointer
+                            active:bg-[#ad803c]
+                            focus:outline-2 focus:outline-[#867162]
+                            disabled:hover:bg-[#c59854] disabled:opacity-50 disabled:cursor-not-allowed
+                            dark:text-zinc-300
+                            dark:border-zinc-500
+                            dark:bg-neutral-600
+                            dark:hover:bg-[#4b4b4b]
+                            dark:active:bg-[#393939]
+                            dark:focus:outline-[#494951]
+                            dark:disabled:hover:bg-neutral-600
                         "
                     >
                         {/* Colored (blue) overlay idea that I didn't really like in application */}

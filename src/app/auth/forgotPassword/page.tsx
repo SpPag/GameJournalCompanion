@@ -99,14 +99,21 @@ const ForgotPasswordPage = () => {
 
     return (
         <div className="dark:text-[#d4d4d8]">
-            <div className="flex flex-col items-center justify-center mt-25 text-center gap-6 px-4">
+            <div className="flex flex-col items-center justify-center gap-6 px-4 mt-25 text-center">
                 <form
                     onSubmit={handleSubmit}
                     className="flex flex-col items-center gap-4 w-full max-w-sm"
                 >
-                    <div className="flex flex-col px-4 py-3 gap-4 rounded-lg border border-stone-700 dark:border-none
-                        shadow-xl dark:shadow-none bg-[#b68945]/75 dark:bg-neutral-800/65">
-                        <h1 className="text-2xl font-semibold text-[#111827] dark:text-[#d4d4d8]">
+                    <div
+                        className="
+                            flex flex-col gap-4
+                            px-4 py-3
+                            border rounded-lg border-stone-700
+                            bg-[#b68945]/75 shadow-xl
+                            dark:border-none
+                            dark:bg-neutral-800/65 dark:shadow-none
+                        ">
+                        <h1 className="text-2xl text-[#111827] font-semibold dark:text-[#d4d4d8]">
                             Forgot your password?
                         </h1>
 
@@ -123,30 +130,39 @@ const ForgotPasswordPage = () => {
                         required
                         onChange={(e) => setEmail(e.target.value)}
                         className="
-                            w-full border p-2 rounded
-                            bg-[#f5f5f4] text-[#111827] border-stone-700
+                            w-full p-2
+                            text-[#111827]
+                            border rounded border-stone-700
+                            bg-[#f5f5f4]
                             focus:outline-2 focus:outline-[#836e5e]/70
-                            dark:text-[#d4d4d8] dark:border-zinc-500 dark:bg-[#312d29]
+                            dark:text-[#d4d4d8]
+                            dark:border-zinc-500
+                            dark:bg-[#312d29]
                             dark:focus:outline-zinc-400
                         "
                         autoComplete="email"
                     />
 
-                    <div className="flex gap-4 h-[3.8rem] w-full">
+                    <div className="flex gap-4 w-full h-[3.8rem] ">
                         <button
                             type="submit"
                             disabled={forgotResetRequestLoading}
                             className="
-                                h-full w-1/2 m-auto
-                                border rounded-lg border-stone-700 dark:border-zinc-500
-                                bg-[#c59854] dark:bg-neutral-600
-                                text-[#111827] dark:text-zinc-300
-                                focus:outline-2 focus:outline-[#867162] dark:focus:outline-[#494951]
-                                hover:bg-[#b68945] dark:hover:bg-[#4b4b4b]
-                                active:bg-[#ad803c] dark:active:bg-[#393939]
-                                disabled:bg-[#c59854] dark:disabled:bg-neutral-600
-                                disabled:opacity-50 disabled:cursor-not-allowed
-                                hover:cursor-pointer
+                                w-1/2 h-full m-auto
+                                text-[#111827]
+                                border rounded-lg border-stone-700
+                                bg-[#c59854]
+                                hover:bg-[#b68945] hover:cursor-pointer
+                                active:bg-[#ad803c]
+                                focus:outline-2 focus:outline-[#867162]
+                                disabled:bg-[#c59854] disabled:opacity-50 disabled:cursor-not-allowed
+                                dark:text-zinc-300
+                                dark:border-zinc-500
+                                dark:bg-neutral-600
+                                dark:hover:bg-[#4b4b4b]
+                                dark:active:bg-[#393939]
+                                dark:focus:outline-[#494951]
+                                dark:disabled:bg-neutral-600
                             "
                         >
                             {forgotResetRequestLoading ? "Sending..." : "Send reset link"}
@@ -157,13 +173,18 @@ const ForgotPasswordPage = () => {
                             onClick={() => router.push("/login")}
                             className="
                                 w-1/2 py-2 m-auto
-                                border rounded-lg border-stone-700 dark:border-zinc-500
-                                bg-[#c59854] dark:bg-neutral-600
-                                text-[#111827] dark:text-zinc-300
-                                focus:outline-2 focus:outline-[#867162] dark:focus:outline-[#494951]
-                                hover:bg-[#b68945] dark:hover:bg-[#4b4b4b]
-                                active:bg-[#ad803c] dark:active:bg-[#393939]
-                                hover:cursor-pointer
+                                text-[#111827]
+                                border rounded-lg border-stone-700
+                                bg-[#c59854]
+                                hover:bg-[#b68945] hover:cursor-pointer
+                                active:bg-[#ad803c]
+                                focus:outline-2 focus:outline-[#867162]
+                                dark:text-zinc-300
+                                dark:border-zinc-500
+                                dark:bg-neutral-600
+                                dark:hover:bg-[#4b4b4b]
+                                dark:active:bg-[#393939]
+                                dark:focus:outline-[#494951]
                             "
                         >
                             Back to login
