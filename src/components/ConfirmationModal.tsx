@@ -26,18 +26,18 @@ const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
     isDestructive = false,
     isLoading = false,
 }) => {
-    // Close on Escape
+    // Close on Escape / confirm on Enter
     useEffect(() => {
         function handleKeyDown(e: KeyboardEvent) {
             if (e.key === 'Escape') onClose();
             if (e.key === 'Enter' && !isLoading) onConfirm();
         }
-        if (isOpen) {
-            document.addEventListener('keydown', handleKeyDown);
-            return () => document.removeEventListener('keydown', handleKeyDown);
-        }
-    }, [isOpen, onClose]);
 
+        if (!isOpen) return;
+
+        document.addEventListener('keydown', handleKeyDown);
+        return () => document.removeEventListener('keydown', handleKeyDown);
+    }, [isOpen, onClose, isLoading, onConfirm]);
 
     if (!isOpen) return null;
 
@@ -53,7 +53,7 @@ const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
             onClick={handleBackdropClick}
         >
             <div className="rounded-lg p-20 w-full max-w-2xl aspect-[3/2] relative overflow-hidden flex items-center justify-center">
-
+            
                 {/* ✅ Background image layer */}
                 <div className="absolute inset-0 bg-[url('/BurningNote.png')] bg-center bg-cover dark:brightness-50" />
                 <div className="p-6 w-full max-w-4/5 relative z-10">
