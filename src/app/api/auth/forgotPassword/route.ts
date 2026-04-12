@@ -32,7 +32,7 @@ export async function POST(req: Request) {
     if (!success) {
         return NextResponse.json(
             {
-                error: "Too many requests from this network. Please try again later.",
+                error: "Too many requests. Please try again later.",
             },
             {
                 status: 429,
