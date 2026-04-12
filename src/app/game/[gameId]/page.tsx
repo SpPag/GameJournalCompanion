@@ -5,7 +5,6 @@ import React, { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { Game, IGame } from "../../../../lib/models/Game";
 import { GameTitle } from "@/components/GameTitle";
-import { INote } from "../../../../lib/models/Note";
 import { Note } from "@/types/Note";
 import { NoteCard } from "@/components/NoteCard";
 import { WelcomeUser } from "@/components/WelcomeUser";
