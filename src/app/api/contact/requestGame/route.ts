@@ -4,22 +4,7 @@ import { authOptions } from "@/../lib/authOptions";
 import { requestGameIpLimiter, requestGameUserLimiter } from "@/../lib/rateLimit";
 import { sendGameRequestEmail } from "@/../lib/email";
 import { updateUserLastActive } from "@/../lib/updateUserLastActive";
-
-function getClientIp(req: Request): string {
-    const xForwardedFor = req.headers.get("x-forwarded-for");
-
-    if (xForwardedFor) {
-        return xForwardedFor.split(",")[0].trim();
-    }
-
-    const realIp = req.headers.get("x-real-ip");
-
-    if (realIp) {
-        return realIp.trim();
-    }
-
-    return "unknown";
-}
+import { getClientIp } from "@/../lib/getClientIP";
 
 export async function POST(req: Request) {
     // Get client IP for rate limiting

@@ -3,23 +3,8 @@ import dbConnect from "@/../lib/mongoose";
 import { User } from "@/../lib/models/User";
 import crypto from "crypto";
 import { sendVerificationEmail } from "@/../lib/email";
-import { resendIpLimiter } from "@/../lib/rateLimit";
-
-// Utility function to extract the client's IP address from request headers
-function getClientIp(req: Request): string {
-    const xForwardedFor = req.headers.get("x-forwarded-for");
-    if (xForwardedFor) {
-        return xForwardedFor.split(",")[0].trim();
-    }
-
-    const realIp = req.headers.get("x-real-ip");
-
-    if (realIp) {
-        return realIp.trim();
-    }
-
-    return "unknown";
-}
+import { resendIpLimiter, resendEmailLimiter } from "@/../lib/rateLimit";
+import { getClientIp } from "@/../lib/getClientIP";
 
 export async function POST(req: Request) {
 
@@ -46,14 +31,54 @@ export async function POST(req: Request) {
         );
     }
 
-    // Parse request body and extract email
-    const { email } = await req.json();
+    // Parse the incoming JSON body
+    let body: { email?: unknown };
+
+    try {
+        body = await req.json();
+    } catch {
+        return NextResponse.json(
+            { error: "Invalid request body" },
+            { status: 400 }
+        );
+    }
+
+    const { email } = body;
 
     // Validate required field
-    if (!email) {
+    if (typeof email !== "string" || email.trim().length === 0) {
         return NextResponse.json(
-            { error: "Email required" },
+            { error: "Missing or invalid email" },
             { status: 400 }
+        );
+    }
+
+    const normalizedEmail = email.trim().toLowerCase();
+
+    const emailRateLimitKey = crypto.createHash("sha256").update(normalizedEmail).digest("hex");
+
+    // Apply email address-based rate limiting
+    const {
+        success: emailAddressSuccess,
+        limit: emailAddressLimit,
+        remaining: emailAddressRemaining,
+        reset: emailAddressReset,
+    } = await resendEmailLimiter.limit(emailRateLimitKey); // using hashed email as key to avoid storing raw emails in Redis keys / analytics
+
+    // If email address rate limit exceeded, return 429 with rate limit headers
+    if (!emailAddressSuccess) {
+        return NextResponse.json(
+            {
+                error: "Too many requests. Please try again later.",
+            },
+            {
+                status: 429,
+                headers: {
+                    "X-RateLimit-Limit": String(emailAddressLimit),
+                    "X-RateLimit-Remaining": String(emailAddressRemaining),
+                    "X-RateLimit-Reset": String(emailAddressReset),
+                },
+            }
         );
     }
 
@@ -78,7 +103,7 @@ export async function POST(req: Request) {
     //      - update token + cooldown timestamp
     const user = await User.findOneAndUpdate(
         {
-            email,
+            email: normalizedEmail,
             emailVerified: false,
             $or: [
                 // No previous resend
@@ -105,16 +130,16 @@ export async function POST(req: Request) {
     //      - OR email already verified
     //      - OR cooldown not finished
     if (!user) {
-        return NextResponse.json(
-            { error: "Please wait before requesting another email." },
-            { status: 429 }
-        );
+        return NextResponse.json({
+            success: true,
+            message: "If the account exists and is not yet verified, a verification email will be sent."
+        });
     }
 
     try {
         // Send verification email using RAW token
         //      (user will send it back → we hash it again and compare)
-        await sendVerificationEmail(email, rawToken);
+        await sendVerificationEmail(normalizedEmail, rawToken);
     } catch (error) {
 
         // Rollback ONLY if this exact request is still the latest state

@@ -5,21 +5,7 @@ import { User } from "@/../lib/models/User";
 import crypto from "crypto";
 import { resetPasswordIpLimiter } from "@/../lib/rateLimit";
 import { sendPasswordChangedEmail } from "@/../lib/email";
-
-function getClientIp(req: Request): string {
-    const xForwardedFor = req.headers.get("x-forwarded-for");
-    if (xForwardedFor) {
-        return xForwardedFor.split(",")[0].trim();
-    }
-
-    const realIp = req.headers.get("x-real-ip");
-
-    if (realIp) {
-        return realIp.trim();
-    }
-
-    return "unknown";
-}
+import { getClientIp } from "@/../lib/getClientIP";
 
 export async function POST(req: Request) {
 

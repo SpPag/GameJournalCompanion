@@ -10,6 +10,13 @@ export const resendIpLimiter = new Ratelimit({
   prefix: "ratelimit:resend-ip",
 });
 
+export const resendEmailLimiter = new Ratelimit({
+  redis,
+  limiter: Ratelimit.slidingWindow(5, "10 m"),
+  analytics: true,
+  prefix: "ratelimit:resend-email",
+});
+
 export const registerIpLimiter = new Ratelimit({
   redis,
   limiter: Ratelimit.slidingWindow(3, "10 m"),
