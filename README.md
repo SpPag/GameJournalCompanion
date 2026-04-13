@@ -7,12 +7,27 @@ The goal is to provide a persistent, organized way to capture all those small bu
 
 ---
 
+## Features
+
+- User authentication with email verification (Resend)
+- Secure login system using NextAuth
+- Register and manage a personal game library
+- Create, edit, and delete notes per game
+- Automatic cleanup of related data:
+  - De-registering a game removes associated notes
+  - Deleting an account removes all user data
+- MongoDB-based data persistence with relational references
+- Responsive UI built with Tailwind CSS
+
+---
+
 ## Tech Stack
 
 - **Framework:** Next.js (App Router)
 - **Frontend:** React
 - **Backend:** Next.js API routes / server components
 - **Database:** MongoDB
+- **Media Storage:** Cloudinary
 - **ODM:** Mongoose
 - **Authentication:** NextAuth.js with MongoDB Adapter
 - **Email Verification:** Resend
