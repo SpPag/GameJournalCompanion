@@ -27,7 +27,7 @@ The goal is to provide a persistent, organized way to capture all those small bu
 - **Frontend:** React
 - **Backend:** Next.js API routes / server components
 - **Database:** MongoDB
-- **Media Storage:** Cloudinary
+- **Media Storage:** Cloudinary (game cover image hosting and delivery)
 - **ODM:** Mongoose
 - **Authentication:** NextAuth.js with MongoDB Adapter
 - **Email Verification:** Resend
