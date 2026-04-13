@@ -1,4 +1,5 @@
 # GameJournalCompanion
+
 GameJournalCompanion is a full-stack web application built with Next.js and MongoDB that acts as a personal journal for gamers.
 
 It allows players to register games they’re currently playing and keep structured notes tied to each one — whether that’s tracking side quests, remembering items sold by specific vendors (and their prices), noting useful trades, or marking areas to revisit later when they’ve leveled up.
@@ -11,16 +12,16 @@ The goal is to provide a persistent, organized way to capture all those small bu
 
 - User authentication with email verification (Resend)
 - Secure login system using NextAuth
+- Secure password reset flow with email verification
 - Register and manage a personal game library
 - Create, edit, and delete notes per game
 - Automatic cleanup of related data:
   - De-registering a game removes associated notes
   - Deleting an account removes all user data
-- MongoDB-based data persistence with relational references
+- User-submitted game requests via contact form with email notifications
+- MongoDB data modeling using referenced relationships between users, games, and notes
 - Responsive UI built with Tailwind CSS
-- Rate limiting applied to authentication and user-facing API routes using Upstash Redis
-- Secure password reset flow with email verification and rate limiting
-- User-submitted game requests via contact form with email notifications (rate limited)
+- Rate limiting applied to authentication and user-facing API routes
 
 ---
 
@@ -34,9 +35,9 @@ The goal is to provide a persistent, organized way to capture all those small bu
 - **ODM:** Mongoose
 - **Authentication:** NextAuth.js with MongoDB Adapter
 - **Email Verification:** Resend
+- **Rate Limiting:** Upstash Redis (via @upstash/ratelimit)
 - **Styling:** Tailwind CSS
 - **Tooling:** ESLint, Turbopack
-- **Rate Limiting:** Upstash Redis (via @upstash/ratelimit)
 
 ---
 
