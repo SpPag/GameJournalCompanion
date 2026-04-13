@@ -18,6 +18,9 @@ The goal is to provide a persistent, organized way to capture all those small bu
   - Deleting an account removes all user data
 - MongoDB-based data persistence with relational references
 - Responsive UI built with Tailwind CSS
+- Rate limiting applied to authentication and user-facing API routes using Upstash Redis
+- Secure password reset flow with email verification and rate limiting
+- User-submitted game requests via contact form with email notifications (rate limited)
 
 ---
 
@@ -33,6 +36,7 @@ The goal is to provide a persistent, organized way to capture all those small bu
 - **Email Verification:** Resend
 - **Styling:** Tailwind CSS
 - **Tooling:** ESLint, Turbopack
+- **Rate Limiting:** Upstash Redis (via @upstash/ratelimit)
 
 ---
 
