@@ -25,8 +25,10 @@ The goal is to provide a persistent, organized way to capture all those small bu
 
 Due to a compatibility issue between MongoDB v6 and `@next-auth/mongodb-adapter@1.1.3` (which supports MongoDB Node.js driver v4.x and v5.x), installation currently requires:
 
-```bash
+```
+bash
 npm install --legacy-peer-deps
+```
 
 Screenshots of the progress so far:
 
