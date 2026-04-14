@@ -20,7 +20,7 @@ The goal is to provide a persistent, organized way to capture all those small bu
   - Deleting an account removes all user data
 - User-submitted game requests via contact form with email notifications
 - MongoDB data modeling using referenced relationships between users, games, and notes
-- Responsive UI built with Tailwind CSS
+- Responsive UI design using Tailwind CSS
 - Rate limiting applied to authentication and user-facing API routes
 
 ---
