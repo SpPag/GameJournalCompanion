@@ -54,7 +54,7 @@ Screenshots of the progress so far:
 
 [Starting page while the user isn't logged in](https://res.cloudinary.com/dztftxick/image/upload/v1752070293/GJC_Starting_Page_fbkpaj.png)
 
-[Login page](https://res.cloudinary.com/dztftxick/image/upload/v1752070166/GJC_Login_Page_ibmdtb.png)
+[Login page](https://res.cloudinary.com/dztftxick/image/upload/v1776242413/GJC_Login_Page_jmprkc.png)
 
 [Register page](https://res.cloudinary.com/dztftxick/image/upload/v1752070162/GJC_Register_Page_ipcypz.png)
 
@@ -64,6 +64,6 @@ Screenshots of the progress so far:
 
 [The modal that opens when a user clicks on the 'Register a new game' card in the home page](https://res.cloudinary.com/dztftxick/image/upload/v1752070156/GJC_Add_Game_Modal_mdptc9.png)
 
-[A game's specific page - a little barren for now, regarding both looks and functionality](https://res.cloudinary.com/dztftxick/image/upload/v1752070167/GJC_Game_Page_srda4e.png)
+[A game's specific page](https://res.cloudinary.com/dztftxick/image/upload/v1776242412/GJC_Game_Page_d8ueh3.png)
 
 <em>All game cover images are copyright of their respective publishers and used here for non-commercial, educational/demo purposes only.</em>
