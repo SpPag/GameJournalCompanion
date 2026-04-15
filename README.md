@@ -50,7 +50,7 @@ bash
 npm install --legacy-peer-deps
 ```
 
-Screenshots of the progress so far:
+Screenshots:
 
 [Starting page while the user isn't logged in](https://res.cloudinary.com/dztftxick/image/upload/v1752070293/GJC_Starting_Page_fbkpaj.png)
 
