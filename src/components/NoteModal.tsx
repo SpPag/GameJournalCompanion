@@ -98,7 +98,7 @@ return (
                     value={content}
                     onChange={(e) => setContent(e.target.value)}
                     placeholder="Write your note here..."
-                    className="w-full h-32 p-3 border text-[#111827] border-zinc-300/50 focus:outline-2 focus:outline-[#836e5e]/70 dark:border-zinc-500 rounded-md bg-white/70 dark:bg-[#312d29]/80 dark:text-zinc-300 mb-3 dark:focus:outline-zinc-400 resize-y"
+                    className="w-full h-32 p-3 max-h-[30vh] border text-[#111827] border-zinc-300/50 focus:outline-2 focus:outline-[#836e5e]/70 dark:border-zinc-500 rounded-md bg-white/70 dark:bg-[#312d29]/80 dark:text-zinc-300 mb-3 dark:focus:outline-zinc-400 resize-y"
                 />
 
                 <div className="flex justify-end gap-3 mt-4">
